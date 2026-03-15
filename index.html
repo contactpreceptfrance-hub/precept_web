@@ -1,232 +1,823 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Precept France | Site en construction</title>
-    <meta name="description" content="Bienvenue sur le futur site de Precept France. Notre nouveau site est actuellement en cours de création.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #0d2b4d; /* Deep blue similar to Precept.org */
-            --secondary-color: #e63946; /* Accent color */
-            --text-main: #f8f9fa;
-            --text-muted: #adb5bd;
-            --bg-gradient-start: #0a192f;
-            --bg-gradient-end: #020c1b;
-        }
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Precept France | Découvrez la Bible par vous-même</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  :root {
+    --navy: #0c1f3f;
+    --navy-mid: #152d57;
+    --navy-light: #1e3d70;
+    --blue: #2563eb;
+    --blue-bright: #3b82f6;
+    --sky: #93c5fd;
+    --gold: #c9943a;
+    --gold-light: #e8b96a;
+    --cream: #f8f5f0;
+    --warm-white: #fdfcfa;
+    --text-muted: #8892a4;
+    --text-light: #b8c4d4;
+    --border: rgba(255,255,255,0.08);
+  }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-        }
+  html { scroll-behavior: smooth; }
 
-        /* Subtle animated background shapes */
-        .bg-shape {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            z-index: 0;
-            opacity: 0.6;
-            animation: float 20s infinite alternate ease-in-out;
-        }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--navy);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
 
-        .shape-1 {
-            width: 40vw;
-            height: 40vw;
-            background: rgba(13, 43, 77, 0.5);
-            top: -10vw;
-            left: -10vw;
-        }
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(12,31,63,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .logo-mark {
+    width: 38px; height: 38px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo-mark svg {
+    width: 38px; height: 27px;
+    fill: white;
+  }
+  .logo-mark svg .cls-1 { fill: white; }
+  .logo-text { color: white; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+  .logo-text strong { color: var(--gold-light); }
 
-        .shape-2 {
-            width: 30vw;
-            height: 30vw;
-            background: rgba(230, 57, 70, 0.15);
-            bottom: -5vw;
-            right: -10vw;
-            animation-delay: -5s;
-        }
+  .nav-links { display: flex; align-items: center; gap: 2.5rem; }
+  .nav-links a {
+    color: var(--text-light); font-size: 0.875rem; font-weight: 400;
+    text-decoration: none; letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: white; }
+  .btn-nav {
+    background: var(--gold); color: white !important;
+    padding: 0.6rem 1.4rem; border-radius: 4px;
+    font-weight: 600 !important; font-size: 0.8rem !important;
+    letter-spacing: 0.06em !important; text-transform: uppercase;
+    transition: background 0.2s !important;
+  }
+  .btn-nav:hover { background: var(--gold-light) !important; color: var(--navy) !important; }
 
-        .container {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            padding: 3rem;
-            max-width: 800px;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            transform: translateY(20px);
-            opacity: 0;
-            animation: fadeUp 1s forwards cubic-bezier(0.16, 1, 0.3, 1);
-        }
+  .nav-mobile { display: none; }
+  .nav-mobile button { background: none; border: none; cursor: pointer; color: var(--text-light); }
+  .nav-mobile button svg { width: 24px; height: 24px; }
 
-        .logo-placeholder {
-            margin-bottom: 2rem;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
+  /* ── HERO ── */
+  .hero {
+    position: relative; min-height: 92vh;
+    background: var(--navy);
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCpUowu9ZBb567J-T4XEPX2TQ411CRlMultRYWQTF34zJv3yqfbhdeI1qfHYBbtjy0nYdGC6iSf_jz87or7tgQfzFqmZwx9O8tK__mkoXsSx7spSGp9WFxVh6rNIWUgtVmzhs8FmvVxTCWPVbOWq7sOgFZDNjfAbxokQ5YD8lzdbeZgzPVAqmGZnh4-r5ffMekgpGDYwqpgRkpXFTRKQGuYepsRKij231AjDJSqZGe2pxcq-W3oWne6kYLPmbLpwG6GNNjHMHjddQ8');
+    background-size: cover; background-position: center 30%;
+    opacity: 0.18;
+    filter: saturate(0.4) brightness(0.6);
+  }
+  .hero-gradient {
+    position: absolute; inset: 0;
+    background: linear-gradient(105deg, rgba(12,31,63,0.98) 45%, rgba(12,31,63,0.6) 100%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-inner {
+    position: relative; z-index: 2;
+    max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+    width: 100%;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(201,148,58,0.12); border: 1px solid rgba(201,148,58,0.3);
+    padding: 0.35rem 0.9rem; border-radius: 20px;
+    margin-bottom: 1.75rem;
+  }
+  .hero-eyebrow span { color: var(--gold-light); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+  .hero-eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
 
-        .logo-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, #ffffff, #a8b2d1);
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5.5vw, 5rem);
+    font-weight: 600; line-height: 1.08;
+    color: white; letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--sky); }
+  .hero-sub {
+    font-size: 1.05rem; line-height: 1.75; color: var(--text-light);
+    max-width: 480px; margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-        h1 {
-            font-family: 'Outfit', sans-serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(to right, #ffffff, #a8b2d1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--gold);
+    color: white; text-decoration: none;
+    padding: 0.9rem 2rem; border-radius: 4px;
+    font-weight: 600; font-size: 0.9rem; letter-spacing: 0.04em;
+    transition: background 0.2s, transform 0.2s;
+    box-shadow: 0 4px 20px rgba(201,148,58,0.35);
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-primary svg { width: 16px; height: 16px; }
 
-        p {
-            font-size: 1.125rem;
-            line-height: 1.6;
-            color: var(--text-muted);
-            margin-bottom: 2.5rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid rgba(255,255,255,0.2); color: white;
+    text-decoration: none; padding: 0.9rem 2rem; border-radius: 4px;
+    font-weight: 400; font-size: 0.9rem; letter-spacing: 0.02em;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.05); }
 
-        .divider {
-            height: 1px;
-            width: 60px;
-            background: var(--secondary-color);
-            margin: 0 auto 2.5rem auto;
-            border-radius: 2px;
-            transition: width 0.3s ease;
-        }
+  .hero-image-col { position: relative; }
+  .hero-img-frame {
+    position: relative; border-radius: 6px; overflow: hidden;
+    aspect-ratio: 4/5;
+    box-shadow: -8px 8px 60px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .hero-img-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(12,31,63,0.6) 0%, transparent 50%);
+  }
+  .hero-img-badge {
+    position: absolute; bottom: 1.5rem; left: 1.5rem; right: 1.5rem;
+    background: rgba(12,31,63,0.85); backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 6px;
+    padding: 1rem 1.25rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .hero-img-badge-icon {
+    width: 40px; height: 40px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  }
+  .hero-img-badge-icon svg { width: 18px; height: 18px; color: white; }
+  .hero-img-badge-text p { color: var(--text-light); font-size: 0.75rem; }
+  .hero-img-badge-text strong { color: white; font-size: 0.9rem; }
 
-        .container:hover .divider {
-            width: 100px;
-        }
+  /* ── SECTION: QUOTE BAND ── */
+  .quote-band {
+    background: var(--navy-mid);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 3.5rem 2rem; text-align: center;
+  }
+  .quote-band blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 400; font-style: italic;
+    color: var(--sky); max-width: 700px; margin: 0 auto;
+    line-height: 1.5;
+  }
+  .quote-band cite {
+    display: block; margin-top: 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-muted); font-style: normal;
+  }
+  .quote-band-rule { width: 40px; height: 2px; background: var(--gold); margin: 1.5rem auto 0; }
 
-        .contact-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 1rem 2rem;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #fff;
-            background: linear-gradient(135deg, var(--secondary-color), #c1121f);
-            border: none;
-            border-radius: 50px;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
+  /* ── SECTION: METHOD ── */
+  .section { padding: 7rem 2rem; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
 
-        .contact-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: all 0.6s ease;
-        }
+  .section-header { margin-bottom: 4rem; }
+  .section-tag {
+    display: inline-block; font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .section-tag::before { content: '— '; }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600; line-height: 1.15;
+    color: var(--navy);
+  }
+  .section-subtitle {
+    margin-top: 0.75rem; font-size: 1rem; color: #5a6880;
+    font-weight: 300; max-width: 520px;
+    line-height: 1.7;
+  }
 
-        .contact-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(230, 57, 70, 0.4);
-        }
+  .method-bg { background: var(--cream); }
+  .method-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .method-card {
+    background: white; padding: 3rem 2.5rem;
+    position: relative; overflow: hidden;
+    transition: box-shadow 0.3s;
+  }
+  .method-card:hover { box-shadow: 0 8px 40px rgba(12,31,63,0.08); z-index: 1; }
+  .method-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--navy), var(--blue));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .method-card:hover::before { transform: scaleX(1); }
+  .method-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4.5rem; font-weight: 700; line-height: 1;
+    color: rgba(12,31,63,0.06); margin-bottom: 1.5rem;
+    letter-spacing: -0.04em;
+  }
+  .method-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 600; color: var(--navy);
+    margin-bottom: 0.75rem;
+  }
+  .method-question {
+    font-style: italic; color: var(--gold); font-size: 0.95rem;
+    font-family: 'Cormorant Garamond', serif; font-weight: 400;
+    margin-bottom: 1rem;
+  }
+  .method-card p { font-size: 0.9rem; color: #6b7a90; line-height: 1.7; font-weight: 300; }
 
-        .contact-btn:hover::before {
-            left: 100%;
-        }
+  /* ── SECTION: TESTIMONIALS ── */
+  .testimonials-bg { background: var(--navy); }
+  .testimonials-bg .section-title { color: white; }
+  .testimonials-bg .section-subtitle { color: var(--text-light); }
 
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1rem; }
+  .testimonial-card {
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+    border-radius: 6px; padding: 2rem 2rem 1.75rem;
+    position: relative;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .testimonial-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.15); }
+  .testimonial-quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem; line-height: 0.8; font-weight: 700;
+    color: var(--gold); opacity: 0.6; margin-bottom: 1rem;
+    display: block;
+  }
+  .testimonial-card blockquote {
+    font-size: 0.95rem; line-height: 1.75; color: var(--text-light);
+    font-weight: 300; margin-bottom: 1.5rem; font-style: italic;
+    font-family: 'Cormorant Garamond', serif; font-size: 1.05rem;
+  }
+  .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+  .testimonial-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--navy-light), var(--blue));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 700; color: white;
+    flex-shrink: 0;
+  }
+  .testimonial-author-name { font-size: 0.85rem; font-weight: 600; color: white; }
+  .testimonial-author-role { font-size: 0.75rem; color: var(--text-muted); }
 
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -50px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
-            100% { transform: translate(0, 0) scale(1); }
-        }
+  /* ── SECTION: STATS ── */
+  .stats-bg { background: linear-gradient(135deg, var(--navy-mid), var(--navy)); }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+  .stat-item { text-align: center; }
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 600;
+    color: white; line-height: 1; margin-bottom: 0.5rem;
+  }
+  .stat-number span { color: var(--gold-light); }
+  .stat-label {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text-muted);
+  }
+  .stat-divider {
+    width: 1px; background: var(--border);
+    display: none;
+  }
 
-        /* Responsive */
-        @media (max-width: 640px) {
-            .container {
-                padding: 2rem 1.5rem;
-                margin: 0 1rem;
-            }
-        }
-    </style>
+  /* ── SECTION: RESOURCES ── */
+  .resources-inner {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem;
+  }
+  .resources-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--gold); font-size: 0.85rem; font-weight: 600;
+    text-decoration: none; letter-spacing: 0.04em;
+    transition: gap 0.2s;
+  }
+  .resources-link:hover { gap: 10px; }
+  .resources-link svg { width: 14px; height: 14px; }
+
+  .resources-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .resource-card { cursor: pointer; }
+  .resource-img-wrap {
+    overflow: hidden; border-radius: 4px;
+    aspect-ratio: 3/4; background: var(--cream);
+    margin-bottom: 1.25rem; position: relative;
+  }
+  .resource-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s; }
+  .resource-card:hover .resource-img-wrap img { transform: scale(1.05); }
+  .resource-img-wrap::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(12,31,63,0.3), transparent 60%);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .resource-card:hover .resource-img-wrap::after { opacity: 1; }
+  .resource-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--navy); margin-bottom: 0.4rem; }
+  .resource-card p { font-size: 0.85rem; color: #8892a4; line-height: 1.6; font-weight: 300; }
+
+  /* ── SECTION: TRAINING ── */
+  .training-bg { background: var(--navy); }
+  .training-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+  .training-bg .section-title { color: white; }
+  .training-sub { font-size: 1rem; color: var(--text-light); font-weight: 300; line-height: 1.8; margin-bottom: 2.5rem; }
+  .training-list { list-style: none; margin-bottom: 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
+  .training-list li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.9rem; color: var(--text-light); font-weight: 300; }
+  .training-list li::before {
+    content: ''; display: block; flex-shrink: 0;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: rgba(201,148,58,0.15); border: 1px solid var(--gold);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23c9943a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 6l3 3 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: center; background-size: 12px;
+    margin-top: 2px;
+  }
+
+  .training-img-wrap { position: relative; }
+  .training-img-frame {
+    border-radius: 6px; overflow: hidden;
+    box-shadow: 8px 8px 60px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .training-img-frame img { width: 100%; display: block; filter: saturate(0.8); transition: filter 0.5s; }
+  .training-img-frame:hover img { filter: saturate(1); }
+  .training-accent-block {
+    position: absolute; bottom: -1.5rem; right: -1.5rem;
+    background: var(--gold); color: var(--navy);
+    padding: 1.25rem 1.5rem; border-radius: 4px;
+    font-family: 'Cormorant Garamond', serif;
+    box-shadow: 0 8px 30px rgba(201,148,58,0.3);
+  }
+  .training-accent-block strong { display: block; font-size: 1.8rem; font-weight: 700; line-height: 1; }
+  .training-accent-block span { font-size: 0.75rem; font-weight: 400; opacity: 0.8; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* ── SECTION: MISSION ── */
+  .mission-bg { background: var(--cream); }
+  .mission-inner { text-align: center; max-width: 800px; margin: 0 auto; }
+  .mission-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+    font-weight: 400; font-style: italic;
+    color: var(--navy-mid); line-height: 1.5; margin-bottom: 1.5rem;
+  }
+  .mission-rule { width: 60px; height: 2px; background: linear-gradient(90deg, var(--navy), var(--blue)); margin: 0 auto 2rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid var(--border);
+    padding: 5rem 2rem 2.5rem;
+  }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 3rem; margin-bottom: 4rem; }
+  .footer-brand p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.75; font-weight: 300; margin-top: 1.25rem; max-width: 280px; }
+  .footer-col h4 {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 1.5rem;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+  .footer-col ul a { font-size: 0.875rem; color: var(--text-light); text-decoration: none; font-weight: 300; transition: color 0.2s; }
+  .footer-col ul a:hover { color: white; }
+
+  .footer-socials { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
+  .social-link {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid var(--border); color: var(--text-muted);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; transition: border-color 0.2s, color 0.2s;
+  }
+  .social-link:hover { border-color: var(--gold); color: var(--gold); }
+  .social-link svg { width: 15px; height: 15px; }
+
+  .footer-newsletter p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; font-weight: 300; margin-bottom: 1rem; }
+  .newsletter-form { display: flex; gap: 0; }
+  .newsletter-form input {
+    flex: 1; padding: 0.65rem 1rem;
+    background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+    border-right: none; border-radius: 4px 0 0 4px;
+    color: white; font-size: 0.85rem; font-family: 'DM Sans', sans-serif;
+    outline: none; transition: border-color 0.2s;
+  }
+  .newsletter-form input::placeholder { color: var(--text-muted); }
+  .newsletter-form input:focus { border-color: rgba(255,255,255,0.2); }
+  .newsletter-form button {
+    padding: 0.65rem 1.25rem; background: var(--gold); border: none;
+    border-radius: 0 4px 4px 0; color: white; font-size: 0.8rem;
+    font-weight: 600; letter-spacing: 0.06em; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; transition: background 0.2s;
+  }
+  .newsletter-form button:hover { background: var(--gold-light); }
+
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-bottom p, .footer-bottom a { font-size: 0.78rem; color: var(--text-muted); text-decoration: none; }
+  .footer-bottom a:hover { color: var(--text-light); }
+  .footer-bottom-links { display: flex; gap: 1.5rem; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in { animation: fadeUp 0.7s ease both; }
+  .fade-in-1 { animation-delay: 0.1s; }
+  .fade-in-2 { animation-delay: 0.22s; }
+  .fade-in-3 { animation-delay: 0.34s; }
+  .fade-in-4 { animation-delay: 0.46s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-image-col { display: none; }
+    .method-grid { grid-template-columns: 1fr; gap: 2px; }
+    .testimonials-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .resources-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .training-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 3rem; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-mobile { display: flex; }
+    .resources-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .section { padding: 5rem 1.5rem; }
+  }
+</style>
 </head>
 <body>
 
-    <div class="bg-shape shape-1"></div>
-    <div class="bg-shape shape-2"></div>
-
-    <div class="container">
-        <div class="logo-placeholder">
-            <div class="logo-icon">P</div>
-            <span>Precept France</span>
-        </div>
-        
-        <h1>Notre nouveau site arrive bientôt.</h1>
-        <div class="divider"></div>
-        <p>
-            Nous travaillons activement sur une toute nouvelle expérience en ligne pour vous. 
-            Découvrez bientôt de nouvelles ressources pour étudier la Bible de manière inductive.
-        </p>
-
-        <a href="mailto:contactpreceptfrance@gmail.com" class="contact-btn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            Nous Contacter
-        </a>
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="#">
+      <div class="logo-mark">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 27"><g id="Home.lg"><g id="nav-container"><g id="precept-logo"><path id="Fill-17" class="cls-1" d="M.5 11.49l4.02 9.1h4.45L4.22 9.85.5 11.49z"/><path id="Fill-19" class="cls-1" d="M25.37 9.85l-4.75 10.74h4.45l4.02-9.1-3.72-1.64z"/><path id="Fill-21" class="cls-1" d="M12.76 20.59h4.07V4.48h-4.07v16.11z"/><path id="Fill-23" class="cls-1" d="M19.52 11.78l-1.87 8.81h2.09l1.78-8.39-2-.42z"/><path id="Fill-24" class="cls-1" d="M8.07 12.2l1.78 8.39h2.09l-1.88-8.81-1.99.42z"/></g></g></g></svg>
+      </div>
+      <span class="logo-text">PRECEPT<strong>FRANCE</strong></span>
+    </a>
+    <div class="nav-links">
+      <a href="#methode">La Méthode</a>
+      <a href="#formation">Formation</a>
+      <a href="#mission">Notre Mission</a>
+      <a class="btn-nav" href="#">Commencer</a>
     </div>
+    <div class="nav-mobile">
+      <button type="button" aria-label="Menu">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-gradient"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow fade-in fade-in-1">
+        <div class="hero-eyebrow-dot"></div>
+        <span>Méthode Inductive · Depuis 1970</span>
+      </div>
+      <h1 class="fade-in fade-in-2">
+        Découvrez la Bible<br/>
+        <em>par vous-même.</em>
+      </h1>
+      <p class="hero-sub fade-in fade-in-3">
+        Une méthode rigoureuse pour approfondir votre foi et transformer votre vie. Apprenez à observer, interpréter et appliquer les Écritures avec clarté.
+      </p>
+      <div class="hero-actions fade-in fade-in-4">
+        <a class="btn-primary" href="#">
+          Commencer mon étude
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          </svg>
+        </a>
+        <a class="btn-ghost" href="#methode">Découvrir la méthode</a>
+      </div>
+    </div>
+    <div class="hero-image-col fade-in fade-in-3">
+      <div class="hero-img-frame">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpUowu9ZBb567J-T4XEPX2TQ411CRlMultRYWQTF34zJv3yqfbhdeI1qfHYBbtjy0nYdGC6iSf_jz87or7tgQfzFqmZwx9O8tK__mkoXsSx7spSGp9WFxVh6rNIWUgtVmzhs8FmvVxTCWPVbOWq7sOgFZDNjfAbxokQ5YD8lzdbeZgzPVAqmGZnh4-r5ffMekgpGDYwqpgRkpXFTRKQGuYepsRKij231AjDJSqZGe2pxcq-W3oWne6kYLPmbLpwG6GNNjHMHjddQ8" alt="Bible ouverte"/>
+        <div class="hero-img-overlay"></div>
+        <div class="hero-img-badge">
+          <div class="hero-img-badge-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="hero-img-badge-text">
+            <p>Plus de 20 000 étudiants</p>
+            <strong>partout en France</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE BAND -->
+<div class="quote-band">
+  <blockquote>
+    «&thinsp;Ne vous contentez plus de lire — apprenez à observer, interpréter et appliquer.&thinsp;»
+  </blockquote>
+  <div class="quote-band-rule"></div>
+  <cite>La Méthode Inductive · Precept Ministries</cite>
+</div>
+
+<!-- METHOD -->
+<section class="section method-bg" id="methode">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-tag">La Méthode</span>
+      <h2 class="section-title">La Méthode Inductive</h2>
+      <p class="section-subtitle">Une approche structurée en trois étapes pour laisser la Bible parler d'elle-même.</p>
+    </div>
+    <div class="method-grid">
+      <div class="method-card">
+        <div class="method-number">01</div>
+        <h3>Observation</h3>
+        <p class="method-question">« Qu'est-ce que le texte dit ? »</p>
+        <p>Regardez les faits. Identifiez les mots-clés, les personnages et les actions sans préjugés ni interprétations préalables.</p>
+      </div>
+      <div class="method-card">
+        <div class="method-number">02</div>
+        <h3>Interprétation</h3>
+        <p class="method-question">« Qu'est-ce que le texte signifie ? »</p>
+        <p>Comprenez le contexte original, culturel et historique pour saisir l'intention de l'auteur inspiré.</p>
+      </div>
+      <div class="method-card">
+        <div class="method-number">03</div>
+        <h3>Application</h3>
+        <p class="method-question">« Comment cela change ma vie ? »</p>
+        <p>Laissez la vérité transformer votre cœur, vos pensées et vos actions au quotidien.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testimonials-bg">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-tag" style="color: var(--gold-light)">Témoignages</span>
+      <h2 class="section-title">Ce qu'ils en disent</h2>
+      <p class="section-subtitle" style="color: var(--text-muted)">Des milliers de vies transformées par une étude sérieuse de la Parole.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <span class="testimonial-quote-mark">"</span>
+        <blockquote>La méthode inductive a complètement changé ma façon d'aborder la Bible. Je comprends maintenant ce que je lis, et ça transforme ma prière.</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">M</div>
+          <div>
+            <div class="testimonial-author-name">Marie-Claire D.</div>
+            <div class="testimonial-author-role">Lyon · Étudiante depuis 2 ans</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <span class="testimonial-quote-mark">"</span>
+        <blockquote>Je pensais connaître la Bible. Precept m'a montré à quel point je passais à côté. Cette méthode est rigoureuse, exigeante — et absolument indispensable.</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">P</div>
+          <div>
+            <div class="testimonial-author-name">Paul M.</div>
+            <div class="testimonial-author-role">Paris · Leader de groupe</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <span class="testimonial-quote-mark">"</span>
+        <blockquote>En quelques semaines, j'ai appris plus sur la Parole de Dieu qu'en dix années de lecture superficielle. Je recommande à tout croyant sérieux.</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">S</div>
+          <div>
+            <div class="testimonial-author-name">Sophie L.</div>
+            <div class="testimonial-author-role">Bordeaux · Pasteur</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="section stats-bg" id="mission" style="padding: 5rem 2rem;">
+  <div class="section-inner">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">50<span>+</span></div>
+        <div class="stat-label">Ans de ministère</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">150<span>+</span></div>
+        <div class="stat-label">Pays touchés</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">20k<span>+</span></div>
+        <div class="stat-label">Étudiants en France</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">100<span>%</span></div>
+        <div class="stat-label">Basé sur la Bible</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCES -->
+<section class="section" style="background: white;">
+  <div class="section-inner">
+    <div class="resources-inner">
+      <div>
+        <span class="section-tag">Bibliothèque</span>
+        <h2 class="section-title">Ressources &amp; Études</h2>
+      </div>
+      <a class="resources-link" href="#">
+        Voir toutes les ressources
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        </svg>
+      </a>
+    </div>
+    <div class="resources-grid">
+      <div class="resource-card">
+        <div class="resource-img-wrap">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9mlVOH_ZKHOt7VtpPFXSIK4Rqk5W1ks29IJCt62bC9ghj4RddNpCKMy38sWA6-6Um-WYbrJQSw0bJj1H7VTGYRcSM_GXaMWImeIybvrpHIQ93L3byaMMpa1BPbLJugg-3_Vtvh2IZ0yioc-hBUXYOO8codxkUjBhwuZjCQB--pxqOx9gzE-UvrrsnaIBKJILJ2kGR0n9_gte1Oj2okUAaszmP3qFbx-79h8TrtnhGZ9F43vHqENE5xl1QMwLjsABQtYg_6Bhg6BY" alt="Genèse"/>
+        </div>
+        <h3>Genèse : Au commencement</h3>
+        <p>10 semaines d'étude inductive approfondie.</p>
+      </div>
+      <div class="resource-card">
+        <div class="resource-img-wrap">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAL2J1WoXd8_txsbkG1ag41_y50_VynrD76R5PPe8idmEJ3lkLifIm2omPy1KjRDRzRhoRXTZcvLgq4xpEM6Kf0BGRikQSPMp4k8Cepyb5eHlQGQF6Wf5S4XLawfdKLh4vnUDdiyG9cu13toFAyIKIVdrKxRf3YRJ-16ksvRwn_NO8-udLvYfMgQUx0PKyKrN5lLGvls43sK1eManBHyJKfp6-HRAGehjQTBIvHnRkuPpj_fGsCOHKDhaQCpJiCSzjdegxz-p4-_jA" alt="Philippiens"/>
+        </div>
+        <h3>Philippiens : La Joie</h3>
+        <p>Découvrez le secret d'une joie inébranlable.</p>
+      </div>
+      <div class="resource-card">
+        <div class="resource-img-wrap">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPjsPBXXNKCncZOIL962Wbn3XrMukTAAA5yLbBfxRbq_mzmehyaGSTu_DumYOxhW2TEyFa6J7W1jhgnz0jFDAGqrCJOnQDka7PTF028bOQRyTwxGY5jdVD-ApqUmWAV_1rS-mdjM1YG4WrtBGyf9jLo0z39zKH2c9SPd9D8Eezm8vZSIrcfViYV4avXQhxCHDVZgcfWAJaLwhVagBG1YJ12u6gaRAVWc-OxM4xFDUYUYe68zbNIf42m926yPUw34ftpZTTfovCYt0" alt="Sermon sur la Montagne"/>
+        </div>
+        <h3>Le Sermon sur la Montagne</h3>
+        <p>L'éthique du Royaume de Dieu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAINING -->
+<section class="section training-bg" id="formation">
+  <div class="section-inner">
+    <div class="training-grid">
+      <div>
+        <span class="section-tag" style="color: var(--gold-light)">Leadership</span>
+        <h2 class="section-title" style="margin-bottom: 1.5rem;">Formation et Leadership</h2>
+        <p class="training-sub">Vous avez à cœur de partager la Parole ? Nous formons des leaders capables d'animer des groupes d'étude biblique inductive partout en France.</p>
+        <ul class="training-list">
+          <li>Accompagnement personnalisé tout au long de votre formation</li>
+          <li>Matériel pédagogique complet et éprouvé sur 50 ans</li>
+          <li>Intégration dans un réseau national de leaders bibliques</li>
+        </ul>
+        <a class="btn-primary" href="#" style="display: inline-flex;">
+          Devenir un leader
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          </svg>
+        </a>
+      </div>
+      <div class="training-img-wrap">
+        <div class="training-img-frame">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8CF36qrDZY1p3VMWGWkQSW1QwlEuyVQSAen3uaTsXFQzdOhJrVB6V0B7sZps4dZDFWt2_QV6YRjzptUOTrw8mtaGeDmt1KA0huQtkHEaMNBMFM6KbYvqWCC6lIjNQO9fPPA87vrsHiMpfp4uEI1llTugrjqYqeRgy8FxMcdgux80SP1b0CPwm2qTa03W0sd073M4dNk5yIW-ymikDkjO90c-IIYtsobqCWYZuEgb-Ukaq6Pa7JSi3GwXPHQULs0CdHBs1Rsf8MfE" alt="Formation group"/>
+        </div>
+        <div class="training-accent-block">
+          <strong>20k+</strong>
+          <span>étudiants formés</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="section mission-bg">
+  <div class="section-inner">
+    <div class="mission-inner">
+      <span class="section-tag">Notre Mission</span>
+      <p class="mission-quote">
+        «&thinsp;Engager chaque personne dans une relation transformante avec Dieu à travers l'étude rigoureuse de Sa Parole.&thinsp;»
+      </p>
+      <div class="mission-rule"></div>
+      <p style="font-size:0.9rem; color:#8892a4; font-weight:300; line-height:1.7; max-width:560px; margin: 0 auto;">
+        Depuis plus de 50 ans, Precept Ministries forme des disciples dans 150 pays. En France, nous portons cette vision avec conviction : la transformation passe par la connaissance profonde de la Bible.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="#">
+          <div class="logo-mark">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 27"><g id="Home.lg"><g id="nav-container"><g id="precept-logo"><path id="Fill-17" class="cls-1" d="M.5 11.49l4.02 9.1h4.45L4.22 9.85.5 11.49z"/><path id="Fill-19" class="cls-1" d="M25.37 9.85l-4.75 10.74h4.45l4.02-9.1-3.72-1.64z"/><path id="Fill-21" class="cls-1" d="M12.76 20.59h4.07V4.48h-4.07v16.11z"/><path id="Fill-23" class="cls-1" d="M19.52 11.78l-1.87 8.81h2.09l1.78-8.39-2-.42z"/><path id="Fill-24" class="cls-1" d="M8.07 12.2l1.78 8.39h2.09l-1.88-8.81-1.99.42z"/></g></g></g></svg>
+          </div>
+          <span class="logo-text">PRECEPT<strong>FRANCE</strong></span>
+        </a>
+        <p>Organisation à but non lucratif dédiée à l'enseignement de la méthode inductive pour une compréhension profonde et transformante des Écritures.</p>
+        <div class="footer-socials" style="margin-top: 1.5rem;">
+          <a class="social-link" href="#" aria-label="Facebook">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a class="social-link" href="#" aria-label="Instagram">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12.315 2c2.43 0 2.717.01 3.67.053 1.026.047 1.587.218 1.958.362.49.19.84.418 1.208.786.368.367.596.718.786 1.208.145.372.315.933.362 1.958.044.953.053 1.24.053 3.67s-.01 2.717-.053 3.67c-.047 1.026-.218 1.587-.362 1.958-.19.49-.418.84-.786 1.208-.367.368-.718.596-1.208.786-.372.145-.933.315-1.958.362-.953.044-1.24.053-3.67.053s-2.717-.01-3.67-.053c-1.026-.047-1.587-.218-1.958-.362-.49-.19-.84-.418-1.208-.786-.368-.367-.596-.718-.786-1.208-.145-.372-.315-.933-.362-1.958C2.01 14.717 2 14.43 2 12s.01-2.717.053-3.67c.047-1.026.218-1.587.362-1.958.19-.49.418-.84.786-1.208.367-.368.718-.596 1.208-.786.372-.145.933-.315 1.958-.362.953-.044 1.24-.053 3.67-.053zm0-2c-2.473 0-2.783.01-3.753.055-1.03.047-1.734.21-2.35.45-.636.247-1.176.578-1.714 1.116-.538.538-.868 1.078-1.116 1.714-.24.616-.403 1.32-.45 2.35C2.01 9.217 2 9.527 2 12s.01 2.783.055 3.753c.047 1.03.21 1.734.45 2.35.247.636.578 1.176 1.116 1.714.538.538 1.078.868 1.714 1.116.616.24 1.32.403 2.35.45.97.045 1.28.055 3.753.055s2.783-.01 3.753-.055c1.03-.047 1.734-.21 2.35-.45.636-.247 1.176-.578 1.714-1.116.538-.538.868-1.078 1.116-1.714.24-.616.403-1.32.45-2.35.045-.97.055-1.28.055-3.753s-.01-2.783-.055-3.753c-.047-1.03-.21-1.734-.45-2.35-.247-.636-.578-1.176-1.116-1.714-.538-.538-1.078-.868-1.714-1.116-.616-.24-1.32-.403-2.35-.45-.97-.045-1.28-.055-3.753-.055z"/><path d="M12 5.838A6.162 6.162 0 1018.162 12 6.162 6.162 0 0012 5.838zm0 10.162A4 4 0 1116 12a4 4 0 01-4 4zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Explorer</h4>
+        <ul>
+          <li><a href="#">Toutes les Études</a></li>
+          <li><a href="#">Événements</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Organisation</h4>
+        <ul>
+          <li><a href="#">Notre Histoire</a></li>
+          <li><a href="#">L'Équipe</a></li>
+          <li><a href="#">Partenaires</a></li>
+          <li><a href="#">Faire un don</a></li>
+        </ul>
+      </div>
+      <div class="footer-newsletter footer-col">
+        <h4>Newsletter</h4>
+        <p>Restez informé de nos prochaines formations et nouvelles ressources.</p>
+        <form class="newsletter-form" onsubmit="return false;">
+          <input type="email" placeholder="Votre email"/>
+          <button type="submit">OK</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Precept France. Tous droits réservés.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Mentions Légales</a>
+        <a href="#">Confidentialité</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>

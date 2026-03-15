@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Precept France | Découvrez la Bible par vous-même</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              orange: '#f05a28',
+              gray: '#4a4a4a',
+              lightGray: '#f9fafb',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          borderRadius: {
+            'custom': '8px',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-transitions">
+    .transition-all { transition: all 0.3s ease; }
+    .hover-lift:hover { transform: translateY(-4px); }
+  </style>
+</head>
+<body class="font-sans text-brand-gray bg-white antialiased">
+<!-- BEGIN: Navigation -->
+<nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100" data-purpose="main-navigation">
+<div class="max-row mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-20">
+<!-- Logo Area -->
+<div class="flex-shrink-0 flex items-center">
+<a class="flex items-center space-x-2" href="#">
+<div class="w-10 h-10 bg-brand-orange rounded-custom flex items-center justify-center">
+<span class="text-white font-bold text-xl">P</span>
+</div>
+<span class="text-xl font-extrabold tracking-tight text-gray-900">PRECEPT<span class="text-brand-orange">FRANCE</span></span>
+</a>
+</div>
+<!-- Navigation Links (Digital Sobriety) -->
+<div class="hidden md:flex space-x-8 items-center">
+<a class="text-sm font-medium hover:text-brand-orange transition-all" href="#methode">La Méthode</a>
+<a class="text-sm font-medium hover:text-brand-orange transition-all" href="#formation">Formation</a>
+<a class="text-sm font-medium hover:text-brand-orange transition-all" href="#mission">Notre Mission</a>
+<a class="bg-brand-orange text-white px-5 py-2.5 rounded-custom text-sm font-semibold hover:bg-orange-600 transition-all" href="#">Commencer</a>
+</div>
+<!-- Mobile Menu Button (Placeholder) -->
+<div class="md:hidden">
+<button class="text-gray-500 hover:text-brand-orange" type="button">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- END: Navigation -->
+<main>
+<!-- BEGIN: Hero Section -->
+<section class="relative overflow-hidden bg-white pt-16 pb-24 lg:pt-32 lg:pb-40" data-purpose="hero">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="lg:grid lg:grid-cols-12 lg:gap-12 items-center">
+<div class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
+<h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl leading-tight">
+              Découvrez la Bible <br/>
+<span class="text-brand-orange">par vous-même.</span>
+</h1>
+<p class="mt-6 text-xl text-gray-500 leading-relaxed">
+              Une méthode inductive pour approfondir votre foi et transformer votre vie. Apprenez à étudier les Écritures avec clarté et conviction.
+            </p>
+<div class="mt-10 flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4">
+<a class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-bold rounded-custom text-white bg-brand-orange hover:bg-orange-600 shadow-lg hover-lift transition-all" href="#">
+                Commencer mon étude
+              </a>
+<a class="inline-flex items-center justify-center px-8 py-4 border-2 border-brand-orange text-base font-bold rounded-custom text-brand-orange bg-transparent hover:bg-orange-50 transition-all" href="#methode">
+                Découvrir la méthode
+              </a>
+</div>
+</div>
+<div class="mt-16 sm:mt-24 lg:mt-0 lg:col-span-6">
+<div class="relative mx-auto w-full rounded-custom shadow-2xl overflow-hidden aspect-[4/3]">
+<img alt="Une Bible ouverte avec des notes d'étude" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpUowu9ZBb567J-T4XEPX2TQ411CRlMultRYWQTF34zJv3yqfbhdeI1qfHYBbtjy0nYdGC6iSf_jz87or7tgQfzFqmZwx9O8tK__mkoXsSx7spSGp9WFxVh6rNIWUgtVmzhs8FmvVxTCWPVbOWq7sOgFZDNjfAbxokQ5YD8lzdbeZgzPVAqmGZnh4-r5ffMekgpGDYwqpgRkpXFTRKQGuYepsRKij231AjDJSqZGe2pxcq-W3oWne6kYLPmbLpwG6GNNjHMHjddQ8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Hero Section -->
+<!-- BEGIN: Value Proposition -->
+<section class="py-20 bg-brand-lightGray" data-purpose="value-proposition">
+<div class="max-w-4xl mx-auto px-4 text-center">
+<h2 class="text-3xl font-bold text-gray-900 mb-6">Ne vous contentez plus de lire.</h2>
+<p class="text-2xl text-brand-orange font-medium italic">
+          "Apprenez à observer, interpréter et appliquer."
+        </p>
+<div class="mt-8 w-24 h-1 bg-brand-orange mx-auto rounded-full"></div>
+</div>
+</section>
+<!-- END: Value Proposition -->
+<!-- BEGIN: The Inductive Method -->
+<section class="py-24 bg-white" data-purpose="inductive-method" id="methode">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16">
+<h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">La Méthode Inductive</h2>
+<p class="mt-4 max-w-2xl mx-auto text-lg text-gray-500">
+            Une approche structurée en trois étapes pour laisser la Bible parler d'elle-même.
+          </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<!-- Step 1 -->
+<div class="relative p-8 bg-white border border-gray-100 rounded-custom shadow-sm hover:shadow-md transition-all text-center">
+<div class="w-16 h-16 bg-orange-100 text-brand-orange rounded-full flex items-center justify-center mx-auto mb-6">
+<span class="text-2xl font-bold">01</span>
+</div>
+<h3 class="text-xl font-bold text-gray-900 mb-4">Observation</h3>
+<p class="text-gray-600 mb-4 italic">"Qu'est-ce que le texte dit ?"</p>
+<p class="text-sm text-gray-500">Regardez les faits. Identifiez les mots-clés, les personnages et les actions sans préjugés.</p>
+</div>
+<!-- Step 2 -->
+<div class="relative p-8 bg-white border border-gray-100 rounded-custom shadow-sm hover:shadow-md transition-all text-center">
+<div class="w-16 h-16 bg-orange-100 text-brand-orange rounded-full flex items-center justify-center mx-auto mb-6">
+<span class="text-2xl font-bold">02</span>
+</div>
+<h3 class="text-xl font-bold text-gray-900 mb-4">Interprétation</h3>
+<p class="text-gray-600 mb-4 italic">"Qu'est-ce que le texte signifie ?"</p>
+<p class="text-sm text-gray-500">Comprenez le contexte original pour saisir l'intention de l'auteur inspiré.</p>
+</div>
+<!-- Step 3 -->
+<div class="relative p-8 bg-white border border-gray-100 rounded-custom shadow-sm hover:shadow-md transition-all text-center">
+<div class="w-16 h-16 bg-orange-100 text-brand-orange rounded-full flex items-center justify-center mx-auto mb-6">
+<span class="text-2xl font-bold">03</span>
+</div>
+<h3 class="text-xl font-bold text-gray-900 mb-4">Application</h3>
+<p class="text-gray-600 mb-4 italic">"Comment cela change ma vie ?"</p>
+<p class="text-sm text-gray-500">Laissez la vérité transformer votre cœur, vos pensées et vos actions quotidiennes.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- END: The Inductive Method -->
+<!-- BEGIN: Training & Leadership -->
+<section class="py-24 bg-brand-gray text-white" data-purpose="leadership-training" id="formation">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="lg:flex lg:items-center lg:justify-between">
+<div class="lg:w-1/2">
+<h2 class="text-3xl font-extrabold sm:text-4xl mb-6">Formation et Leadership</h2>
+<p class="text-lg text-gray-300 mb-8">
+              Vous avez à cœur de partager la Parole ? Nous formons des leaders capables d'animer des groupes d'étude biblique inductive partout en France.
+            </p>
+<ul class="space-y-4 mb-10">
+<li class="flex items-center space-x-3">
+<svg class="h-6 w-6 text-brand-orange" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>Accompagnement personnalisé</span>
+</li>
+<li class="flex items-center space-x-3">
+<svg class="h-6 w-6 text-brand-orange" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>Matériel pédagogique complet</span>
+</li>
+<li class="flex items-center space-x-3">
+<svg class="h-6 w-6 text-brand-orange" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>Réseau national de leaders</span>
+</li>
+</ul>
+<a class="inline-block px-8 py-4 bg-brand-orange rounded-custom font-bold text-white hover:bg-orange-600 transition-all shadow-xl" href="#">
+              Devenir un leader
+            </a>
+</div>
+<div class="mt-12 lg:mt-0 lg:w-5/12">
+<img alt="Groupe de personnes étudiant ensemble" class="rounded-custom shadow-2xl grayscale hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8CF36qrDZY1p3VMWGWkQSW1QwlEuyVQSAen3uaTsXFQzdOhJrVB6V0B7sZps4dZDFWt2_QV6YRjzptUOTrw8mtaGeDmt1KA0huQtkHEaMNBMFM6KbYvqWCC6lIjNQO9fPPA87vrsHiMpfp4uEI1llTugrjqYqeRgy8FxMcdgux80SP1b0CPwm2qTa03W0sd073M4dNk5yIW-ymikDkjO90c-IIYtsobqCWYZuEgb-Ukaq6Pa7JSi3GwXPHQULs0CdHBs1Rsf8MfE"/>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Training & Leadership -->
+<!-- BEGIN: Resources/Featured -->
+<section class="py-24 bg-white" data-purpose="resources">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+<div>
+<h2 class="text-3xl font-extrabold text-gray-900">Ressources &amp; Études</h2>
+<p class="mt-4 text-lg text-gray-500">Explorez nos guides d'étude thématiques.</p>
+</div>
+<a class="mt-4 md:mt-0 text-brand-orange font-bold flex items-center hover:underline" href="#">
+            Voir toutes les ressources
+            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Featured Study 1 -->
+<div class="group cursor-pointer">
+<div class="overflow-hidden rounded-custom mb-4 aspect-[3/4] bg-gray-100">
+<img alt="Etude sur la Genèse" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9mlVOH_ZKHOt7VtpPFXSIK4Rqk5W1ks29IJCt62bC9ghj4RddNpCKMy38sWA6-6Um-WYbrJQSw0bJj1H7VTGYRcSM_GXaMWImeIybvrpHIQ93L3byaMMpa1BPbLJugg-3_Vtvh2IZ0yioc-hBUXYOO8codxkUjBhwuZjCQB--pxqOx9gzE-UvrrsnaIBKJILJ2kGR0n9_gte1Oj2okUAaszmP3qFbx-79h8TrtnhGZ9F43vHqENE5xl1QMwLjsABQtYg_6Bhg6BY"/>
+</div>
+<h3 class="font-bold text-lg text-gray-900">Genèse : Au commencement</h3>
+<p class="text-sm text-gray-500">10 semaines d'étude inductive approfondie.</p>
+</div>
+<!-- Featured Study 2 -->
+<div class="group cursor-pointer">
+<div class="overflow-hidden rounded-custom mb-4 aspect-[3/4] bg-gray-100">
+<img alt="Etude sur les Philippiens" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAL2J1WoXd8_txsbkG1ag41_y50_VynrD76R5PPe8idmEJ3lkLifIm2omPy1KjRDRzRhoRXTZcvLgq4xpEM6Kf0BGRikQSPMp4k8Cepyb5eHlQGQF6Wf5S4XLawfdKLh4vnUDdiyG9cu13toFAyIKIVdrKxRf3YRJ-16ksvRwn_NO8-udLvYfMgQUx0PKyKrN5lLGvls43sK1eManBHyJKfp6-HRAGehjQTBIvHnRkuPpj_fGsCOHKDhaQCpJiCSzjdegxz-p4-_jA"/>
+</div>
+<h3 class="font-bold text-lg text-gray-900">Philippiens : La Joie</h3>
+<p class="text-sm text-gray-500">Découvrez le secret d'une joie inébranlable.</p>
+</div>
+<!-- Featured Study 3 -->
+<div class="group cursor-pointer">
+<div class="overflow-hidden rounded-custom mb-4 aspect-[3/4] bg-gray-100">
+<img alt="Etude Sermon sur la Montagne" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPjsPBXXNKCncZOIL962Wbn3XrMukTAAA5yLbBfxRbq_mzmehyaGSTu_DumYOxhW2TEyFa6J7W1jhgnz0jFDAGqrCJOnQDka7PTF028bOQRyTwxGY5jdVD-ApqUmWAV_1rS-mdjM1YG4WrtBGyf9jLo0z39zKH2c9SPd9D8Eezm8vZSIrcfViYV4avXQhxCHDVZgcfWAJaLwhVagBG1YJ12u6gaRAVWc-OxM4xFDUYUYe68zbNIf42m926yPUw34ftpZTTfovCYt0"/>
+</div>
+<h3 class="font-bold text-lg text-gray-900">Le Sermon sur la Montagne</h3>
+<p class="text-sm text-gray-500">L'éthique du Royaume de Dieu.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Resources/Featured -->
+<!-- BEGIN: Mission & Stats -->
+<section class="py-24 bg-brand-lightGray" data-purpose="mission-stats" id="mission">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+<h2 class="text-3xl font-extrabold text-gray-900 mb-8">Notre Mission</h2>
+<p class="max-w-3xl mx-auto text-xl text-brand-gray leading-relaxed mb-16">
+          "Engager chaque personne dans une relation avec Dieu à travers l'étude de Sa Parole."
+        </p>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+<div>
+<div class="text-4xl font-extrabold text-brand-orange mb-2">50+</div>
+<div class="text-sm font-medium text-gray-500 uppercase tracking-wider">Ans de ministère</div>
+</div>
+<div>
+<div class="text-4xl font-extrabold text-brand-orange mb-2">150+</div>
+<div class="text-sm font-medium text-gray-500 uppercase tracking-wider">Pays touchés</div>
+</div>
+<div>
+<div class="text-4xl font-extrabold text-brand-orange mb-2">20k+</div>
+<div class="text-sm font-medium text-gray-500 uppercase tracking-wider">Étudiants en France</div>
+</div>
+<div>
+<div class="text-4xl font-extrabold text-brand-orange mb-2">100%</div>
+<div class="text-sm font-medium text-gray-500 uppercase tracking-wider">Basé sur la Bible</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Mission & Stats -->
+</main>
+<!-- BEGIN: Footer -->
+<footer class="bg-white border-t border-gray-100 pt-20 pb-10" data-purpose="main-footer">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+<!-- Brand/About -->
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center space-x-2 mb-6">
+<div class="w-8 h-8 bg-brand-orange rounded-custom flex items-center justify-center">
+<span class="text-white font-bold text-sm">P</span>
+</div>
+<span class="text-lg font-bold text-gray-900">PRECEPT FRANCE</span>
+</div>
+<p class="text-sm text-gray-500 leading-relaxed">
+            Une organisation à but non lucratif dédiée à l'enseignement de la méthode inductive pour une compréhension profonde des Écritures.
+          </p>
+</div>
+<!-- Links -->
+<div>
+<h4 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-6">Explorer</h4>
+<ul class="space-y-4">
+<li><a class="text-sm text-gray-500 hover:text-brand-orange transition-all" href="#">Toutes les Études</a></li>
+<li><a class="text-sm text-gray-500 hover:text-brand-orange transition-all" href="#">Événements</a></li>
+<li><a class="text-sm text-gray-500 hover:text-brand-orange transition-all" href="#">Blog</a></li>
+<li><a class="text-sm text-gray-500 hover:text-brand-orange transition-all" href="#">Contact</a></li>
+</ul>
+</div>
+<!-- Social -->
+<div>
+<h4 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-6">Suivez-nous</h4>
+<div class="flex space-x-4">
+<a class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-brand-orange hover:border-brand-orange transition-all" href="#">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
+</a>
+<a class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-brand-orange hover:border-brand-orange transition-all" href="#">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M12.315 2c2.43 0 2.717.01 3.67.053 1.026.047 1.587.218 1.958.362.49.19.84.418 1.208.786.368.367.596.718.786 1.208.145.372.315.933.362 1.958.044.953.053 1.24.053 3.67s-.01 2.717-.053 3.67c-.047 1.026-.218 1.587-.362 1.958-.19.49-.418.84-.786 1.208-.367.368-.718.596-1.208.786-.372.145-.933.315-1.958.362-.953.044-1.24.053-3.67.053s-2.717-.01-3.67-.053c-1.026-.047-1.587-.218-1.958-.362-.49-.19-.84-.418-1.208-.786-.368-.367-.596-.718-.786-1.208-.145-.372-.315-.933-.362-1.958C2.01 14.717 2 14.43 2 12s.01-2.717.053-3.67c.047-1.026.218-1.587.362-1.958.19-.49.418-.84.786-1.208.367-.368.718-.596 1.208-.786.372-.145.933-.315 1.958-.362.953-.044 1.24-.053 3.67-.053zm0-2c-2.473 0-2.783.01-3.753.055-1.03.047-1.734.21-2.35.45-.636.247-1.176.578-1.714 1.116-.538.538-.868 1.078-1.116 1.714-.24.616-.403 1.32-.45 2.35C2.01 9.217 2 9.527 2 12s.01 2.783.055 3.753c.047 1.03.21 1.734.45 2.35.247.636.578 1.176 1.116 1.714.538.538 1.078.868 1.714 1.116.616.24 1.32.403 2.35.45.97.045 1.28.055 3.753.055s2.783-.01 3.753-.055c1.03-.047 1.734-.21 2.35-.45.636-.247 1.176-.578 1.714-1.116.538-.538.868-1.078 1.116-1.714.24-.616.403-1.32.45-2.35.045-.97.055-1.28.055-3.753s-.01-2.783-.055-3.753c-.047-1.03-.21-1.734-.45-2.35-.247-.636-.578-1.176-1.116-1.714-.538-.538-1.078-.868-1.714-1.116-.616-.24-1.32-.403-2.35-.45-.97-.045-1.28-.055-3.753-.055z"></path><path d="M12 5.838A6.162 6.162 0 1018.162 12 6.162 6.162 0 0012 5.838zm0 10.162A4 4 0 1116 12a4 4 0 01-4 4zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path></svg>
+</a>
+</div>
+</div>
+<!-- Newsletter -->
+<div>
+<h4 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-6">Newsletter</h4>
+<p class="text-sm text-gray-500 mb-4">Restez informé de nos prochaines formations.</p>
+<form class="flex space-x-2">
+<input class="flex-grow text-sm border-gray-200 rounded-custom focus:ring-brand-orange focus:border-brand-orange" placeholder="Email" type="email"/>
+<button class="bg-brand-orange text-white px-4 py-2 rounded-custom font-semibold text-sm hover:bg-orange-600 transition-all" type="submit">OK</button>
+</form>
+</div>
+</div>
+<div class="pt-10 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400">
+<p>© 2023 Precept France. Tous droits réservés.</p>
+<div class="mt-4 md:mt-0 space-x-6">
+<a class="hover:text-brand-orange" href="#">Mentions Légales</a>
+<a class="hover:text-brand-orange" href="#">Confidentialité</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: Footer -->
+</body></html>
