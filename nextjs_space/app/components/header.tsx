@@ -22,15 +22,13 @@ export default function Header() {
           <Link href="/" className="flex items-center gap-3">
             <div className="relative w-12 h-12">
               <Image
-                src="/images/logo-centered.png"
+                src="/images/logo-icon.webp"
                 alt="Precept France Logo"
                 fill
                 className="object-contain"
               />
             </div>
-            <span className="font-playfair text-xl font-bold text-darkblue hidden sm:block">
-              Precept France
-            </span>
+            <span className="hidden font-playfair text-xl font-bold text-[#374151] sm:block">Precept France</span>
           </Link>
 
           {/* Desktop Nav */}
@@ -41,7 +39,7 @@ export default function Header() {
                 <Link
                   key={item?.name ?? ''}
                   href={item?.href ?? '#'}
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg text-darkblue hover:bg-teal/10 hover:text-teal transition-all duration-300 font-medium"
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg text-[#444444] hover:bg-[#14b8a6]/10 hover:text-[#14b8a6] transition-all duration-300 font-medium"
                 >
                   {IconComponent && <IconComponent size={18} />}
                   {item?.name ?? ''}
