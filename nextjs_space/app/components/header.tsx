@@ -22,10 +22,11 @@ export default function Header() {
           <Link href="/" className="flex items-center gap-3">
             <div className="relative w-12 h-12">
               <Image
-                src="/images/logo-icon.webp"
+                src="/images/logo.png"
                 alt="Precept France Logo"
                 fill
                 className="object-contain"
+                sizes="48px"
               />
             </div>
             <span className="hidden font-playfair text-xl font-bold text-[#374151] sm:block">Precept France</span>
