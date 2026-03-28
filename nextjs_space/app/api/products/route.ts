@@ -1,10 +1,11 @@
-export const dynamic = "force-dynamic";
-
 import { NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+import { getPrisma } from '@/lib/prisma'
+
+export const dynamic = 'force-dynamic'
 
 export async function GET() {
   try {
+    const prisma = getPrisma()
     const products = await prisma.product.findMany({
       orderBy: { createdAt: 'desc' },
     })
