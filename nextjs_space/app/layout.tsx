@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Playfair_Display, Montserrat } from 'next/font/google'
 import { headers } from 'next/headers'
+import { CartProvider } from '@/lib/cart-context'
 import './globals.css'
 
 export const dynamic = "force-dynamic"
@@ -16,7 +17,7 @@ const montserrat = Montserrat({
 })
 
 export async function generateMetadata(): Promise<Metadata> {
-  const headersList = headers()
+  const headersList = await headers()
   const host = headersList.get('x-forwarded-host') || headersList.get('host') || 'localhost:3000'
   const protocol = host.includes('localhost') ? 'http' : 'https'
   const baseUrl = `${protocol}://${host}`
@@ -49,7 +50,9 @@ export default function RootLayout({
         <script src="https://apps.abacus.ai/chatllm/appllm-lib.js"></script>
       </head>
       <body className={`${playfair.variable} ${montserrat.variable} font-montserrat bg-white text-darkblue antialiased`}>
-        {children}
+        <CartProvider>
+          {children}
+        </CartProvider>
       </body>
     </html>
   )
