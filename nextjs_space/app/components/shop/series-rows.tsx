@@ -29,7 +29,7 @@ export function SeriesRows({ groups }: SeriesRowsProps) {
     <div className="py-10 px-6 sm:px-10 bg-[#0a0e1a]">
       {/* Search bar */}
       <div className="max-w-md mb-10">
-        <div className="flex items-center gap-3 bg-white/6 border border-white/12 rounded-xl px-4 py-3">
+        <div className="flex items-center gap-3 bg-[#0d1a30] border border-white/12 rounded-xl px-4 py-3">
           <span className="text-white/40 text-base">🔍</span>
           <input
             type="text"
