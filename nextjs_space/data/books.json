@@ -1,0 +1,210 @@
+[
+  {
+    "name": "Qui est Dieu ?",
+    "description": "Une étude de 40 minutes sur la nature et les attributs de Dieu. Idéale pour les débutants ou les groupes avec peu de temps.",
+    "price": 12.99,
+    "imageUrl": "/images/book-qui-est-dieu.png",
+    "type": "LIVRE",
+    "series": "40min"
+  },
+  {
+    "name": "La Prière",
+    "description": "Découvrez le fondement biblique de la prière et apprenez à communier avec Dieu à travers Sa Parole.",
+    "price": 12.99,
+    "imageUrl": "/images/book-la-priere.png",
+    "type": "LIVRE",
+    "series": "40min"
+  },
+  {
+    "name": "La Foi",
+    "description": "Qu'est-ce que la foi biblique ? Cette étude de 40 minutes explore la confiance en Dieu à travers les Écritures.",
+    "price": 12.99,
+    "imageUrl": "/images/book-la-foi.png",
+    "type": "LIVRE",
+    "series": "40min"
+  },
+  {
+    "name": "Le Saint-Esprit",
+    "description": "Qui est le Saint-Esprit et quel est son rôle dans la vie du croyant ? Une étude concise et profonde.",
+    "price": 12.99,
+    "imageUrl": "/images/book-saint-esprit.png",
+    "type": "LIVRE",
+    "series": "40min"
+  },
+  {
+    "name": "Le Salut",
+    "description": "Une exploration biblique du plan de salut de Dieu, de la grâce et de la rédemption en Christ.",
+    "price": 12.99,
+    "imageUrl": "/images/book-le-salut.png",
+    "type": "LIVRE",
+    "series": "40min"
+  },
+  {
+    "name": "La Souffrance",
+    "description": "Comment Dieu utilise-t-il la souffrance dans la vie du croyant ? Une étude biblique réconfortante et instructive.",
+    "price": 12.99,
+    "imageUrl": "/images/book-souffrance.png",
+    "type": "LIVRE",
+    "series": "40min"
+  },
+  {
+    "name": "Genèse : Aux Origines",
+    "description": "Plongez dans les premiers chapitres de la Bible et découvrez les vérités fondamentales sur la création et l'humanité.",
+    "price": 18.99,
+    "imageUrl": "/images/book-genese.png",
+    "type": "LIVRE",
+    "series": "in-out"
+  },
+  {
+    "name": "Jean : Le Fils de Dieu",
+    "description": "Une étude inductive de l'Évangile de Jean, révélant la divinité et l'humanité de Jésus-Christ.",
+    "price": 18.99,
+    "imageUrl": "/images/book-jean.png",
+    "type": "LIVRE",
+    "series": "in-out"
+  },
+  {
+    "name": "Romains : La Justice de Dieu",
+    "description": "Explorez l'épître aux Romains et saisissez la profondeur de la justice, de la grâce et du salut par la foi.",
+    "price": 18.99,
+    "imageUrl": "/images/book-romains.png",
+    "type": "LIVRE",
+    "series": "in-out"
+  },
+  {
+    "name": "Philippiens : La Joie en Christ",
+    "description": "Découvrez comment Paul, même en prison, exhorte les croyants à la joie et à la paix en Jésus-Christ.",
+    "price": 16.99,
+    "imageUrl": "/images/book-philippiens.png",
+    "type": "LIVRE",
+    "series": "in-out"
+  },
+  {
+    "name": "Révélation : Les Temps de la Fin",
+    "description": "Une étude inductive du livre de l'Apocalypse, démystifiant les prophéties et la victoire finale de Christ.",
+    "price": 19.99,
+    "imageUrl": "/images/book-revelation.png",
+    "type": "LIVRE",
+    "series": "in-out"
+  },
+  {
+    "name": "Précept sur Précept — Genèse, Partie 1",
+    "description": "Étude approfondie des chapitres 1 à 11 de la Genèse. Méthode inductive complète avec questions d'observation et d'interprétation.",
+    "price": 24.99,
+    "imageUrl": "/images/book-pup-genese1.png",
+    "type": "LIVRE",
+    "series": "pup"
+  },
+  {
+    "name": "Précept sur Précept — Genèse, Partie 2",
+    "description": "Suite de l'étude de la Genèse, chapitres 12 à 50. Abraham, Isaac, Jacob et Joseph révèlent le plan de Dieu.",
+    "price": 24.99,
+    "imageUrl": "/images/book-pup-genese2.png",
+    "type": "LIVRE",
+    "series": "pup"
+  },
+  {
+    "name": "Précept sur Précept — Jean, Partie 1",
+    "description": "Étude inductive approfondie de Jean 1 à 11. Qui est vraiment Jésus ? Les signes et les révélations du Fils de Dieu.",
+    "price": 24.99,
+    "imageUrl": "/images/book-pup-jean1.png",
+    "type": "LIVRE",
+    "series": "pup"
+  },
+  {
+    "name": "Précept sur Précept — Jean, Partie 2",
+    "description": "Jean 12 à 21 : la Passion, la Résurrection et les apparitions. Une étude qui approfondit votre foi.",
+    "price": 24.99,
+    "imageUrl": "/images/book-pup-jean2.png",
+    "type": "LIVRE",
+    "series": "pup"
+  },
+  {
+    "name": "Précept sur Précept — Romains, Partie 1",
+    "description": "Romains 1 à 8 : la condamnation, la justification et la vie dans l'Esprit. Une étude inductive complète.",
+    "price": 24.99,
+    "imageUrl": "/images/book-pup-romains1.png",
+    "type": "LIVRE",
+    "series": "pup"
+  },
+  {
+    "name": "Précept sur Précept — Romains, Partie 2",
+    "description": "Romains 9 à 16 : Israël, l'Église et la vie chrétienne pratique. Clôture majestueuse de l'épître.",
+    "price": 24.99,
+    "imageUrl": "/images/book-pup-romains2.png",
+    "type": "LIVRE",
+    "series": "pup"
+  },
+  {
+    "name": "Yarrow — Volume 1",
+    "description": "Premier volume de la série Yarrow pour les groupes d'étude intermédiaires. Études thématiques à travers l'Ancien Testament.",
+    "price": 21.99,
+    "imageUrl": "/images/book-yarrow1.png",
+    "type": "LIVRE",
+    "series": "yarrow"
+  },
+  {
+    "name": "Yarrow — Volume 2",
+    "description": "Deuxième volume de la série Yarrow. Approfondissement des thèmes du Nouveau Testament et application pratique.",
+    "price": 21.99,
+    "imageUrl": "/images/book-yarrow2.png",
+    "type": "LIVRE",
+    "series": "yarrow"
+  },
+  {
+    "name": "Yarrow — Volume 3",
+    "description": "Troisième volume Yarrow : étude des épîtres de Paul et leur pertinence pour la vie chrétienne aujourd'hui.",
+    "price": 21.99,
+    "imageUrl": "/images/book-yarrow3.png",
+    "type": "LIVRE",
+    "series": "yarrow"
+  },
+  {
+    "name": "La Bible pour les Enfants — Les Héros",
+    "description": "Des histoires bibliques passionnantes sur les grands héros de la foi, racontées de manière accessible aux enfants.",
+    "price": 14.99,
+    "imageUrl": "/images/book-enfants-heros.png",
+    "type": "LIVRE",
+    "series": "enfants"
+  },
+  {
+    "name": "La Bible pour les Enfants — Jésus",
+    "description": "La vie, les miracles et l'enseignement de Jésus présentés aux enfants avec des questions d'exploration simples.",
+    "price": 14.99,
+    "imageUrl": "/images/book-enfants-jesus.png",
+    "type": "LIVRE",
+    "series": "enfants"
+  },
+  {
+    "name": "La Bible pour les Enfants — Les Psaumes",
+    "description": "Initier les enfants à la prière et à l'adoration à travers une sélection de psaumes adaptés et illustrés.",
+    "price": 14.99,
+    "imageUrl": "/images/book-enfants-psaumes.png",
+    "type": "LIVRE",
+    "series": "enfants"
+  },
+  {
+    "name": "Étude Inductive de la Bible — Formation Complète",
+    "description": "Formation complète à la méthode inductive Precept : observation, interprétation et application des Écritures. Idéale pour les leaders.",
+    "price": 49.99,
+    "imageUrl": "/images/book-etude-inductive.png",
+    "type": "FORMATION",
+    "series": "formation"
+  },
+  {
+    "name": "Former des Leaders de Groupes",
+    "description": "Comment animer, structurer et faire croître un groupe d'étude biblique inductive. Guide pratique pour les responsables.",
+    "price": 39.99,
+    "imageUrl": "/images/book-formation-leaders.png",
+    "type": "FORMATION",
+    "series": "formation"
+  },
+  {
+    "name": "Introduction à la Méthode Precept",
+    "description": "Découvrez les principes fondamentaux de l'étude inductive de la Bible telle qu'enseignée par Precept Ministries International.",
+    "price": 29.99,
+    "imageUrl": "/images/book-intro-precept.png",
+    "type": "FORMATION",
+    "series": "formation"
+  }
+]
