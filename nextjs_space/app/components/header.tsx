@@ -21,17 +21,17 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[#081228]/97 backdrop-blur-sm shadow-md border-b border-white/8">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#0c1f3f]/97 backdrop-blur-sm shadow-md border-b border-white/8">
         <div className="max-w-[1200px] mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center gap-3">
-              <div className="relative w-12 h-12">
+              <div className="relative w-10 h-10">
                 <Image
                   src="/images/logo.png"
                   alt="Precept France Logo"
                   fill
-                  className="object-contain"
-                  sizes="48px"
+                  className="object-contain mix-blend-screen brightness-125"
+                  sizes="40px"
                 />
               </div>
               <span className="hidden font-playfair text-xl font-bold text-white sm:block">
