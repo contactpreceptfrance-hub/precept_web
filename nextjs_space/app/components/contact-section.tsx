@@ -44,7 +44,7 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-teal/5 to-darkblue/5">
+    <section id="contact" className="py-20 bg-[#0a0e1a]">
       <div ref={ref} className="max-w-[1200px] mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -52,14 +52,14 @@ export default function ContactSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal/10 text-teal rounded-full mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#46c4c0]/15 border border-[#46c4c0]/35 text-[#46c4c0] rounded-full mb-6">
             <Mail size={20} />
             <span className="font-medium">Contactez-nous</span>
           </div>
-          <h2 className="font-playfair text-3xl md:text-4xl font-bold text-darkblue mb-4">
-            Une question ? <span className="text-teal">Écrivez-nous</span>
+          <h2 className="font-playfair text-3xl md:text-4xl font-bold text-white mb-4">
+            Une question ? <span className="text-[#46c4c0]">Écrivez-nous</span>
           </h2>
-          <p className="text-darkblue/70 max-w-2xl mx-auto">
+          <p className="text-white/60 max-w-2xl mx-auto">
             Nous sommes à votre écoute pour répondre à toutes vos questions.
           </p>
         </motion.div>
@@ -70,10 +70,10 @@ export default function ContactSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="max-w-2xl mx-auto"
         >
-          <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-8 space-y-6">
+          <form onSubmit={handleSubmit} className="bg-[#111c30] border border-white/10 rounded-2xl shadow-2xl p-8 space-y-6">
             {/* Name */}
             <div className="relative">
-              <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+              <User className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30" size={20} />
               <input
                 type="text"
                 name="name"
@@ -81,13 +81,13 @@ export default function ContactSection() {
                 onChange={handleChange}
                 placeholder="Votre nom"
                 required
-                className="w-full pl-12 pr-4 py-4 rounded-lg border border-gray-200 focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none transition-all duration-300"
+                className="w-full pl-12 pr-4 py-4 rounded-lg bg-white/6 border border-white/12 text-white placeholder-white/30 focus:border-[#46c4c0] focus:ring-2 focus:ring-[#46c4c0]/20 outline-none transition-all duration-300"
               />
             </div>
 
             {/* Email */}
             <div className="relative">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30" size={20} />
               <input
                 type="email"
                 name="email"
@@ -95,13 +95,13 @@ export default function ContactSection() {
                 onChange={handleChange}
                 placeholder="Votre email"
                 required
-                className="w-full pl-12 pr-4 py-4 rounded-lg border border-gray-200 focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none transition-all duration-300"
+                className="w-full pl-12 pr-4 py-4 rounded-lg bg-white/6 border border-white/12 text-white placeholder-white/30 focus:border-[#46c4c0] focus:ring-2 focus:ring-[#46c4c0]/20 outline-none transition-all duration-300"
               />
             </div>
 
             {/* Subject */}
             <div className="relative">
-              <FileText className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+              <FileText className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30" size={20} />
               <input
                 type="text"
                 name="subject"
@@ -109,13 +109,13 @@ export default function ContactSection() {
                 onChange={handleChange}
                 placeholder="Sujet"
                 required
-                className="w-full pl-12 pr-4 py-4 rounded-lg border border-gray-200 focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none transition-all duration-300"
+                className="w-full pl-12 pr-4 py-4 rounded-lg bg-white/6 border border-white/12 text-white placeholder-white/30 focus:border-[#46c4c0] focus:ring-2 focus:ring-[#46c4c0]/20 outline-none transition-all duration-300"
               />
             </div>
 
             {/* Message */}
             <div className="relative">
-              <MessageSquare className="absolute left-4 top-4 text-gray-400" size={20} />
+              <MessageSquare className="absolute left-4 top-4 text-white/30" size={20} />
               <textarea
                 name="message"
                 value={formData?.message ?? ''}
@@ -123,7 +123,7 @@ export default function ContactSection() {
                 placeholder="Votre message"
                 required
                 rows={5}
-                className="w-full pl-12 pr-4 py-4 rounded-lg border border-gray-200 focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none transition-all duration-300 resize-none"
+                className="w-full pl-12 pr-4 py-4 rounded-lg bg-white/6 border border-white/12 text-white placeholder-white/30 focus:border-[#46c4c0] focus:ring-2 focus:ring-[#46c4c0]/20 outline-none transition-all duration-300 resize-none"
               />
             </div>
 
@@ -131,7 +131,7 @@ export default function ContactSection() {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-teal text-white rounded-lg font-semibold hover:bg-teal-600 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+              className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-[#46c4c0] to-[#14b8a6] text-[#0c1f3f] rounded-xl font-bold hover:opacity-90 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg"
             >
               {status === 'loading' ? (
                 <>
@@ -169,7 +169,7 @@ export default function ContactSection() {
               </motion.div>
             )}
 
-            <p className="text-center text-sm text-darkblue/50">
+            <p className="text-center text-sm text-white/30">
               Vos données sont traitées de manière confidentielle.
             </p>
           </form>

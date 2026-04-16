@@ -21,7 +21,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-md">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#0c1f3f]/95 backdrop-blur-sm shadow-md border-b border-white/8">
         <div className="max-w-[1200px] mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center gap-3">
@@ -34,7 +34,7 @@ export default function Header() {
                   sizes="48px"
                 />
               </div>
-              <span className="hidden font-playfair text-xl font-bold text-[#374151] sm:block">
+              <span className="hidden font-playfair text-xl font-bold text-white sm:block">
                 Precept France
               </span>
             </Link>
@@ -47,7 +47,7 @@ export default function Header() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg text-[#444444] hover:bg-[#14b8a6]/10 hover:text-[#14b8a6] transition-all duration-300 font-medium"
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg text-white/80 hover:bg-[#46c4c0]/15 hover:text-[#46c4c0] transition-all duration-300 font-medium"
                   >
                     <IconComponent size={18} />
                     {item.name}
@@ -90,7 +90,7 @@ export default function Header() {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="md:hidden mt-4 pb-4 border-t border-gray-200"
+                className="md:hidden mt-4 pb-4 border-t border-white/10"
               >
                 <div className="flex flex-col gap-2 pt-4">
                   {navItems.map((item) => {
@@ -100,7 +100,7 @@ export default function Header() {
                         key={item.name}
                         href={item.href}
                         onClick={() => setIsMenuOpen(false)}
-                        className="flex items-center gap-3 px-4 py-3 rounded-lg text-darkblue hover:bg-teal/10 hover:text-teal transition-all duration-300"
+                        className="flex items-center gap-3 px-4 py-3 rounded-lg text-white/80 hover:bg-[#46c4c0]/15 hover:text-[#46c4c0] transition-all duration-300"
                       >
                         <IconComponent size={20} />
                         {item.name}
