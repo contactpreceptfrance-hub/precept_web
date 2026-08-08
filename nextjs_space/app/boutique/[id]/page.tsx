@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, Facebook, Mail } from 'lucide-react'
 import { getPrisma } from '@/lib/prisma'
 import { AddToCartButton } from '@/app/components/shop/add-to-cart-button'
+import { CoverViewer } from '@/app/components/shop/cover-viewer'
 import Header from '@/app/components/header'
 import Footer from '@/app/components/footer'
 
@@ -43,21 +43,14 @@ export default async function BookDetailPage({ params }: Props) {
         </Link>
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
-          {/* Cover */}
-          <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-[#1a3a6a] border border-white/10">
-            {product.imageUrl ? (
-              <Image src={product.imageUrl} alt={product.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-            ) : (
-              <div className="w-full h-full flex items-end p-6 bg-gradient-to-br from-[#0d3560] to-[#125f67]">
-                <span className="text-white font-bold text-lg">{product.name}</span>
-              </div>
-            )}
-            <span className={`absolute top-4 left-4 text-xs font-bold px-3 py-1 rounded-lg uppercase tracking-wide ${
-              product.type === 'LIVRE' ? 'bg-[#46c4c0]/85 text-[#0c1f3f]' : 'bg-purple-500/85 text-white'
-            }`}>
-              {product.type === 'LIVRE' ? 'Livre' : 'Formation'}
-            </span>
-          </div>
+          {/* Cover — recto, with a toggle to the back when one exists */}
+          <CoverViewer
+            name={product.name}
+            imageUrl={product.imageUrl}
+            backImageUrl={product.backImageUrl}
+            type={product.type}
+            series={product.series}
+          />
 
           {/* Info */}
           <div>

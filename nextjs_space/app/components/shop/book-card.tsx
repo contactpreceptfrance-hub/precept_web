@@ -32,13 +32,16 @@ export function BookCard({ id, name, description, price, imageUrl, type }: BookC
     <div className="relative flex-shrink-0 w-44 group">
       {/* Cover */}
       <Link href={`/boutique/${id}`} className="block">
-        <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-[#1a3a6a] mb-3 border border-white/8 group-hover:border-[#46c4c0]/40 transition-colors">
+        {/* Covers are not a uniform shape — they range from 0.64 to 0.82 (w/h).
+            The box is 2/3, which most of them sit close to, and object-contain
+            letterboxes the rest rather than cropping the artwork. */}
+        <div className="relative w-full aspect-[2/3] rounded-2xl overflow-hidden bg-[#1a3a6a] mb-3 border border-white/8 group-hover:border-[#46c4c0]/40 transition-colors">
           {imageUrl ? (
             <Image
               src={imageUrl}
               alt={name}
               fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500"
+              className="object-contain group-hover:scale-105 transition-transform duration-500"
               sizes="176px"
             />
           ) : (
