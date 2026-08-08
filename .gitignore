@@ -8,8 +8,10 @@ node_modules
 /coverage
 
 # Next.js
-/.next/
-/out/
+# No leading slash: the app lives in nextjs_space/, so these must match at any
+# depth. With "/.next/" the build output under nextjs_space/ was being tracked.
+.next/
+out/
 *.tsbuildinfo
 next-env.d.ts
 
