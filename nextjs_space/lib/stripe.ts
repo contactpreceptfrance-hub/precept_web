@@ -7,7 +7,7 @@ const globalForStripe = globalThis as unknown as {
 export function getStripe(): Stripe {
   if (!globalForStripe.stripe) {
     globalForStripe.stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-      apiVersion: '2025-01-27.acacia',
+      apiVersion: '2026-03-25.dahlia',
     })
   }
   return globalForStripe.stripe
