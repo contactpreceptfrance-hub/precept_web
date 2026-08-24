@@ -26,7 +26,7 @@ export default function YoutubeSection() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
   return (
-    <section id="videos" className="py-20 bg-[#0c1f3f]/40">
+    <section id="videos" className="py-20 bg-gray-50">
       <div ref={ref} className="max-w-[1200px] mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -34,14 +34,14 @@ export default function YoutubeSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-500/15 border border-red-500/30 text-red-400 rounded-full mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-100 text-red-600 rounded-full mb-6">
             <Youtube size={20} />
             <span className="font-medium">Nos Vidéos</span>
           </div>
-          <h2 className="font-playfair text-3xl md:text-4xl font-bold text-white mb-4">
-            Découvrez nos <span className="text-[#46c4c0]">Ressources Vidéo</span>
+          <h2 className="font-playfair text-3xl md:text-4xl font-bold text-darkblue mb-4">
+            Découvrez nos <span className="text-teal">Ressources Vidéo</span>
           </h2>
-          <p className="text-white/60 max-w-2xl mx-auto">
+          <p className="text-darkblue/70 max-w-2xl mx-auto">
             Apprenez et grandissez spirituellement grâce à notre contenu vidéo enrichissant.
           </p>
         </motion.div>
@@ -53,7 +53,7 @@ export default function YoutubeSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.15 }}
-              className="bg-[#111c30] border border-white/8 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:border-[#46c4c0]/30 transition-all duration-300 hover:-translate-y-1"
+              className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
             >
               <div className="relative aspect-video bg-gray-200">
                 <iframe
@@ -65,10 +65,10 @@ export default function YoutubeSection() {
                 />
               </div>
               <div className="p-6">
-                <h3 className="font-playfair text-xl font-bold text-white mb-2">
+                <h3 className="font-playfair text-xl font-bold text-darkblue mb-2">
                   {video?.title ?? ''}
                 </h3>
-                <p className="text-white/55 text-sm">
+                <p className="text-darkblue/70 text-sm">
                   {video?.description ?? ''}
                 </p>
               </div>

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Menu, X, BookOpen, Video, Mail, ShoppingBag } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useCart } from '@/lib/cart-context'
@@ -11,6 +12,10 @@ import { CartDrawer } from '@/app/components/shop/cart-drawer'
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { totalItems, openCart } = useCart()
+  // The landing page keeps its original light header; only the boutique
+  // (dark navy pages) gets the dark variant so the shop stays consistent.
+  const pathname = usePathname()
+  const dark = pathname?.startsWith('/boutique') ?? false
 
   const navItems = [
     { name: 'Mission',   href: '#mission',  icon: BookOpen },
@@ -21,20 +26,24 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[#0c1f3f]/97 backdrop-blur-sm shadow-md border-b border-white/8">
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm shadow-md ${
+          dark ? 'bg-[#0c1f3f]/97 border-b border-white/8' : 'bg-white/95'
+        }`}
+      >
         <div className="max-w-[1200px] mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center gap-3">
-              <div className="relative w-10 h-10">
+              <div className={`relative ${dark ? 'w-10 h-10' : 'w-12 h-12'}`}>
                 <Image
                   src="/images/logo.png"
                   alt="Precept France Logo"
                   fill
-                  className="object-contain mix-blend-screen brightness-125"
-                  sizes="40px"
+                  className={`object-contain ${dark ? 'mix-blend-screen brightness-125' : ''}`}
+                  sizes="48px"
                 />
               </div>
-              <span className="hidden font-playfair text-xl font-bold text-white sm:block">
+              <span className={`hidden font-playfair text-xl font-bold sm:block ${dark ? 'text-white' : 'text-[#374151]'}`}>
                 Precept France
               </span>
             </Link>
@@ -47,7 +56,11 @@ export default function Header() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg text-white/80 hover:bg-[#46c4c0]/15 hover:text-[#46c4c0] transition-all duration-300 font-medium"
+                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 font-medium ${
+                      dark
+                        ? 'text-white/80 hover:bg-[#46c4c0]/15 hover:text-[#46c4c0]'
+                        : 'text-[#444444] hover:bg-[#14b8a6]/10 hover:text-[#14b8a6]'
+                    }`}
                   >
                     <IconComponent size={18} />
                     {item.name}
@@ -75,7 +88,7 @@ export default function Header() {
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="md:hidden p-2 rounded-lg hover:bg-teal/10 transition-colors"
+                className={`md:hidden p-2 rounded-lg hover:bg-teal/10 transition-colors ${dark ? 'text-white' : 'text-darkblue'}`}
                 aria-label="Menu"
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -90,7 +103,7 @@ export default function Header() {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="md:hidden mt-4 pb-4 border-t border-white/10"
+                className={`md:hidden mt-4 pb-4 border-t ${dark ? 'border-white/10' : 'border-gray-200'}`}
               >
                 <div className="flex flex-col gap-2 pt-4">
                   {navItems.map((item) => {
@@ -100,7 +113,11 @@ export default function Header() {
                         key={item.name}
                         href={item.href}
                         onClick={() => setIsMenuOpen(false)}
-                        className="flex items-center gap-3 px-4 py-3 rounded-lg text-white/80 hover:bg-[#46c4c0]/15 hover:text-[#46c4c0] transition-all duration-300"
+                        className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 ${
+                          dark
+                            ? 'text-white/80 hover:bg-[#46c4c0]/15 hover:text-[#46c4c0]'
+                            : 'text-darkblue hover:bg-teal/10 hover:text-teal'
+                        }`}
                       >
                         <IconComponent size={20} />
                         {item.name}
