@@ -5,7 +5,9 @@ generator client {
 
 datasource db {
     provider = "postgresql"
-    url      = env("DATABASE_URL")
+    url       = env("DATABASE_URL")
+    // Neon: app traffic goes through the pooler; Prisma Migrate needs the direct host.
+    directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
 model Product {

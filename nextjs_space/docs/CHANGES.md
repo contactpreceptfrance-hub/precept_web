@@ -9,9 +9,14 @@
 
 ## Environment Variables
 
+Production DB: Neon project `precept-france` (`sparkling-scene-89259699`, eu-central-1),
+migrated and seeded on 2026-08-25. `prisma migrate deploy` runs in the Vercel build and
+needs `DATABASE_URL_UNPOOLED` — without it the build fails before `next build`.
+
 ### Required (add to `.env` locally and Vercel dashboard)
 ```
-DATABASE_URL=postgresql://...        # Postgres connection string
+DATABASE_URL=postgresql://...        # Neon POOLED url (host contains "-pooler") — app traffic
+DATABASE_URL_UNPOOLED=postgresql://... # Neon DIRECT url (no "-pooler") — Prisma Migrate only
 STRIPE_SECRET_KEY=sk_live_...        # Available Saturday
 STRIPE_WEBHOOK_SECRET=whsec_...      # From Stripe dashboard > Webhooks
 NEXT_PUBLIC_BASE_URL=https://...     # Your Vercel production URL
