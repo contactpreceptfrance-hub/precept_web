@@ -34,3 +34,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .worktrees/
+
+# Local reference material kept at the repo root (Precept brochures, the
+# scraped Canadian catalogue) — never meant to ship with the site.
+/*.pdf
+/Precept Produkt Katalog.html
+/Precept Produkt Katalog_files/
+
+# Claude Code local settings
+.claude/
