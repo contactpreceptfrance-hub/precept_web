@@ -13,10 +13,11 @@ export default function Header() {
   const { totalItems, openCart } = useCart()
 
   const navItems = [
-    { name: 'Mission',   href: '#mission',  icon: BookOpen },
-    { name: 'Vidéos',    href: '#videos',   icon: Video },
+    // Absolute paths so the anchors also work from /boutique pages.
+    { name: 'Mission',   href: '/#mission', icon: BookOpen },
+    { name: 'Vidéos',    href: '/#videos',  icon: Video },
     { name: 'Boutique',  href: '/boutique', icon: ShoppingBag },
-    { name: 'Contact',   href: '#contact',  icon: Mail },
+    { name: 'Contact',   href: '/#contact', icon: Mail },
   ]
 
   return (
@@ -32,6 +33,7 @@ export default function Header() {
                   fill
                   className="object-contain"
                   sizes="48px"
+                  priority
                 />
               </div>
               <span className="hidden font-playfair text-xl font-bold text-[#374151] sm:block">
