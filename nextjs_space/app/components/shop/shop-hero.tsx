@@ -18,7 +18,7 @@ export function ShopHero() {
       </div>
 
       <div className="relative z-10 px-6 sm:px-12 py-16 max-w-2xl">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#46c4c0]/15 border border-[#46c4c0]/35 text-[#46c4c0] rounded-full text-xs font-semibold uppercase tracking-widest mb-5">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 border border-white/40 text-white rounded-full text-xs font-semibold uppercase tracking-widest mb-5">
           📚 Notre Boutique
         </div>
         <h1 className="font-playfair text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4 drop-shadow-[0_3px_14px_rgba(4,18,38,0.55)]">
