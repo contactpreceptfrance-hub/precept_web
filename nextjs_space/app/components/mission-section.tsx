@@ -10,21 +10,21 @@ const sections = [
     title: 'Notre Vision',
     icon: Eye,
     content: 'Que chaque croyant en Christ vive la Parole de Dieu au quotidien.',
-    bgColor: 'bg-[#0a0e1a]',
+    bgColor: 'bg-white',
   },
   {
     id: 'mission',
     title: 'Notre Mission',
     icon: Target,
     content: 'Amener les gens à une relation étroite avec Dieu par le biais d\'études bibliques approfondies.',
-    bgColor: 'bg-[#0c1f3f]/60',
+    bgColor: 'bg-teal/5',
   },
   {
     id: 'but',
     title: 'Notre But',
     icon: Heart,
     content: 'Fournir les outils nécessaires pour étudier les Écritures de manière autonome et nouer une relation personnelle avec Dieu.',
-    bgColor: 'bg-[#0a0e1a]',
+    bgColor: 'bg-white',
   },
 ]
 
@@ -64,14 +64,14 @@ export default function MissionSection() {
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 className="flex flex-col md:flex-row items-center gap-8"
               >
-                <div className="flex-shrink-0 w-20 h-20 rounded-full bg-[#46c4c0]/15 border border-[#46c4c0]/30 flex items-center justify-center">
-                  {IconComponent && <IconComponent size={40} className="text-[#46c4c0]" />}
+                <div className="flex-shrink-0 w-20 h-20 rounded-full bg-teal/10 flex items-center justify-center">
+                  {IconComponent && <IconComponent size={40} className="text-teal" />}
                 </div>
                 <div className="text-center md:text-left">
-                  <h2 className="font-playfair text-3xl md:text-4xl font-bold text-white mb-4">
+                  <h2 className="font-playfair text-3xl md:text-4xl font-bold text-darkblue mb-4">
                     {section?.title ?? ''}
                   </h2>
-                  <p className="text-lg text-white/70 max-w-2xl leading-relaxed">
+                  <p className="text-lg text-darkblue/80 max-w-2xl leading-relaxed">
                     {section?.content ?? ''}
                   </p>
                 </div>

@@ -8,8 +8,10 @@ node_modules
 /coverage
 
 # Next.js
-/.next/
-/out/
+# No leading slash: the app lives in nextjs_space/, so these must match at any
+# depth. With "/.next/" the build output under nextjs_space/ was being tracked.
+.next/
+out/
 *.tsbuildinfo
 next-env.d.ts
 
@@ -32,3 +34,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .worktrees/
+
+# Local reference material kept at the repo root (Precept brochures, the
+# scraped Canadian catalogue) — never meant to ship with the site.
+/*.pdf
+/Precept Produkt Katalog.html
+/Precept Produkt Katalog_files/
+
+# Claude Code local settings
+.claude/

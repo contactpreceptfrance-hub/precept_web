@@ -5,20 +5,26 @@ generator client {
 
 datasource db {
     provider = "postgresql"
-    url      = env("DATABASE_URL")
+    url       = env("DATABASE_URL")
+    // Neon: app traffic goes through the pooler; Prisma Migrate needs the direct host.
+    directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
 model Product {
-  id          String      @id @default(cuid())
-  name        String
-  description String
-  price       Float
-  imageUrl    String
-  type        ProductType
-  series      String?     // "40min" | "in-out" | "pup" | "yarrow" | "enfants" | "formation"
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  orderItems  OrderItem[]
+  id           String      @id @default(cuid())
+  name         String
+  description  String
+  price        Float
+  imageUrl     String
+  // Back cover. Nullable: not every product has one, and for the Précepte sur
+  // Précepte and Saisir et Agir titles this is a generic series back shared
+  // across all of them rather than artwork specific to the title.
+  backImageUrl String?
+  type         ProductType
+  series       String?     // "40min" | "seigneur" | "etudes" | "saisir" | "pup" | "enfants"
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  orderItems   OrderItem[]
 }
 
 enum ProductType {
