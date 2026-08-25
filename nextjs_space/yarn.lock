@@ -5819,6 +5819,7 @@ __metadata:
     react-use: "npm:17.6.0"
     recharts: "npm:2.15.3"
     sonner: "npm:1.5.0"
+    stripe: "npm:22.0.2"
     swr: "npm:2.2.4"
     tailwind-merge: "npm:2.5.2"
     tailwind-scrollbar-hide: "npm:1.1.7"
@@ -12668,6 +12669,18 @@ __metadata:
   version: 3.1.1
   resolution: "strip-json-comments@npm:3.1.1"
   checksum: 10c0/9681a6257b925a7fa0f285851c0e613cc934a50661fa7bb41ca9cbbff89686bb4a0ee366e6ecedc4daafd01e83eee0720111ab294366fe7c185e935475ebcecd
+  languageName: node
+  linkType: hard
+
+"stripe@npm:22.0.2":
+  version: 22.0.2
+  resolution: "stripe@npm:22.0.2"
+  peerDependencies:
+    "@types/node": ">=18"
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+  checksum: 10c0/4eb21d5064c1bc0fbc60de8d5e0a7a4b26c807e557d15353fa9f98c7fb93082b545ff54c7e00333f784c3bc6c4036dfa8c28401847d202343f69dedfa35568b0
   languageName: node
   linkType: hard
 

@@ -1,0 +1,380 @@
+[
+  {
+    "name": "Bâtir un mariage qui fructifie vraiment",
+    "description": "Ce que Dieu déclare sur le mariage, et comment bâtir une union qui porte durablement du fruit. Six semaines d'étude, sans devoirs à la maison.",
+    "price": 12.99,
+    "imageUrl": "/images/books/batir-un-mariage-qui-fructifie-vraiment.webp",
+    "backImageUrl": "/images/books/batir-un-mariage-qui-fructifie-vraiment-verso.webp",
+    "type": "LIVRE",
+    "series": "40min"
+  },
+  {
+    "name": "Comment faire des choix que vous ne regretterez pas",
+    "description": "Les principes bibliques qui éclairent les décisions difficiles, pour choisir selon la sagesse de Dieu plutôt que sous la pression du moment.",
+    "price": 12.99,
+    "imageUrl": "/images/books/comment-faire-des-choix-que-vous-ne-regretterez-pas.webp",
+    "backImageUrl": "/images/books/comment-faire-des-choix-que-vous-ne-regretterez-pas-verso.webp",
+    "type": "LIVRE",
+    "series": "40min"
+  },
+  {
+    "name": "Comment savoir que Dieu est votre Père ?",
+    "description": "Une étude de la première épître de Jean pour discerner les marques d'une vraie filiation divine et affermir votre assurance. Format 40 minutes, sans devoirs.",
+    "price": 12.99,
+    "imageUrl": "/images/books/comment-savoir-que-dieu-est-votre-pere.webp",
+    "backImageUrl": "/images/books/comment-savoir-que-dieu-est-votre-pere-verso.webp",
+    "type": "LIVRE",
+    "series": "40min"
+  },
+  {
+    "name": "Enflammez votre passion pour Dieu",
+    "description": "Lorsque la foi devient routine, l'Écriture rallume le feu. Une étude pour retrouver un amour vivant et brûlant pour le Seigneur.",
+    "price": 12.99,
+    "imageUrl": "/images/books/enflammez-votre-passion-pour-dieu.webp",
+    "backImageUrl": "/images/books/enflammez-votre-passion-pour-dieu-verso.webp",
+    "type": "LIVRE",
+    "series": "40min"
+  },
+  {
+    "name": "Entretenir une relation réelle avec Dieu",
+    "description": "Dépassez la religion des apparences pour découvrir ce qu'est une communion authentique et quotidienne avec Dieu.",
+    "price": 12.99,
+    "imageUrl": "/images/books/entretenir-une-relation-reelle-avec-dieu.webp",
+    "backImageUrl": "/images/books/entretenir-une-relation-reelle-avec-dieu-verso.webp",
+    "type": "LIVRE",
+    "series": "40min"
+  },
+  {
+    "name": "Jésus : comprendre sa mort et sa résurrection",
+    "description": "Marc 14 à 16. Suivez le Seigneur de Gethsémané au tombeau vide, et saisissez le sens de la croix pour votre vie.",
+    "price": 12.99,
+    "imageUrl": "/images/books/jesus-comprendre-sa-mort-et-sa-resurrection.webp",
+    "backImageUrl": "/images/books/jesus-comprendre-sa-mort-et-sa-resurrection-verso.webp",
+    "type": "LIVRE",
+    "series": "40min"
+  },
+  {
+    "name": "Jésus : faire l'expérience de son toucher",
+    "description": "Marc 1 à 6. Découvrez le Christ à l'œuvre — sa puissance, sa compassion, et l'effet de sa présence sur ceux qu'il rencontre.",
+    "price": 12.99,
+    "imageUrl": "/images/books/jesus-faire-l-experience-de-son-toucher.webp",
+    "backImageUrl": "/images/books/jesus-faire-l-experience-de-son-toucher-verso.webp",
+    "type": "LIVRE",
+    "series": "40min"
+  },
+  {
+    "name": "Jésus : à l'écoute de sa voix",
+    "description": "Marc 7 à 13. Écoutez l'enseignement de Jésus sur le Royaume, la foi et le cœur de l'homme, et laissez sa voix orienter la vôtre.",
+    "price": 12.99,
+    "imageUrl": "/images/books/jesus-a-l-ecoute-de-sa-voix.webp",
+    "backImageUrl": "/images/books/jesus-a-l-ecoute-de-sa-voix-verso.webp",
+    "type": "LIVRE",
+    "series": "40min"
+  },
+  {
+    "name": "Le ciel, l'enfer et la vie après la mort",
+    "description": "Ce que la Bible enseigne réellement sur l'éternité — au-delà des opinions et des peurs, une réponse tirée du texte lui-même.",
+    "price": 12.99,
+    "imageUrl": "/images/books/le-ciel-l-enfer-et-la-vie-apres-la-mort.webp",
+    "backImageUrl": "/images/books/le-ciel-l-enfer-et-la-vie-apres-la-mort-verso.webp",
+    "type": "LIVRE",
+    "series": "40min"
+  },
+  {
+    "name": "Libéré de l'emprise de la peur",
+    "description": "L'anxiété n'a pas le dernier mot. Une étude sur ce que Dieu dit à ceux que la crainte paralyse, et sur le chemin de la délivrance.",
+    "price": 12.99,
+    "imageUrl": "/images/books/libere-de-l-emprise-de-la-peur.webp",
+    "backImageUrl": "/images/books/libere-de-l-emprise-de-la-peur-verso.webp",
+    "type": "LIVRE",
+    "series": "40min"
+  },
+  {
+    "name": "Mener une vie d'adoration authentique",
+    "description": "L'adoration dépasse largement le chant du dimanche. Découvrez ce que Dieu recherche chez ceux qui l'adorent en esprit et en vérité.",
+    "price": 12.99,
+    "imageUrl": "/images/books/mener-une-vie-d-adoration-authentique.webp",
+    "backImageUrl": "/images/books/mener-une-vie-d-adoration-authentique-verso.webp",
+    "type": "LIVRE",
+    "series": "40min"
+  },
+  {
+    "name": "Pardonner : briser l'emprise du passé",
+    "description": "Le pardon libère celui qui l'accorde. Une étude pour comprendre le pardon selon Dieu et sortir de l'emprise des blessures anciennes.",
+    "price": 12.99,
+    "imageUrl": "/images/books/pardonner-briser-l-emprise-du-passe.webp",
+    "backImageUrl": "/images/books/pardonner-briser-l-emprise-du-passe-verso.webp",
+    "type": "LIVRE",
+    "series": "40min"
+  },
+  {
+    "name": "Être un disciple : ce qu'il en coûte vraiment",
+    "description": "Jésus n'a jamais dissimulé le prix à payer pour le suivre. Examinez ses propres paroles sur ce que signifie être son disciple.",
+    "price": 12.99,
+    "imageUrl": "/images/books/etre-un-disciple-ce-qu-il-en-coute-vraiment.webp",
+    "backImageUrl": "/images/books/etre-un-disciple-ce-qu-il-en-coute-vraiment-verso.webp",
+    "type": "LIVRE",
+    "series": "40min"
+  },
+  {
+    "name": "Dieu, es-tu là ?",
+    "description": "Pour ceux qui doutent ou traversent le silence : ce que la Bible révèle d'un Dieu présent, même lorsqu'on ne le perçoit pas.",
+    "price": 12.99,
+    "imageUrl": "/images/books/dieu-es-tu-la.webp",
+    "backImageUrl": "/images/books/dieu-es-tu-la-verso.webp",
+    "type": "LIVRE",
+    "series": "seigneur"
+  },
+  {
+    "name": "Seigneur, enseigne-moi à prier",
+    "description": "Une étude qui fait de la prière une conversation nourrie par l'Écriture plutôt qu'un exercice répétitif.",
+    "price": 12.99,
+    "imageUrl": "/images/books/seigneur-enseigne-moi-a-prier.webp",
+    "backImageUrl": "/images/books/seigneur-enseigne-moi-a-prier-verso.webp",
+    "type": "LIVRE",
+    "series": "seigneur"
+  },
+  {
+    "name": "Seigneur, enseigne-moi à étudier la Bible",
+    "description": "Apprenez la méthode d'étude inductive pas à pas : observer, interpréter, appliquer. La porte d'entrée idéale pour étudier la Parole par vous-même.",
+    "price": 12.99,
+    "imageUrl": "/images/books/seigneur-enseigne-moi-a-etudier-la-bible.webp",
+    "backImageUrl": "/images/books/seigneur-enseigne-moi-a-etudier-la-bible-verso.webp",
+    "type": "LIVRE",
+    "series": "seigneur"
+  },
+  {
+    "name": "Seigneur, j'ai besoin de réponses",
+    "description": "Quand les questions difficiles surgissent, l'Écriture répond. Une étude pour chercher dans le texte les réponses que Dieu y a placées.",
+    "price": 12.99,
+    "imageUrl": "/images/books/seigneur-j-ai-besoin-de-reponses.webp",
+    "backImageUrl": "/images/books/seigneur-j-ai-besoin-de-reponses-verso.webp",
+    "type": "LIVRE",
+    "series": "seigneur"
+  },
+  {
+    "name": "Seigneur, je veux te connaître",
+    "description": "Dieu se révèle par ses noms. Découvrez qui il est à travers les noms qu'il se donne dans l'Écriture, et apprenez à compter sur lui.",
+    "price": 12.99,
+    "imageUrl": "/images/books/seigneur-je-veux-te-connaitre.webp",
+    "backImageUrl": "/images/books/seigneur-je-veux-te-connaitre-verso.webp",
+    "type": "LIVRE",
+    "series": "seigneur"
+  },
+  {
+    "name": "Choisir la Victoire",
+    "description": "La vie chrétienne est un combat. Découvrez les ressources que Dieu donne à ceux qui veulent vivre en vainqueurs et non en vaincus.",
+    "price": 12.99,
+    "imageUrl": "/images/books/choisir-la-victoire.webp",
+    "backImageUrl": "/images/books/choisir-la-victoire-verso.webp",
+    "type": "LIVRE",
+    "series": "etudes"
+  },
+  {
+    "name": "Enfin Libéré",
+    "description": "L'Écriture montre le chemin qui mène hors de l'esclavage du péché vers la liberté véritable promise en Christ.",
+    "price": 12.99,
+    "imageUrl": "/images/books/enfin-libere.webp",
+    "backImageUrl": "/images/books/enfin-libere-verso.webp",
+    "type": "LIVRE",
+    "series": "etudes"
+  },
+  {
+    "name": "Enseigne-moi tes voies",
+    "description": "Un parcours dans les cinq premiers livres de la Bible pour découvrir les voies de Dieu et le dessein qu'il poursuit depuis le commencement.",
+    "price": 12.99,
+    "imageUrl": "/images/books/enseigne-moi-tes-voies.webp",
+    "backImageUrl": "/images/books/enseigne-moi-tes-voies-verso.webp",
+    "type": "LIVRE",
+    "series": "etudes"
+  },
+  {
+    "name": "L'appel à suivre Jésus",
+    "description": "Que signifie répondre à l'appel du Christ ? Une étude sur la vocation du disciple et les engagements qu'elle implique.",
+    "price": 12.99,
+    "imageUrl": "/images/books/l-appel-a-suivre-jesus.webp",
+    "backImageUrl": "/images/books/l-appel-a-suivre-jesus-verso.webp",
+    "type": "LIVRE",
+    "series": "etudes"
+  },
+  {
+    "name": "La clé pour vivre par la Foi",
+    "description": "Ce que signifie concrètement marcher par la foi et non par la vue, dans les décisions et les épreuves du quotidien.",
+    "price": 12.99,
+    "imageUrl": "/images/books/la-cle-pour-vivre-par-la-foi.webp",
+    "backImageUrl": "/images/books/la-cle-pour-vivre-par-la-foi-verso.webp",
+    "type": "LIVRE",
+    "series": "etudes"
+  },
+  {
+    "name": "Philippiens",
+    "description": "Saisir et Agir — niveau intermédiaire. La joie en Christ, même en prison : une étude suivie de l'épître aux Philippiens, avec devoirs hebdomadaires.",
+    "price": 12.99,
+    "imageUrl": "/images/books/philippiens.webp",
+    "backImageUrl": "/images/books/philippiens-verso.webp",
+    "type": "LIVRE",
+    "series": "saisir"
+  },
+  {
+    "name": "1 Thessaloniciens",
+    "description": "Précepte sur Précepte. Une jeune Église, l'espérance du retour du Seigneur et la sainteté qui l'accompagne. Niveau intensif.",
+    "price": 12.99,
+    "imageUrl": "/images/books/1-thessaloniciens.webp",
+    "backImageUrl": "/images/books/1-thessaloniciens-verso.webp",
+    "type": "LIVRE",
+    "series": "pup"
+  },
+  {
+    "name": "2 Timothée",
+    "description": "Précepte sur Précepte. Les dernières paroles de Paul : garder le dépôt de la foi et persévérer jusqu'au bout. Niveau intensif.",
+    "price": 12.99,
+    "imageUrl": "/images/books/2-timothee.webp",
+    "backImageUrl": "/images/books/2-timothee-verso.webp",
+    "type": "LIVRE",
+    "series": "pup"
+  },
+  {
+    "name": "Esdras et Aggée",
+    "description": "Précepte sur Précepte. Le retour d'exil, la reconstruction du temple et l'appel à redonner à Dieu la première place. Niveau intensif.",
+    "price": 12.99,
+    "imageUrl": "/images/books/esdras-et-aggee.webp",
+    "backImageUrl": "/images/books/esdras-et-aggee-verso.webp",
+    "type": "LIVRE",
+    "series": "pup"
+  },
+  {
+    "name": "Genèse, partie 1",
+    "description": "Précepte sur Précepte — 1re de 5 parties, chapitres 1 et 2. Le récit de la création étudié verset par verset. Niveau intensif, avec devoirs hebdomadaires.",
+    "price": 12.99,
+    "imageUrl": "/images/books/genese-partie-1.webp",
+    "backImageUrl": "/images/books/genese-partie-1-verso.webp",
+    "type": "LIVRE",
+    "series": "pup"
+  },
+  {
+    "name": "Genèse, partie 2",
+    "description": "Précepte sur Précepte — 2e de 5 parties, chapitres 3 à 11. La chute, le déluge et les origines des nations. Niveau intensif, avec devoirs hebdomadaires.",
+    "price": 12.99,
+    "imageUrl": "/images/books/genese-partie-2.webp",
+    "backImageUrl": "/images/books/genese-partie-2-verso.webp",
+    "type": "LIVRE",
+    "series": "pup"
+  },
+  {
+    "name": "Genèse, partie 3",
+    "description": "Précepte sur Précepte — 3e de 5 parties, chapitres 11 à 25. L'appel d'Abraham et la promesse sur laquelle repose toute l'alliance. Niveau intensif.",
+    "price": 12.99,
+    "imageUrl": "/images/books/genese-partie-3.webp",
+    "backImageUrl": "/images/books/genese-partie-3-verso.webp",
+    "type": "LIVRE",
+    "series": "pup"
+  },
+  {
+    "name": "L'Alliance",
+    "description": "Précepte sur Précepte. Le fil de l'alliance parcourt toute l'Écriture — le saisir, c'est éclairer la Bible entière. Niveau intensif.",
+    "price": 12.99,
+    "imageUrl": "/images/books/l-alliance.webp",
+    "backImageUrl": "/images/books/l-alliance-verso.webp",
+    "type": "LIVRE",
+    "series": "pup"
+  },
+  {
+    "name": "Romains, partie 1",
+    "description": "Précepte sur Précepte — partie 1 de 4, chapitres 1 à 5. Le péché universel et la justice de Dieu reçue par la foi. Niveau intensif, avec devoirs hebdomadaires.",
+    "price": 12.99,
+    "imageUrl": "/images/books/romains-partie-1.webp",
+    "backImageUrl": "/images/books/romains-partie-1-verso.webp",
+    "type": "LIVRE",
+    "series": "pup"
+  },
+  {
+    "name": "Romains, partie 2",
+    "description": "Précepte sur Précepte — partie 2 de 4, chapitres 6 à 8. Affranchi du péché, conduit par l'Esprit : la vie nouvelle du croyant.",
+    "price": 12.99,
+    "imageUrl": "/images/books/romains-partie-2.webp",
+    "backImageUrl": "/images/books/romains-partie-2-verso.webp",
+    "type": "LIVRE",
+    "series": "pup"
+  },
+  {
+    "name": "Romains, partie 3",
+    "description": "Précepte sur Précepte — partie 3 de 4, chapitres 9 à 11. Israël, la souveraineté de Dieu et son plan de rédemption.",
+    "price": 12.99,
+    "imageUrl": "/images/books/romains-partie-3.webp",
+    "backImageUrl": "/images/books/romains-partie-3-verso.webp",
+    "type": "LIVRE",
+    "series": "pup"
+  },
+  {
+    "name": "Romains, partie 4",
+    "description": "Précepte sur Précepte — partie 4 de 4, chapitres 12 à 16. La doctrine mise en pratique dans l'Église et dans la vie quotidienne.",
+    "price": 12.99,
+    "imageUrl": "/images/books/romains-partie-4.webp",
+    "backImageUrl": "/images/books/romains-partie-4-verso.webp",
+    "type": "LIVRE",
+    "series": "pup"
+  },
+  {
+    "name": "Tite",
+    "description": "Précepte sur Précepte. La saine doctrine et son incidence concrète sur la conduite de l'Église. Niveau intensif.",
+    "price": 12.99,
+    "imageUrl": "/images/books/tite.webp",
+    "backImageUrl": "/images/books/tite-verso.webp",
+    "type": "LIVRE",
+    "series": "pup"
+  },
+  {
+    "name": "Abraham, le vaillant explorateur de Dieu",
+    "description": "Pour les 7-12 ans. Sur les traces d'Abraham, l'homme qui a tout quitté sur la promesse de Dieu — une leçon de foi pour les jeunes explorateurs.",
+    "price": 12.99,
+    "imageUrl": "/images/books/abraham-le-vaillant-explorateur-de-dieu.webp",
+    "backImageUrl": "/images/books/abraham-le-vaillant-explorateur-de-dieu-verso.webp",
+    "type": "LIVRE",
+    "series": "enfants"
+  },
+  {
+    "name": "Déterrons le passé",
+    "description": "Pour les 7-12 ans. Une expédition archéologique dans les récits bibliques, pour déterrer les vérités que Dieu y a déposées.",
+    "price": 12.99,
+    "imageUrl": "/images/books/deterrons-le-passe.webp",
+    "backImageUrl": "/images/books/deterrons-le-passe-verso.webp",
+    "type": "LIVRE",
+    "series": "enfants"
+  },
+  {
+    "name": "Jésus sous les réflecteurs",
+    "description": "Pour les 7-12 ans. Qui est vraiment Jésus ? Les jeunes détectives mènent l'enquête dans l'Évangile pour le découvrir par eux-mêmes.",
+    "price": 12.99,
+    "imageUrl": "/images/books/jesus-sous-les-reflecteurs.webp",
+    "backImageUrl": "/images/books/jesus-sous-les-reflecteurs-verso.webp",
+    "type": "LIVRE",
+    "series": "enfants"
+  },
+  {
+    "name": "Jésus, puissance incroyable",
+    "description": "Pour les 7-12 ans. Les miracles de Jésus racontés et étudiés, pour découvrir la puissance du Fils de Dieu.",
+    "price": 12.99,
+    "imageUrl": "/images/books/jesus-puissance-incroyable.webp",
+    "backImageUrl": "/images/books/jesus-puissance-incroyable-verso.webp",
+    "type": "LIVRE",
+    "series": "enfants"
+  },
+  {
+    "name": "Jésus, vers l'Éternité",
+    "description": "Pour les 7-12 ans. De la croix à la résurrection, les enfants découvrent la plus grande nouvelle de l'histoire.",
+    "price": 12.99,
+    "imageUrl": "/images/books/jesus-vers-l-eternite.webp",
+    "backImageUrl": "/images/books/jesus-vers-l-eternite-verso.webp",
+    "type": "LIVRE",
+    "series": "enfants"
+  },
+  {
+    "name": "L'extraordinaire création de Dieu",
+    "description": "Pour les 7-12 ans. Une enquête passionnante dans les premiers chapitres de la Genèse, à la découverte du Dieu qui a tout créé.",
+    "price": 12.99,
+    "imageUrl": "/images/books/l-extraordinaire-creation-de-dieu.webp",
+    "backImageUrl": "/images/books/l-extraordinaire-creation-de-dieu-verso.webp",
+    "type": "LIVRE",
+    "series": "enfants"
+  }
+]

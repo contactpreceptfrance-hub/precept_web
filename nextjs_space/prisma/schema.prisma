@@ -1,28 +1,63 @@
 generator client {
     provider = "prisma-client-js"
-    // native: local / Vercel build machine; rhel: Vercel serverless Node runtime
     binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
     provider = "postgresql"
-    url      = env("DATABASE_URL")
+    url       = env("DATABASE_URL")
+    // Neon: app traffic goes through the pooler; Prisma Migrate needs the direct host.
+    directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
 model Product {
-  id          String   @id @default(cuid())
-  name        String
-  description String
-  price       Float
-  imageUrl    String
-  type        ProductType
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           String      @id @default(cuid())
+  name         String
+  description  String
+  price        Float
+  imageUrl     String
+  // Back cover. Nullable: not every product has one, and for the Précepte sur
+  // Précepte and Saisir et Agir titles this is a generic series back shared
+  // across all of them rather than artwork specific to the title.
+  backImageUrl String?
+  type         ProductType
+  series       String?     // "40min" | "seigneur" | "etudes" | "saisir" | "pup" | "enfants"
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  orderItems   OrderItem[]
 }
 
 enum ProductType {
   LIVRE
   FORMATION
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  stripeSessionId String      @unique
+  customerEmail   String
+  customerName    String
+  status          OrderStatus @default(PENDING)
+  totalAmount     Float
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  items           OrderItem[]
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id])
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  unitPrice Float
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
 }
 
 model ContactSubmission {

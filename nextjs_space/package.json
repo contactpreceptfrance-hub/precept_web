@@ -3,7 +3,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "db:local": "DATABASE_URL=\"postgresql://postgres:password@localhost:5432/precept_france\" npx prisma db push",
+    "db:seed": "DATABASE_URL=\"postgresql://postgres:password@localhost:5432/precept_france\" npx tsx scripts/seed-books.ts",
+    "db:studio": "DATABASE_URL=\"postgresql://postgres:password@localhost:5432/precept_france\" npx prisma studio",
+    "build": "prisma generate && prisma migrate deploy && next build",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate"
@@ -112,6 +115,7 @@
     "react-use": "17.6.0",
     "recharts": "2.15.3",
     "sonner": "1.5.0",
+    "stripe": "22.0.2",
     "swr": "2.2.4",
     "tailwind-scrollbar-hide": "1.1.7",
     "vaul": "0.9.9",
