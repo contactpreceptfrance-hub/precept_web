@@ -21,7 +21,7 @@ export function CoverViewer({ name, imageUrl, backImageUrl, type, series }: Cove
 
   return (
     <div>
-      <div className="relative aspect-[2/3] rounded-2xl overflow-hidden bg-[#1a3a6a] border border-white/10">
+      <div className="relative aspect-[2/3] rounded-2xl overflow-hidden bg-gray-50 border border-gray-200 shadow-sm">
         {current ? (
           <Image
             src={current}
@@ -40,7 +40,7 @@ export function CoverViewer({ name, imageUrl, backImageUrl, type, series }: Cove
         {!showBack && (
           <span
             className={`absolute top-4 left-4 text-xs font-bold px-3 py-1 rounded-lg uppercase tracking-wide ${
-              type === 'LIVRE' ? 'bg-[#46c4c0]/85 text-[#0c1f3f]' : 'bg-purple-500/85 text-white'
+              type === 'LIVRE' ? 'bg-teal text-white' : 'bg-purple-500 text-white'
             }`}
           >
             {type === 'LIVRE' ? 'Livre' : 'Formation'}
@@ -65,8 +65,8 @@ export function CoverViewer({ name, imageUrl, backImageUrl, type, series }: Cove
               onClick={tab.go}
               className={`flex-1 py-2 rounded-xl text-xs font-bold transition-colors ${
                 tab.active
-                  ? 'bg-[#46c4c0] text-[#0c1f3f]'
-                  : 'border border-white/15 bg-white/5 text-white/60 hover:text-white hover:border-white/30'
+                  ? 'bg-teal text-white'
+                  : 'border border-gray-200 bg-white text-darkblue/60 hover:text-darkblue hover:border-gray-300'
               }`}
             >
               {tab.label}

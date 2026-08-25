@@ -28,7 +28,7 @@ export function AddToCartButton({ productId, name, price, imageUrl }: Props) {
       className={`w-full flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-base transition-all duration-200 ${
         added
           ? 'bg-green-500 text-white'
-          : 'bg-gradient-to-r from-[#46c4c0] to-[#14b8a6] text-[#0c1f3f] hover:opacity-90'
+          : 'bg-teal text-white hover:bg-teal-600 shadow-lg hover:shadow-xl'
       }`}
     >
       <ShoppingBag size={20} />

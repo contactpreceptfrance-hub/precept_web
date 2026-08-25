@@ -25,7 +25,7 @@ export default async function BoutiquePage() {
   const groups = await getGroups()
 
   return (
-    <main className="min-h-screen bg-[#0a0e1a]">
+    <main className="min-h-screen bg-white">
       <Header />
       <div className="pt-[72px]"> {/* offset for fixed header */}
         <ShopHero />

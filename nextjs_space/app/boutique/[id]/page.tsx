@@ -35,10 +35,10 @@ export default async function BookDetailPage({ params }: Props) {
   if (!product) notFound()
 
   return (
-    <main className="min-h-screen bg-[#0a0e1a]">
+    <main className="min-h-screen bg-white">
       <Header />
       <div className="pt-[72px] max-w-5xl mx-auto px-6 py-12">
-        <Link href="/boutique" className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors mb-8 text-sm">
+        <Link href="/boutique" className="inline-flex items-center gap-2 text-darkblue/50 hover:text-darkblue transition-colors mb-8 text-sm">
           <ArrowLeft size={16} /> Retour à la boutique
         </Link>
 
@@ -54,9 +54,9 @@ export default async function BookDetailPage({ params }: Props) {
 
           {/* Info */}
           <div>
-            <h1 className="font-playfair text-3xl font-bold text-white mb-3">{product.name}</h1>
-            <p className="text-[#46c4c0] text-3xl font-black mb-6">{product.price.toFixed(2)} €</p>
-            <p className="text-white/70 leading-relaxed mb-8">{product.description}</p>
+            <h1 className="font-playfair text-3xl font-bold text-darkblue mb-3">{product.name}</h1>
+            <p className="text-teal text-3xl font-black mb-6">{product.price.toFixed(2)} €</p>
+            <p className="text-darkblue/70 leading-relaxed mb-8">{product.description}</p>
 
             <AddToCartButton
               productId={product.id}
@@ -66,8 +66,8 @@ export default async function BookDetailPage({ params }: Props) {
             />
 
             {/* Share row */}
-            <div className="mt-8 pt-6 border-t border-white/10">
-              <p className="text-white/40 text-xs uppercase tracking-widest mb-3">Partager</p>
+            <div className="mt-8 pt-6 border-t border-gray-200">
+              <p className="text-darkblue/40 text-xs uppercase tracking-widest mb-3">Partager</p>
               <div className="flex gap-2">
                 <a
                   href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`/boutique/${product.id}`)}`}
