@@ -50,7 +50,7 @@ export default function MissionSection() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
   return (
-    <section id="mission" className="py-20">
+    <section id="mission" className="scroll-mt-20 py-20">
       {/* Mission/Vision/But */}
       {sections?.map((section, index) => {
         const IconComponent = section?.icon
