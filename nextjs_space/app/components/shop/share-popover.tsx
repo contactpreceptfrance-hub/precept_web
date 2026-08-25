@@ -89,12 +89,12 @@ export function SharePopover({ bookId, bookTitle, bookDescription, onClose }: Sh
   return (
     <div
       ref={ref}
-      className="absolute bottom-14 right-0 z-50 w-52 bg-[#162236] border border-white/15 rounded-2xl shadow-2xl p-3"
+      className="absolute bottom-14 right-0 z-50 w-52 bg-white border border-gray-200 rounded-2xl shadow-xl p-3"
       onClick={(e) => e.stopPropagation()}
     >
       <div className="flex items-center justify-between mb-2 px-1">
-        <span className="text-white/40 text-xs uppercase tracking-widest">Partager</span>
-        <button onClick={onClose} className="text-white/30 hover:text-white/70">
+        <span className="text-darkblue/40 text-xs uppercase tracking-widest">Partager</span>
+        <button onClick={onClose} className="text-gray-400 hover:text-darkblue">
           <X size={14} />
         </button>
       </div>
@@ -103,25 +103,25 @@ export function SharePopover({ bookId, bookTitle, bookDescription, onClose }: Sh
         <button
           key={p.name}
           onClick={p.action}
-          className="flex items-center gap-2.5 w-full px-2 py-2 rounded-xl hover:bg-white/8 transition-colors text-left"
+          className="flex items-center gap-2.5 w-full px-2 py-2 rounded-xl hover:bg-gray-50 transition-colors text-left"
         >
           <span className={`w-7 h-7 rounded-lg ${p.bg} flex items-center justify-center text-white flex-shrink-0`}>
             {p.icon}
           </span>
-          <span className="text-white text-sm font-medium">{p.name}</span>
+          <span className="text-darkblue text-sm font-medium">{p.name}</span>
         </button>
       ))}
 
-      <div className="my-2 border-t border-white/8" />
+      <div className="my-2 border-t border-gray-100" />
 
       <button
         onClick={handleGroupInvite}
-        className="flex items-center gap-2.5 w-full px-2 py-2 rounded-xl hover:bg-[#46c4c0]/10 transition-colors text-left"
+        className="flex items-center gap-2.5 w-full px-2 py-2 rounded-xl hover:bg-teal/10 transition-colors text-left"
       >
-        <span className="w-7 h-7 rounded-lg bg-[#46c4c0]/20 border border-[#46c4c0]/40 flex items-center justify-center text-[#46c4c0] flex-shrink-0">
+        <span className="w-7 h-7 rounded-lg bg-teal/10 border border-teal/30 flex items-center justify-center text-teal flex-shrink-0">
           <Users size={14} />
         </span>
-        <span className="text-[#46c4c0] text-sm font-medium">Inviter mon groupe</span>
+        <span className="text-teal text-sm font-medium">Inviter mon groupe</span>
       </button>
     </div>
   )
