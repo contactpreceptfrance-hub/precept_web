@@ -5819,7 +5819,7 @@ __metadata:
     react-use: "npm:17.6.0"
     recharts: "npm:2.15.3"
     sonner: "npm:1.5.0"
-    stripe: "npm:^22.0.2"
+    stripe: "npm:22.0.2"
     swr: "npm:2.2.4"
     tailwind-merge: "npm:2.5.2"
     tailwind-scrollbar-hide: "npm:1.1.7"
@@ -12672,7 +12672,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stripe@npm:^22.0.2":
+"stripe@npm:22.0.2":
   version: 22.0.2
   resolution: "stripe@npm:22.0.2"
   peerDependencies:

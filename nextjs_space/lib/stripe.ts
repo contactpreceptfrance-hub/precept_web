@@ -6,9 +6,9 @@ const globalForStripe = globalThis as unknown as {
 
 export function getStripe(): Stripe {
   if (!globalForStripe.stripe) {
-    globalForStripe.stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-      apiVersion: '2026-03-25.dahlia',
-    })
+    // No explicit apiVersion: the SDK pins the API version it was built for,
+    // and hard-coding it broke the Vercel build every time stripe was bumped.
+    globalForStripe.stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
   }
   return globalForStripe.stripe
 }
