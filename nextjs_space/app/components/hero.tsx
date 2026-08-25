@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ChevronDown, BookOpen, PlayCircle } from 'lucide-react'
 
@@ -46,15 +47,15 @@ export default function Hero() {
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-5">
-              <button
-                onClick={scrollToMission}
+              <Link
+                href="/etude"
                 className="px-8 py-4 bg-gradient-to-r from-[#125f67] to-[#093a5d] hover:from-[#1a7078] hover:to-[#0d4b72] text-[#edf3fa] rounded-lg font-semibold transition-all duration-300 shadow-lg shadow-[#021126]/55 active:scale-95 flex items-center gap-3 border border-[#8fc8c3]/14"
               >
                 <BookOpen size={20} />
                 Commencer mon étude
-              </button>
+              </Link>
               <a
-                href="#videos"
+                href="/#methode"
                 className="px-8 py-4 bg-[#072a4a]/44 backdrop-blur-sm text-[#d2f4f2] border border-[#73cfc9]/55 rounded-lg font-semibold hover:bg-[#0b3760]/52 hover:text-[#e8fbfa] transition-all duration-300 flex items-center gap-3 shadow-md shadow-[#021126]/30"
               >
                 <PlayCircle size={20} />

@@ -82,7 +82,7 @@ export default function MissionSection() {
       })}
 
       {/* Inductive Method */}
-      <div ref={ref} className="bg-gradient-to-br from-darkblue to-darkblue-600 py-20">
+      <div id="methode" ref={ref} className="scroll-mt-20 bg-gradient-to-br from-darkblue to-darkblue-600 py-20">
         <div className="max-w-[1200px] mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -91,7 +91,7 @@ export default function MissionSection() {
             className="text-center mb-16"
           >
             <h2 className="font-playfair text-3xl md:text-4xl font-bold text-white mb-4">
-              La Méthode d\'Étude Biblique <span className="text-teal-300">Inductive</span>
+              La Méthode d&apos;Étude Biblique <span className="text-teal-300">Inductive</span>
             </h2>
             <p className="text-white/80 max-w-2xl mx-auto">
               Un cadre pédagogique conçu pour vous aider à manier la parole de vérité avec exactitude.
