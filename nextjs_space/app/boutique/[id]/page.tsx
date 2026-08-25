@@ -37,7 +37,7 @@ export default async function BookDetailPage({ params }: Props) {
   return (
     <main className="min-h-screen bg-white">
       <Header />
-      <div className="pt-[72px] max-w-5xl mx-auto px-6 py-12">
+      <div className="max-w-5xl mx-auto px-6 pt-32 pb-16">
         <Link href="/boutique" className="inline-flex items-center gap-2 text-darkblue/50 hover:text-darkblue transition-colors mb-8 text-sm">
           <ArrowLeft size={16} /> Retour à la boutique
         </Link>
