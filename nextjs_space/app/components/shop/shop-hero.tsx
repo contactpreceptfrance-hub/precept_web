@@ -24,7 +24,7 @@ export function ShopHero() {
         <h1 className="font-playfair text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4 drop-shadow-[0_3px_14px_rgba(4,18,38,0.55)]">
           Livres &amp; <span className="text-[#46c4c0]">Formations</span>
         </h1>
-        <p className="text-[#edf4ff]/85 text-lg font-light leading-relaxed drop-shadow-[0_2px_10px_rgba(2,15,34,0.45)]">
+        <p className="text-white text-lg font-light leading-relaxed drop-shadow-[0_2px_10px_rgba(2,15,34,0.45)]">
           Des ressources pour approfondir votre connaissance de la Parole de Dieu.
           Étudiez les Écritures avec clarté et conviction.
         </p>
