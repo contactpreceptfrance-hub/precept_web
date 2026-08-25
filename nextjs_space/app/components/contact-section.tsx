@@ -44,7 +44,7 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-teal/5 to-darkblue/5">
+    <section id="contact" className="scroll-mt-20 py-20 bg-gradient-to-br from-teal/5 to-darkblue/5">
       <div ref={ref} className="max-w-[1200px] mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -26,7 +26,7 @@ export default function YoutubeSection() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
   return (
-    <section id="videos" className="py-20 bg-gray-50">
+    <section id="videos" className="scroll-mt-20 py-20 bg-gray-50">
       <div ref={ref} className="max-w-[1200px] mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
