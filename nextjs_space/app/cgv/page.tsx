@@ -4,6 +4,7 @@ import LegalPage, { Article, Champ } from '@/app/components/legal-page'
 import { LEGAL, ADRESSE_COMPLETE } from '@/lib/legal'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/cgv' },
   title: 'Conditions générales de vente — Precept France',
   description:
     "Prix, commande, paiement, livraison, droit de rétractation et garanties applicables aux commandes passées sur la boutique Precept France.",

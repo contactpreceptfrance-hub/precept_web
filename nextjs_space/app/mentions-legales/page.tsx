@@ -4,6 +4,7 @@ import LegalPage, { Article, Champ } from '@/app/components/legal-page'
 import { LEGAL, ADRESSE_COMPLETE } from '@/lib/legal'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/mentions-legales' },
   title: 'Mentions légales — Precept France',
   description:
     "Éditeur, directeur de la publication, hébergeur et propriété intellectuelle du site Precept France.",

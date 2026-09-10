@@ -4,6 +4,7 @@ import LegalPage, { Article, Champ } from '@/app/components/legal-page'
 import { LEGAL, ADRESSE_COMPLETE } from '@/lib/legal'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/confidentialite' },
   title: 'Politique de confidentialité — Precept France',
   description:
     "Quelles données Precept France collecte, pourquoi, combien de temps elles sont conservées et comment exercer vos droits.",
