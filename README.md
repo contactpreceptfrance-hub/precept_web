@@ -149,7 +149,7 @@ l'environnement, et jamais depuis les en-têtes de la requête.
 |---|---|
 | `/`, `/etude`, `/cgv`, `/confidentialite`, `/mentions-legales` | statique |
 | `/boutique` | statique, revalidée toutes les heures (ISR) |
-| `/boutique/[id]` | à la demande |
+| `/boutique/[id]` | les 42 fiches prérendues, revalidées toutes les heures |
 | `/sitemap.xml` | statique, revalidé toutes les heures |
 | `/robots.txt` | à la demande — **volontairement** |
 | `/api/*` | à la demande |
