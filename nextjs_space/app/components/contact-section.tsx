@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Send, Mail, User, MessageSquare, FileText, CheckCircle, AlertCircle, Loader2 } from 'lucide-react'
@@ -165,12 +166,22 @@ export default function ContactSection() {
                 className="flex items-center gap-3 p-4 bg-red-50 text-red-700 rounded-lg"
               >
                 <AlertCircle size={20} />
-                <span>Erreur lors de l'envoi. Veuillez réessayer.</span>
+                <span>Erreur lors de l&apos;envoi. Veuillez réessayer.</span>
               </motion.div>
             )}
 
-            <p className="text-center text-sm text-darkblue/50">
-              Vos données sont traitées de manière confidentielle.
+            {/* Mention d'information RGPD : finalité, durée, droits. */}
+            <p className="text-center text-xs text-darkblue/50 leading-relaxed">
+              Votre nom et votre adresse électronique servent uniquement à vous répondre et
+              sont conservés trois ans. Vous pouvez y accéder, les corriger ou les faire
+              supprimer à tout moment — voir notre{' '}
+              <Link
+                href="/confidentialite"
+                className="text-teal underline hover:text-teal-600"
+              >
+                politique de confidentialité
+              </Link>
+              .
             </p>
           </form>
         </motion.div>

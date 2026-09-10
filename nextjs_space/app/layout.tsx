@@ -46,9 +46,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <head>
-        <script src="https://apps.abacus.ai/chatllm/appllm-lib.js"></script>
-      </head>
       <body className={`${playfair.variable} ${montserrat.variable} font-montserrat bg-white text-darkblue antialiased`}>
         <CartProvider>
           {children}

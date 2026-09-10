@@ -82,7 +82,8 @@ vercel --prod    # Manual deploy (or push to main for auto-deploy)
 - [ ] Book cover images: cards currently show gradient placeholders — real images to be added in `public/images/books/`
 - [ ] Stripe not active until keys are added Saturday
 - [ ] DB unreachable locally if Docker not running — API falls back to empty array (boutique shows empty)
-- [ ] `scripts/seed.ts` (old seed) still exists — use `seed-books.ts` going forward
+- [x] `scripts/seed.ts` / `scripts/safe-seed.ts` removed; `seed-books.ts` is the only seed and
+      is now what the `prisma.seed` key points at
 
 ---
 
