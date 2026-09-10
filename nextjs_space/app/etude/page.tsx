@@ -4,6 +4,7 @@ import Header from '@/app/components/header'
 import Footer from '@/app/components/footer'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/etude' },
   title: 'Trouvez une étude — Precept France',
   description:
     'Réunissons-nous en communauté autour de la Parole de Dieu pour le connaître profondément et vivre ensemble différemment.',

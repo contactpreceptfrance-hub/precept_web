@@ -1,10 +1,8 @@
 import type { Metadata } from 'next'
 import { Playfair_Display, Montserrat } from 'next/font/google'
-import { headers } from 'next/headers'
 import { CartProvider } from '@/lib/cart-context'
+import { SITE_URL } from '@/lib/site'
 import './globals.css'
-
-export const dynamic = "force-dynamic"
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -16,27 +14,23 @@ const montserrat = Montserrat({
   variable: '--font-montserrat',
 })
 
-export async function generateMetadata(): Promise<Metadata> {
-  const headersList = await headers()
-  const host = headersList.get('x-forwarded-host') || headersList.get('host') || 'localhost:3000'
-  const protocol = host.includes('localhost') ? 'http' : 'https'
-  const baseUrl = `${protocol}://${host}`
-
-  return {
-    metadataBase: new URL(baseUrl),
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: 'Precept France - Connaître Dieu profondément. Vivre autrement.',
+  description: 'Vous donner les moyens de découvrir par vous-même la vérité de Dieu, mais pas seul. Études bibliques inductives.',
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+  },
+  openGraph: {
     title: 'Precept France - Connaître Dieu profondément. Vivre autrement.',
-    description: 'Vous donner les moyens de découvrir par vous-même la vérité de Dieu, mais pas seul. Études bibliques inductives.',
-    icons: {
-      icon: '/favicon.svg',
-      shortcut: '/favicon.svg',
-    },
-    openGraph: {
-      title: 'Precept France - Connaître Dieu profondément. Vivre autrement.',
-      description: 'Vous donner les moyens de découvrir par vous-même la vérité de Dieu, mais pas seul.',
-      images: ['/og-image.png'],
-      type: 'website',
-    },
-  }
+    description: 'Vous donner les moyens de découvrir par vous-même la vérité de Dieu, mais pas seul.',
+    url: SITE_URL,
+    siteName: 'Precept France',
+    locale: 'fr_FR',
+    images: ['/og-image.png'],
+    type: 'website',
+  },
 }
 
 export default function RootLayout({

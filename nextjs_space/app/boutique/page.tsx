@@ -6,6 +6,7 @@ import Header from '@/app/components/header'
 import Footer from '@/app/components/footer'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/boutique' },
   title: 'Boutique — Precept France',
   description: 'Livres et formations pour approfondir votre connaissance de la Parole de Dieu.',
 }
