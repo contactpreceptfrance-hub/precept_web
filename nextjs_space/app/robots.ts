@@ -33,7 +33,9 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
       // Nothing useful to a crawler, and the success page carries an order id.
-      disallow: ['/api/', '/boutique/succes', '/boutique/annule'],
+      // /admin is password-protected and also sends X-Robots-Tag: noindex, but
+      // saying so here keeps it out of crawl budgets in the first place.
+      disallow: ['/api/', '/admin', '/boutique/succes', '/boutique/annule'],
     },
     sitemap: `${SITE_URL}/sitemap.xml`,
     host: SITE_URL,

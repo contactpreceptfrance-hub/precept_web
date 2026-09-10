@@ -36,6 +36,16 @@ export function clientIp(req: Request & { ip?: string }): string {
 }
 
 /**
+ * Same, for callers that have no Request object.
+ *
+ * Server Actions are invoked without one, so they read `headers()` from
+ * next/headers and hand the result here.
+ */
+export function clientIpFromHeaders(headers: Headers): string {
+  return headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
+}
+
+/**
  * A salted, non-reversible fingerprint of an address.
  *
  * The raw IP is never stored. Without the salt a rainbow table over the whole
