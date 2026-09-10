@@ -29,6 +29,11 @@ export function CoverViewer({ name, imageUrl, backImageUrl, type, series }: Cove
             fill
             className="object-contain"
             sizes="(max-width: 768px) 100vw, 50vw"
+            // The recto sits above the fold and is the largest thing on the
+            // page — it is what LCP measures here. Only the initially shown
+            // face gets the preload: the back cover is only ever reached by
+            // clicking, so preloading it would compete for the same bandwidth.
+            priority={!showBack}
           />
         ) : (
           <div className="w-full h-full flex items-end p-6 bg-gradient-to-br from-[#0d3560] to-[#125f67]">
