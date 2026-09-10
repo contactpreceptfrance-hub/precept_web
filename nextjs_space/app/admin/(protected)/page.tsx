@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import { Package, MessageSquare } from 'lucide-react'
+import Link from 'next/link'
+import { Package, MessageSquare, ArrowRight } from 'lucide-react'
 import { getPrisma } from '@/lib/prisma'
 import { requireAdmin } from '@/lib/admin-guard'
 
@@ -30,13 +31,15 @@ export default async function AdminHomePage() {
       icon: Package,
       label: 'Commandes payées à expédier',
       value: paidOrders,
-      note: 'La liste et le passage à « expédiée » arrivent à la prochaine étape.',
+      href: '/admin/commandes?filtre=a-expedier',
+      cta: 'Voir les commandes',
     },
     {
       icon: MessageSquare,
       label: 'Messages non traités',
       value: unhandledMessages,
-      note: 'La lecture et le suivi arrivent à la prochaine étape.',
+      href: '/admin/messages?filtre=a-traiter',
+      cta: 'Voir les messages',
     },
   ]
 
@@ -48,15 +51,22 @@ export default async function AdminHomePage() {
       </p>
 
       <div className="grid sm:grid-cols-2 gap-6">
-        {tiles.map(({ icon: Icon, label, value, note }) => (
-          <div key={label} className="bg-white rounded-2xl border border-gray-200 p-6">
+        {tiles.map(({ icon: Icon, label, value, href, cta }) => (
+          <Link
+            key={label}
+            href={href}
+            className="bg-white rounded-2xl border border-gray-200 p-6 hover:border-teal/50 hover:shadow-lg transition-all"
+          >
             <div className="flex items-center gap-2 text-darkblue/50 mb-4">
               <Icon size={18} />
               <span className="text-sm font-semibold">{label}</span>
             </div>
             <p className="text-4xl font-black text-teal mb-3">{value}</p>
-            <p className="text-xs text-darkblue/40 leading-relaxed">{note}</p>
-          </div>
+            <p className="text-sm text-teal font-semibold inline-flex items-center gap-1">
+              {cta}
+              <ArrowRight size={14} />
+            </p>
+          </Link>
         ))}
       </div>
     </div>
