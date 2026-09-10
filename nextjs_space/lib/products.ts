@@ -1,5 +1,9 @@
+import { cache } from 'react'
 import { getPrisma } from '@/lib/prisma'
 import { SERIES_CONFIG, SeriesGroup } from '@/lib/types'
+
+/** One entry of the catalogue, as the series grouping exposes it. */
+export type CatalogueEntry = SeriesGroup['products'][number]
 
 /**
  * The catalogue, grouped by series in display order.
@@ -15,7 +19,7 @@ import { SERIES_CONFIG, SeriesGroup } from '@/lib/types'
  * page when the render throws, whereas swallowing the error would cache an empty
  * shop until the next revalidation.
  */
-export async function getSeriesGroups(): Promise<SeriesGroup[]> {
+export const getSeriesGroups = cache(async (): Promise<SeriesGroup[]> => {
   const products = await getPrisma().product.findMany({
     orderBy: { createdAt: 'asc' },
   })
@@ -34,4 +38,40 @@ export async function getSeriesGroups(): Promise<SeriesGroup[]> {
   }
 
   return groups
-}
+})
+
+/**
+ * The catalogue as one flat list, in the order the shop displays it: series by
+ * series, and by date of addition within each.
+ *
+ * Derived from getSeriesGroups rather than re-querying, so the reading order of
+ * the previous/next links is by construction the order a visitor sees on
+ * /boutique. Reorder SERIES_CONFIG and both follow together.
+ */
+export const getOrderedProducts = cache(async (): Promise<CatalogueEntry[]> => {
+  const groups = await getSeriesGroups()
+  return groups.flatMap((group) => group.products)
+})
+
+/**
+ * The neighbours of a product in that reading order.
+ *
+ * No wrap-around: the first book has no previous and the last has no next,
+ * which is what tells a reader they have reached an end of the catalogue.
+ */
+export const getAdjacentProducts = cache(
+  async (id: string): Promise<{ prev: CatalogueEntry | null; next: CatalogueEntry | null }> => {
+    const ordered = await getOrderedProducts()
+    const index = ordered.findIndex((product) => product.id === id)
+
+    // Unknown id: a product that exists but sits outside the grouping cannot
+    // happen (unmatched series fall into "Autres ressources"), so this only
+    // guards against being called for something that is not in the catalogue.
+    if (index === -1) return { prev: null, next: null }
+
+    return {
+      prev: ordered[index - 1] ?? null,
+      next: ordered[index + 1] ?? null,
+    }
+  },
+)

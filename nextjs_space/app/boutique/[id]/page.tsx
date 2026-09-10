@@ -4,9 +4,11 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, Facebook, Mail } from 'lucide-react'
 import { getPrisma } from '@/lib/prisma'
+import { getAdjacentProducts } from '@/lib/products'
 import { SITE_URL } from '@/lib/site'
 import { AddToCartButton } from '@/app/components/shop/add-to-cart-button'
 import { CoverViewer } from '@/app/components/shop/cover-viewer'
+import { BookNav } from '@/app/components/shop/book-nav'
 import Header from '@/app/components/header'
 import Footer from '@/app/components/footer'
 
@@ -49,6 +51,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function BookDetailPage({ params }: Props) {
   const product = await getProduct(params.id)
   if (!product) notFound()
+
+  const { prev, next } = await getAdjacentProducts(product.id)
 
   return (
     <main className="min-h-screen bg-white">
@@ -111,6 +115,8 @@ export default async function BookDetailPage({ params }: Props) {
             </div>
           </div>
         </div>
+
+        <BookNav prev={prev} next={next} />
       </div>
       <Footer />
     </main>
