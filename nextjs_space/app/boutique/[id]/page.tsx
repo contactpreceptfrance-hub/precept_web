@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
+import { cache } from 'react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, Facebook, Mail } from 'lucide-react'
 import { getPrisma } from '@/lib/prisma'
+import { SITE_URL } from '@/lib/site'
 import { AddToCartButton } from '@/app/components/shop/add-to-cart-button'
 import { CoverViewer } from '@/app/components/shop/cover-viewer'
 import Header from '@/app/components/header'
@@ -10,10 +12,23 @@ import Footer from '@/app/components/footer'
 
 type Props = { params: { id: string } }
 
-async function getProduct(id: string) {
+// Prerender the whole catalogue at build time and refresh it hourly, matching
+// /boutique. `dynamicParams` stays at its default: a title added between two
+// revalidations is still rendered on demand rather than 404ing.
+export const revalidate = 3600
+
+export async function generateStaticParams() {
+  const products = await getPrisma().product.findMany({ select: { id: true } })
+  return products.map(({ id }) => ({ id }))
+}
+
+// cache() dedupes the lookup within a single render: generateMetadata and the
+// page component both need the product, and without this every page would cost
+// two round trips to the database instead of one.
+const getProduct = cache(async (id: string) => {
   const prisma = getPrisma()
   return prisma.product.findUnique({ where: { id } })
-}
+})
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = await getProduct(params.id)
@@ -71,7 +86,7 @@ export default async function BookDetailPage({ params }: Props) {
               <p className="text-darkblue/40 text-xs uppercase tracking-widest mb-3">Partager</p>
               <div className="flex gap-2">
                 <a
-                  href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`/boutique/${product.id}`)}`}
+                  href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`${SITE_URL}/boutique/${product.id}`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#1877f2] text-white text-sm font-semibold hover:opacity-90 transition-opacity"

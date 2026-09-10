@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { ShopHero } from '@/app/components/shop/shop-hero'
 import { SeriesRows } from '@/app/components/shop/series-rows'
-import { SeriesGroup } from '@/lib/types'
+import { getSeriesGroups } from '@/lib/products'
 import Header from '@/app/components/header'
 import Footer from '@/app/components/footer'
 
@@ -11,19 +11,14 @@ export const metadata: Metadata = {
   description: 'Livres et formations pour approfondir votre connaissance de la Parole de Dieu.',
 }
 
-async function getGroups(): Promise<SeriesGroup[]> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
-  try {
-    const res = await fetch(`${baseUrl}/api/products`, { cache: 'no-store' })
-    if (!res.ok) return []
-    return res.json()
-  } catch {
-    return []
-  }
-}
+// Prerendered and refreshed hourly rather than rendered on every visit. The
+// catalogue changes when a book is added, not between two page views, so an
+// hour-old page is indistinguishable from a fresh one — and it is served from
+// the edge cache instead of costing a round trip to eu-central-1.
+export const revalidate = 3600
 
 export default async function BoutiquePage() {
-  const groups = await getGroups()
+  const groups = await getSeriesGroups()
 
   return (
     <main className="min-h-screen bg-white">
