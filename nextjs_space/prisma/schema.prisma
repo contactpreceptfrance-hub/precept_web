@@ -1,13 +1,13 @@
 generator client {
-    provider = "prisma-client-js"
-    binaryTargets = ["native", "rhel-openssl-3.0.x"]
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
-    provider = "postgresql"
-    url       = env("DATABASE_URL")
-    // Neon: app traffic goes through the pooler; Prisma Migrate needs the direct host.
-    directUrl = env("DATABASE_URL_UNPOOLED")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  // Neon: app traffic goes through the pooler; Prisma Migrate needs the direct host.
+  directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
 model Product {
@@ -21,7 +21,7 @@ model Product {
   // across all of them rather than artwork specific to the title.
   backImageUrl String?
   type         ProductType
-  series       String?     // "40min" | "seigneur" | "etudes" | "saisir" | "pup" | "enfants"
+  series       String? // "40min" | "seigneur" | "etudes" | "saisir" | "pup" | "enfants"
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
   orderItems   OrderItem[]
@@ -37,21 +37,40 @@ model Order {
   stripeSessionId String      @unique
   customerEmail   String
   customerName    String
+  // Formatted address block collected by Stripe Checkout. Nullable: orders
+  // placed before shipping collection was switched on have none, and the admin
+  // list flags those as unfulfillable rather than hiding them.
+  shippingAddress String?
   status          OrderStatus @default(PENDING)
   totalAmount     Float
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
   items           OrderItem[]
+
+  // The admin list reads orders newest-first, either unfiltered or narrowed to
+  // one status. A composite on (status, createdAt) cannot serve the unfiltered
+  // ordering, so both indexes are needed.
+  @@index([createdAt])
+  @@index([status, createdAt])
 }
 
 model OrderItem {
-  id        String  @id @default(cuid())
-  orderId   String
-  order     Order   @relation(fields: [orderId], references: [id])
-  productId String
-  product   Product @relation(fields: [productId], references: [id])
-  quantity  Int
-  unitPrice Float
+  id          String  @id @default(cuid())
+  orderId     String
+  order       Order   @relation(fields: [orderId], references: [id])
+  productId   String
+  product     Product @relation(fields: [productId], references: [id])
+  // Name at the time of sale. unitPrice already snapshots the price, but the
+  // name did not: renaming a book used to rewrite every past order that
+  // contained it. Nullable only for rows predating this column.
+  productName String?
+  quantity    Int
+  unitPrice   Float
+
+  // Postgres does not index foreign keys on its own, so `include: { items }`
+  // was sequentially scanning the whole table on every admin page load.
+  @@index([orderId])
+  @@index([productId])
 }
 
 enum OrderStatus {
@@ -61,11 +80,43 @@ enum OrderStatus {
 }
 
 model ContactSubmission {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   name      String
   email     String
   subject   String
   message   String
+  createdAt DateTime  @default(now())
+  /// Unused. Free-form string from the original scaffold, never read or
+  /// written by any code. `handledAt` replaces it; left in place rather than
+  /// dropped so this migration stays non-destructive.
+  status    String    @default("nouveau")
+  // When the team dealt with the message. A nullable timestamp answers both
+  // "is it handled" and "when", sorts, and needs no backfill: every existing
+  // row is correctly unhandled.
+  handledAt DateTime?
+  // Which form produced this: the contact section or the study-group request.
+  // Always written server-side from a fixed allowlist, never from client text.
+  source    String    @default("contact")
+
+  @@index([createdAt])
+  @@index([handledAt, createdAt])
+  @@index([source, createdAt])
+}
+
+/// One recorded request against a rate-limited endpoint.
+///
+/// Postgres rather than an in-memory Map: on Vercel each lambda instance would
+/// keep its own counter, so the effective limit multiplied by the number of
+/// warm instances and reset on every cold start. This is shared state, which is
+/// the only thing that actually limits anything.
+model RateLimitHit {
+  id        String   @id @default(cuid())
+  bucket    String // "contact" | "checkout" | "admin_login"
+  // sha256(ip + RATE_LIMIT_SALT). The raw address is never stored, which keeps
+  // this out of the "personal data" bucket the privacy policy has to describe.
+  ipHash    String
   createdAt DateTime @default(now())
-  status    String   @default("nouveau")
+
+  @@index([bucket, ipHash, createdAt])
+  @@index([createdAt])
 }
