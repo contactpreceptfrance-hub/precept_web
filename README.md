@@ -150,7 +150,18 @@ l'environnement, et jamais depuis les en-têtes de la requête.
 | `/`, `/etude`, `/cgv`, `/confidentialite`, `/mentions-legales` | statique |
 | `/boutique` | statique, revalidée toutes les heures (ISR) |
 | `/boutique/[id]` | à la demande |
+| `/sitemap.xml` | statique, revalidé toutes les heures |
+| `/robots.txt` | à la demande — **volontairement** |
 | `/api/*` | à la demande |
+
+`robots.txt` est la seule page volontairement dynamique. Sa décision « ce
+déploiement est-il indexable ? » dépend de `VERCEL_ENV`, et Vercel restaure le
+cache de build d'un déploiement précédent — y compris d'un autre environnement.
+Une sortie prérendue peut donc être réutilisée telle quelle : un preview a été
+observé servant les règles `Allow` construites par un build de production. Dans
+ce sens c'est inoffensif, les previews étant derrière le SSO. Dans l'autre, une
+production réutilisant le cache d'un preview servirait `Disallow: /` et
+désindexerait le site. La décision est donc lue à chaque requête.
 
 Les images passent toutes par `next/image` — aucune balise `<img>` brute — et Vercel
 les sert redimensionnées en AVIF ou WebP. Une couverture de 56 Ko est livrée en
