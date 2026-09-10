@@ -40,6 +40,9 @@ yarn-error.log*
 /*.pdf
 /Precept Produkt Katalog.html
 /Precept Produkt Katalog_files/
+# Ad-hoc design screenshots dropped at the root during the 2026-03 redesign.
+# Kept on disk as reference, but they are not project assets.
+images/Capture d*.png
 
 # Claude Code local settings
 .claude/

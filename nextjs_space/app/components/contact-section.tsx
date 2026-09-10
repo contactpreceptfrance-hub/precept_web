@@ -166,7 +166,7 @@ export default function ContactSection() {
                 className="flex items-center gap-3 p-4 bg-red-50 text-red-700 rounded-lg"
               >
                 <AlertCircle size={20} />
-                <span>Erreur lors de l'envoi. Veuillez réessayer.</span>
+                <span>Erreur lors de l&apos;envoi. Veuillez réessayer.</span>
               </motion.div>
             )}
 

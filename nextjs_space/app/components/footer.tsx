@@ -46,7 +46,7 @@ export default function Footer() {
               <span className="font-playfair text-2xl font-black tracking-tight text-white">Precept France</span>
             </div>
             <p className="text-slate-400 leading-relaxed text-lg font-light max-w-md">
-              Connaître Dieu profondément. Vivre autrement. Nous vous donnons les moyens de découvrir par vous-même la vérité de Dieu à travers une méthode d'étude biblique inductive rigoureuse et accessible.
+              Connaître Dieu profondément. Vivre autrement. Nous vous donnons les moyens de découvrir par vous-même la vérité de Dieu à travers une méthode d&apos;étude biblique inductive rigoureuse et accessible.
             </p>
           </div>
 
