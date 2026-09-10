@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Send, Mail, User, MessageSquare, FileText, CheckCircle, AlertCircle, Loader2 } from 'lucide-react'
@@ -169,8 +170,18 @@ export default function ContactSection() {
               </motion.div>
             )}
 
-            <p className="text-center text-sm text-darkblue/50">
-              Vos données sont traitées de manière confidentielle.
+            {/* Mention d'information RGPD : finalité, durée, droits. */}
+            <p className="text-center text-xs text-darkblue/50 leading-relaxed">
+              Votre nom et votre adresse électronique servent uniquement à vous répondre et
+              sont conservés trois ans. Vous pouvez y accéder, les corriger ou les faire
+              supprimer à tout moment — voir notre{' '}
+              <Link
+                href="/confidentialite"
+                className="text-teal underline hover:text-teal-600"
+              >
+                politique de confidentialité
+              </Link>
+              .
             </p>
           </form>
         </motion.div>

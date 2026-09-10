@@ -11,6 +11,12 @@ const socialLinks = [
   { name: 'Email', icon: Mail, href: 'mailto:contactpreceptfrance@gmail.com', color: 'hover:text-teal' },
 ]
 
+const legalLinks = [
+  { name: 'Mentions légales', href: '/mentions-legales' },
+  { name: 'CGV', href: '/cgv' },
+  { name: 'Confidentialité', href: '/confidentialite' },
+]
+
 export default function Footer() {
   return (
     <footer className="bg-[#020617] text-white pt-24 pb-12 relative overflow-hidden">
@@ -92,9 +98,22 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-12 border-t border-white/5">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
-            <p className="text-slate-500 text-sm font-light">
-              © {new Date().getFullYear()} Precept France. Conçu avec excellence pour la gloire de Dieu.
-            </p>
+            <div className="flex flex-col items-center md:items-start gap-3">
+              <p className="text-slate-500 text-sm font-light">
+                © {new Date().getFullYear()} Precept France. Conçu avec excellence pour la gloire de Dieu.
+              </p>
+              <nav className="flex flex-wrap items-center justify-center md:justify-start gap-x-5 gap-y-2">
+                {legalLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-slate-400 hover:text-white text-sm font-light transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </nav>
+            </div>
             <div className="flex items-center gap-8">
               <p className="text-slate-400 text-sm font-light flex items-center gap-2">
                 Réalisé avec

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { X, Plus, Minus, Trash2, ShoppingBag, Lock } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useCart } from '@/lib/cart-context'
@@ -9,9 +10,12 @@ import { useCart } from '@/lib/cart-context'
 export function CartDrawer() {
   const { items, isOpen, closeCart, removeItem, updateQty, totalPrice, clearCart } = useCart()
   const [isLoading, setIsLoading] = useState(false)
+  // Les CGV doivent être acceptées avant tout paiement (art. L.221-5 du Code de
+  // la consommation). La case n'est jamais pré-cochée : ce serait sans valeur.
+  const [cgvAccepted, setCgvAccepted] = useState(false)
 
   async function handleCheckout() {
-    if (items.length === 0) return
+    if (items.length === 0 || !cgvAccepted) return
     setIsLoading(true)
     try {
       const res = await fetch('/api/checkout', {
@@ -126,17 +130,53 @@ export function CartDrawer() {
                   <span>Total</span>
                   <span className="text-teal">{totalPrice.toFixed(2)} €</span>
                 </div>
+                <label
+                  htmlFor="accept-cgv"
+                  className="flex items-start gap-2.5 mb-4 text-xs text-darkblue/70 leading-relaxed cursor-pointer"
+                >
+                  <input
+                    id="accept-cgv"
+                    type="checkbox"
+                    checked={cgvAccepted}
+                    onChange={(e) => setCgvAccepted(e.target.checked)}
+                    className="mt-0.5 h-4 w-4 flex-shrink-0 rounded border-gray-300 text-teal accent-teal focus:ring-teal"
+                  />
+                  <span>
+                    J&apos;ai lu et j&apos;accepte les{' '}
+                    <Link
+                      href="/cgv"
+                      target="_blank"
+                      className="text-teal underline hover:text-teal-600"
+                    >
+                      conditions générales de vente
+                    </Link>{' '}
+                    et la{' '}
+                    <Link
+                      href="/confidentialite"
+                      target="_blank"
+                      className="text-teal underline hover:text-teal-600"
+                    >
+                      politique de confidentialité
+                    </Link>
+                    .
+                  </span>
+                </label>
                 <button
                   onClick={handleCheckout}
-                  disabled={isLoading}
-                  className="w-full bg-teal text-white font-bold py-4 rounded-xl hover:bg-teal-600 shadow-lg transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
+                  disabled={isLoading || !cgvAccepted}
+                  className="w-full bg-teal text-white font-bold py-4 rounded-xl hover:bg-teal-600 shadow-lg transition-colors disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {isLoading ? (
                     <span className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent" />
                   ) : (
-                    <>Payer avec Stripe →</>
+                    <>Commander et payer — {totalPrice.toFixed(2)} €</>
                   )}
                 </button>
+                {!cgvAccepted && (
+                  <p className="mt-2 text-center text-xs text-darkblue/40">
+                    Cochez la case ci-dessus pour continuer.
+                  </p>
+                )}
                 <div className="flex items-center justify-center gap-1.5 mt-3 text-darkblue/40 text-xs">
                   <Lock size={11} />
                   Paiement sécurisé par Stripe
