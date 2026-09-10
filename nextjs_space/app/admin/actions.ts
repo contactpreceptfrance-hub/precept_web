@@ -7,6 +7,7 @@ import {
   ADMIN_COOKIE_OPTIONS,
   checkAdminPassword,
   createSessionCookieValue,
+  isAdminConfigured,
 } from '@/lib/admin-auth'
 import { RATE_LIMITS, checkRateLimit, clientIpFromHeaders } from '@/lib/rate-limit'
 
@@ -45,6 +46,10 @@ export async function login(formData: FormData) {
     RATE_LIMITS.adminLogin.windowMs,
   )
   if (!ok) redirect(retry('rate'))
+
+  // Before comparing anything: an unconfigured deployment must say so rather
+  // than blame the person typing.
+  if (!isAdminConfigured()) redirect(retry('config'))
 
   if (typeof password !== 'string' || !(await checkAdminPassword(password))) {
     redirect(retry('1'))

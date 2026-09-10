@@ -82,6 +82,21 @@ function readSecrets(): { password: string; sessionSecret: string } | null {
   return { password, sessionSecret }
 }
 
+/**
+ * Whether the admin area has been configured at all.
+ *
+ * Separate from `checkAdminPassword` so the login page can tell "you mistyped"
+ * apart from "this deployment has no ADMIN_PASSWORD". Without it, an
+ * unconfigured deployment answers every attempt with "wrong password", and the
+ * team has no way to tell that the problem is not theirs.
+ *
+ * Disclosing this costs nothing: an unconfigured deployment refuses everyone
+ * regardless, so the answer helps only the operator.
+ */
+export function isAdminConfigured(): boolean {
+  return Boolean(process.env.ADMIN_PASSWORD && process.env.ADMIN_SESSION_SECRET)
+}
+
 async function hmacKey(sessionSecret: string): Promise<CryptoKey> {
   return crypto.subtle.importKey(
     'raw',
