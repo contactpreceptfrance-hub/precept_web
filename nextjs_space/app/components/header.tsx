@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Menu, X, BookOpen, Video, Mail, ShoppingBag } from 'lucide-react'
+import { Menu, X, BookOpen, Video, Mail, ShoppingBag, Compass } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useCart } from '@/lib/cart-context'
 import { CartDrawer } from '@/app/components/shop/cart-drawer'
@@ -14,11 +14,13 @@ export default function Header() {
 
   const navItems = [
     // Absolute paths so the anchors also work from /boutique pages.
-    { name: 'Mission',   href: '/#mission', icon: BookOpen },
-    { name: 'Vidéos',    href: '/#videos',  icon: Video },
-    { name: 'Boutique',  href: '/boutique', icon: ShoppingBag },
-    { name: 'Contact',   href: '/#contact', icon: Mail },
+    { name: 'Mission',    href: '/#mission', icon: BookOpen },
+    { name: 'Vidéos',     href: '/#videos',  icon: Video },
+    { name: 'Nos études', href: '/etude',    icon: Compass },
+    { name: 'Boutique',   href: '/boutique', icon: ShoppingBag },
+    { name: 'Contact',    href: '/#contact', icon: Mail },
   ]
+
 
   return (
     <>
@@ -42,7 +44,7 @@ export default function Header() {
             </Link>
 
             {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-2">
+            <nav className="hidden lg:flex items-center gap-2">
               {navItems.map((item) => {
                 const IconComponent = item.icon
                 return (
@@ -77,7 +79,7 @@ export default function Header() {
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="md:hidden p-2 rounded-lg hover:bg-teal/10 transition-colors text-darkblue"
+                className="lg:hidden p-2 rounded-lg hover:bg-teal/10 transition-colors text-darkblue"
                 aria-label="Menu"
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -92,7 +94,7 @@ export default function Header() {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="md:hidden mt-4 pb-4 border-t border-gray-200"
+                className="lg:hidden mt-4 pb-4 border-t border-gray-200"
               >
                 <div className="flex flex-col gap-2 pt-4">
                   {navItems.map((item) => {
