@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getStripe } from '@/lib/stripe'
 import { getPrisma } from '@/lib/prisma'
+import { RATE_LIMITS, checkRateLimit, clientIp } from '@/lib/rate-limit'
 
 export const dynamic = 'force-dynamic'
 
@@ -24,6 +25,17 @@ function resolveBaseUrl(): string | null {
 
 export async function POST(req: NextRequest) {
   try {
+    // Creating a Checkout Session is free to the caller and costs us a Stripe
+    // API call every time. Nothing limited how many an anonymous visitor could
+    // trigger.
+    const { ok } = await checkRateLimit('checkout', clientIp(req), RATE_LIMITS.checkout)
+    if (!ok) {
+      return NextResponse.json(
+        { error: 'Trop de tentatives. Réessayez dans quelques minutes.' },
+        { status: 429 },
+      )
+    }
+
     const body = await req.json().catch(() => null)
     const rawItems = body?.items
 

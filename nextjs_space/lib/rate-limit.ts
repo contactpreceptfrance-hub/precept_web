@@ -61,8 +61,21 @@ async function hashIp(ip: string): Promise<string> {
     .join('')
 }
 
+/** One window to test a caller against. */
+export type RateWindow = { limit: number; windowMs: number }
+
 /**
  * Whether this request is allowed, recording it if so.
+ *
+ * Several windows can be checked at once — "5 per hour AND 20 per day" — and
+ * they deliberately share ONE recorded row. An earlier version called this
+ * function once per window, so every request inserted two rows and burned two
+ * slots out of its own hourly allowance: the fifth-per-hour limit started
+ * refusing on the third message. Counting many, recording one, is the whole
+ * point of taking the windows together.
+ *
+ * Nothing is recorded when the request is refused. A blocked caller hammering
+ * the endpoint would otherwise keep pushing its own window forward.
  *
  * Fails OPEN: if the database is unreachable the request is allowed through.
  * A spam limiter must never be the reason a customer cannot check out or a
@@ -71,30 +84,35 @@ async function hashIp(ip: string): Promise<string> {
 export async function checkRateLimit(
   bucket: RateLimitBucket,
   ip: string,
-  limit: number,
-  windowMs: number,
+  windows: RateWindow | RateWindow[],
 ): Promise<{ ok: boolean }> {
   if (!process.env.RATE_LIMIT_SALT) {
     console.warn('RATE_LIMIT_SALT is not set — rate limiting is disabled')
     return { ok: true }
   }
 
+  const all = Array.isArray(windows) ? windows : [windows]
+
   try {
     const prisma = getPrisma()
     const ipHash = await hashIp(ip)
-    const since = new Date(Date.now() - windowMs)
+    const now = Date.now()
 
-    const recent = await prisma.rateLimitHit.count({
-      where: { bucket, ipHash, createdAt: { gte: since } },
-    })
+    const counts = await Promise.all(
+      all.map((w) =>
+        prisma.rateLimitHit.count({
+          where: { bucket, ipHash, createdAt: { gte: new Date(now - w.windowMs) } },
+        }),
+      ),
+    )
 
-    if (recent >= limit) return { ok: false }
+    if (counts.some((count, i) => count >= all[i].limit)) return { ok: false }
 
     await prisma.rateLimitHit.create({ data: { bucket, ipHash } })
 
     if (Math.random() < PURGE_PROBABILITY) {
       await prisma.rateLimitHit
-        .deleteMany({ where: { createdAt: { lt: new Date(Date.now() - RETENTION_MS) } } })
+        .deleteMany({ where: { createdAt: { lt: new Date(now - RETENTION_MS) } } })
         .catch(() => {})
     }
 

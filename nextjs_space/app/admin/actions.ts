@@ -39,12 +39,7 @@ export async function login(formData: FormData) {
   // guesses is the entire attack. Limited per IP before the password is even
   // looked at.
   const ip = clientIpFromHeaders(headers())
-  const { ok } = await checkRateLimit(
-    'admin_login',
-    ip,
-    RATE_LIMITS.adminLogin.limit,
-    RATE_LIMITS.adminLogin.windowMs,
-  )
+  const { ok } = await checkRateLimit('admin_login', ip, RATE_LIMITS.adminLogin)
   if (!ok) redirect(retry('rate'))
 
   // Before comparing anything: an unconfigured deployment must say so rather
