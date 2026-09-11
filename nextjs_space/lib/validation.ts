@@ -33,10 +33,13 @@ export const contactSchema = z.object({
   message: z.string().trim().min(10).max(5000),
   origine: z.enum(contactOrigins).optional(),
 
-  // Honeypot. A real, CSS-hidden input that only a bot fills — hence max(0).
-  // The route treats a filled value as success and writes nothing, so the bot
-  // learns nothing from the response.
-  website: z.string().max(0).optional(),
+  // Honeypot. A real, CSS-hidden input that only a bot fills.
+  //
+  // It must PASS validation even when filled: rejecting it here would answer
+  // 400, which tells the bot precisely which field is the trap. The route
+  // inspects the value afterwards and answers a plain 200 while writing
+  // nothing. The length cap is only there to bound the payload.
+  website: z.string().max(200).optional(),
 
   // Milliseconds since the form mounted, sent by the client. Advisory only:
   // it is trivially forgeable, so it costs a naive bot and nothing else.

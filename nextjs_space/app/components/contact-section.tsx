@@ -1,48 +1,19 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { Send, Mail, User, MessageSquare, FileText, CheckCircle, AlertCircle, Loader2 } from 'lucide-react'
+import { Mail } from 'lucide-react'
+import ContactForm from '@/app/components/contact-form'
 
+/**
+ * The contact block on the home page: heading, badge, animation.
+ *
+ * The form itself moved to contact-form.tsx so /etude can render it for
+ * study-group requests. This section must stay visually identical to what it
+ * was before that split.
+ */
 export default function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  })
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e?.preventDefault?.()
-    setStatus('loading')
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      })
-
-      if (response?.ok) {
-        setStatus('success')
-        setFormData({ name: '', email: '', subject: '', message: '' })
-      } else {
-        setStatus('error')
-      }
-    } catch (error) {
-      console.error('Contact form error:', error)
-      setStatus('error')
-    }
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e?.target ?? {}
-    setFormData((prev) => ({ ...(prev ?? {}), [name ?? '']: value ?? '' }))
-  }
 
   return (
     <section id="contact" className="scroll-mt-20 py-20 bg-gradient-to-br from-teal/5 to-darkblue/5">
@@ -71,119 +42,7 @@ export default function ContactSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="max-w-2xl mx-auto"
         >
-          <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-8 space-y-6">
-            {/* Name */}
-            <div className="relative">
-              <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-              <input
-                type="text"
-                name="name"
-                value={formData?.name ?? ''}
-                onChange={handleChange}
-                placeholder="Votre nom"
-                required
-                className="w-full pl-12 pr-4 py-4 rounded-lg border border-gray-200 focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none transition-all duration-300"
-              />
-            </div>
-
-            {/* Email */}
-            <div className="relative">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-              <input
-                type="email"
-                name="email"
-                value={formData?.email ?? ''}
-                onChange={handleChange}
-                placeholder="Votre email"
-                required
-                className="w-full pl-12 pr-4 py-4 rounded-lg border border-gray-200 focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none transition-all duration-300"
-              />
-            </div>
-
-            {/* Subject */}
-            <div className="relative">
-              <FileText className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-              <input
-                type="text"
-                name="subject"
-                value={formData?.subject ?? ''}
-                onChange={handleChange}
-                placeholder="Sujet"
-                required
-                className="w-full pl-12 pr-4 py-4 rounded-lg border border-gray-200 focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none transition-all duration-300"
-              />
-            </div>
-
-            {/* Message */}
-            <div className="relative">
-              <MessageSquare className="absolute left-4 top-4 text-gray-400" size={20} />
-              <textarea
-                name="message"
-                value={formData?.message ?? ''}
-                onChange={handleChange}
-                placeholder="Votre message"
-                required
-                rows={5}
-                className="w-full pl-12 pr-4 py-4 rounded-lg border border-gray-200 focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none transition-all duration-300 resize-none"
-              />
-            </div>
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={status === 'loading'}
-              className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-teal text-white rounded-lg font-semibold hover:bg-teal-600 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
-            >
-              {status === 'loading' ? (
-                <>
-                  <Loader2 size={20} className="animate-spin" />
-                  Envoi en cours...
-                </>
-              ) : (
-                <>
-                  <Send size={20} />
-                  Envoyer le message
-                </>
-              )}
-            </button>
-
-            {/* Status Messages */}
-            {status === 'success' && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-3 p-4 bg-green-50 text-green-700 rounded-lg"
-              >
-                <CheckCircle size={20} />
-                <span>Message envoyé avec succès ! Nous vous répondrons bientôt.</span>
-              </motion.div>
-            )}
-
-            {status === 'error' && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-3 p-4 bg-red-50 text-red-700 rounded-lg"
-              >
-                <AlertCircle size={20} />
-                <span>Erreur lors de l&apos;envoi. Veuillez réessayer.</span>
-              </motion.div>
-            )}
-
-            {/* Mention d'information RGPD : finalité, durée, droits. */}
-            <p className="text-center text-xs text-darkblue/50 leading-relaxed">
-              Votre nom et votre adresse électronique servent uniquement à vous répondre et
-              sont conservés trois ans. Vous pouvez y accéder, les corriger ou les faire
-              supprimer à tout moment — voir notre{' '}
-              <Link
-                href="/confidentialite"
-                className="text-teal underline hover:text-teal-600"
-              >
-                politique de confidentialité
-              </Link>
-              .
-            </p>
-          </form>
+          <ContactForm />
         </motion.div>
       </div>
     </section>
