@@ -2,6 +2,10 @@
 
 import { cookies, headers } from 'next/headers'
 import { redirect } from 'next/navigation'
+import { revalidatePath } from 'next/cache'
+import { getPrisma } from '@/lib/prisma'
+import { requireAdmin } from '@/lib/admin-guard'
+import { idSchema } from '@/lib/validation'
 import {
   ADMIN_COOKIE_NAME,
   ADMIN_COOKIE_OPTIONS,
@@ -65,4 +69,88 @@ export async function login(formData: FormData) {
 export async function logout() {
   cookies().delete(ADMIN_COOKIE_NAME)
   redirect('/admin/login')
+}
+
+/**
+ * Where an admin action sends the browser back to.
+ *
+ * The list pages carry filters and a page number in the query string; without
+ * this, marking one order shipped would bounce the team back to page 1 of an
+ * unfiltered list every time.
+ */
+function returnPath(formData: FormData, fallback: string): string {
+  const value = formData.get('returnTo')
+  if (typeof value !== 'string' || !value.startsWith('/admin')) return fallback
+  if (value.includes('//') || value.includes('\\')) return fallback
+  return value
+}
+
+/** Appends a short outcome note the list page renders once. */
+function withNote(path: string, note: string): string {
+  return `${path}${path.includes('?') ? '&' : '?'}note=${note}`
+}
+
+/**
+ * Move an order between two statuses.
+ *
+ * The current status is part of the WHERE, never assumed. That makes the action
+ * idempotent — a double click is a no-op rather than a second transition — and
+ * it stops a stale page from dragging an order through a state it never had.
+ * `count === 0` means the order was not in `from`, which the caller surfaces
+ * instead of silently reporting success.
+ */
+async function moveOrder(
+  formData: FormData,
+  from: 'PAID' | 'SHIPPED',
+  to: 'PAID' | 'SHIPPED',
+) {
+  await requireAdmin()
+
+  const parsed = idSchema.safeParse(formData.get('orderId'))
+  const back = returnPath(formData, '/admin/commandes')
+  if (!parsed.success) redirect(withNote(back, 'invalide'))
+
+  const { count } = await getPrisma().order.updateMany({
+    where: { id: parsed.data, status: from },
+    data: { status: to },
+  })
+
+  revalidatePath('/admin/commandes')
+  revalidatePath('/admin')
+  redirect(withNote(back, count === 0 ? 'inchange' : 'ok'))
+}
+
+export async function markShipped(formData: FormData) {
+  await moveOrder(formData, 'PAID', 'SHIPPED')
+}
+
+export async function markUnshipped(formData: FormData) {
+  // Staff will mis-click. Without the inverse, the only way back is Prisma Studio.
+  await moveOrder(formData, 'SHIPPED', 'PAID')
+}
+
+/** Same conditional shape, on the message triage flag. */
+async function setMessageHandled(formData: FormData, handled: boolean) {
+  await requireAdmin()
+
+  const parsed = idSchema.safeParse(formData.get('messageId'))
+  const back = returnPath(formData, '/admin/messages')
+  if (!parsed.success) redirect(withNote(back, 'invalide'))
+
+  const { count } = await getPrisma().contactSubmission.updateMany({
+    where: { id: parsed.data, handledAt: handled ? null : { not: null } },
+    data: { handledAt: handled ? new Date() : null },
+  })
+
+  revalidatePath('/admin/messages')
+  revalidatePath('/admin')
+  redirect(withNote(back, count === 0 ? 'inchange' : 'ok'))
+}
+
+export async function markHandled(formData: FormData) {
+  await setMessageHandled(formData, true)
+}
+
+export async function markUnhandled(formData: FormData) {
+  await setMessageHandled(formData, false)
 }
