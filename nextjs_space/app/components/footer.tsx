@@ -55,9 +55,14 @@ export default function Footer() {
             <h3 className="font-playfair text-xl font-bold mb-8 text-[#14b8a6]">Navigation</h3>
             <ul className="space-y-4">
               {[
-                { name: 'Notre Mission', href: '#mission' },
-                { name: 'Ressources Vidéo', href: '#videos' },
-                { name: 'Contactez-nous', href: '#contact' },
+                // Absolute, like the header: a bare '#mission' resolved to
+                // /etude#mission from any page other than the home page, where
+                // no such anchor exists — so these did nothing at all from
+                // /boutique, /etude or any legal page.
+                { name: 'Notre Mission', href: '/#mission' },
+                { name: 'Ressources Vidéo', href: '/#videos' },
+                { name: 'Nos études', href: '/etude' },
+                { name: 'Contactez-nous', href: '/#contact' },
               ]?.map((link) => (
                 <li key={link?.name ?? ''}>
                   <Link

@@ -30,12 +30,14 @@ export default function ConfidentialitePage() {
       </Article>
 
       <Article titre="2. Données collectées et finalités">
-        <p>Nous ne collectons vos données que dans deux situations.</p>
+        <p>Nous ne collectons vos données que dans trois situations.</p>
         <p>
           <strong>Lorsque vous nous écrivez</strong> par le formulaire de contact&nbsp;:
           votre nom, votre adresse électronique, l&apos;objet et le contenu de votre
-          message. Ces données servent uniquement à vous répondre. Base légale&nbsp;: notre
-          intérêt légitime à traiter les demandes qui nous sont adressées.
+          message. Ces données servent à vous répondre et, si votre message est une demande
+          pour rejoindre un groupe d&apos;étude, à vous mettre en relation avec le
+          responsable du groupe le plus proche. Base légale&nbsp;: notre intérêt légitime à
+          traiter les demandes qui nous sont adressées.
         </p>
         <p>
           <strong>Lorsque vous passez commande</strong>&nbsp;: votre nom, votre adresse
@@ -44,6 +46,14 @@ export default function ConfidentialitePage() {
           commande, l&apos;expédier, vous tenir informé et satisfaire nos obligations
           comptables. Base légale&nbsp;: l&apos;exécution du contrat, puis une obligation
           légale de conservation.
+        </p>
+        <p>
+          <strong>Lorsque vous envoyez un formulaire</strong>&nbsp;: une empreinte non
+          réversible de votre adresse IP, calculée avec une clé secrète et impossible à
+          retrouver. Elle sert uniquement à limiter le nombre d&apos;envois automatisés, et
+          n&apos;est jamais rapprochée du contenu de votre message. Votre adresse IP
+          elle-même n&apos;est pas enregistrée. Base légale&nbsp;: notre intérêt légitime à
+          protéger le site contre les abus.
         </p>
         <p>
           <strong>
@@ -78,6 +88,12 @@ export default function ConfidentialitePage() {
           </li>
         </ul>
         <p>
+          Si vous demandez à rejoindre un groupe d&apos;étude, votre nom, votre adresse
+          électronique et le contenu de votre demande sont transmis au responsable du groupe
+          concerné&nbsp;: c&apos;est l&apos;objet même de votre démarche. Aucune autre
+          demande ne lui est communiquée.
+        </p>
+        <p>
           Les transferts hors Union européenne sont encadrés par les clauses contractuelles
           types de la Commission européenne.
         </p>
@@ -92,6 +108,10 @@ export default function ConfidentialitePage() {
           <li>
             <strong>Commandes et pièces comptables&nbsp;:</strong> dix ans, conformément à
             l&apos;article L.123-22 du Code de commerce.
+          </li>
+          <li>
+            <strong>Empreinte d&apos;adresse IP&nbsp;:</strong> supprimée automatiquement
+            au-delà de vingt-cinq heures.
           </li>
           <li>
             <strong>Données de paiement&nbsp;:</strong> conservées par Stripe selon sa
@@ -138,6 +158,12 @@ export default function ConfidentialitePage() {
         <p>
           Lors du paiement, Stripe dépose ses propres cookies techniques et de prévention de
           la fraude sur ses pages sécurisées.
+        </p>
+        <p>
+          Un cookie strictement technique est déposé sur l&apos;espace d&apos;administration
+          réservé à l&apos;équipe, afin de maintenir la session ouverte. Il n&apos;est
+          jamais déposé lors d&apos;une visite ordinaire du site, ne contient aucune donnée
+          personnelle et ne requiert pas de consentement.
         </p>
       </Article>
 
