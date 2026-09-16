@@ -2,6 +2,54 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getPrisma } from '@/lib/prisma'
 import { MIN_FILL_MS, contactSchema } from '@/lib/validation'
 import { RATE_LIMITS, checkRateLimit, clientIp } from '@/lib/rate-limit'
+import { escapeHtml, sendEmail, type EmailRecipient } from '@/lib/email'
+
+const ORIGIN_LABELS: Record<string, string> = {
+  contact: 'Formulaire de contact',
+  groupe: "Demande d'étude en groupe",
+}
+
+/**
+ * Awaited, not fire-and-forget: on Vercel a serverless function can be frozen
+ * the instant the response is sent, which would kill an un-awaited fetch to
+ * Brevo before it completes. sendEmail() itself never throws (it logs and
+ * swallows), so awaiting it here cannot turn a successful submit into a 500 —
+ * it can only add latency.
+ */
+async function notifyTeam(submission: {
+  name: string
+  email: string
+  subject: string
+  message: string
+  origine?: string
+}) {
+  const to = process.env.TEAM_NOTIFICATION_EMAIL
+  if (!to) {
+    console.error('TEAM_NOTIFICATION_EMAIL not set — contact notification not sent')
+    return
+  }
+
+  const cc: EmailRecipient[] = []
+  if (process.env.TEAM_NOTIFICATION_EMAIL_CC) {
+    cc.push({ email: process.env.TEAM_NOTIFICATION_EMAIL_CC })
+  }
+
+  const originLabel = ORIGIN_LABELS[submission.origine ?? 'contact'] ?? 'Formulaire de contact'
+
+  await sendEmail({
+    to: [{ email: to }],
+    cc,
+    replyTo: { email: submission.email, name: submission.name },
+    subject: `[${originLabel}] ${submission.subject}`,
+    htmlContent: `
+      <p><strong>${originLabel}</strong></p>
+      <p><strong>De :</strong> ${escapeHtml(submission.name)} (${escapeHtml(submission.email)})</p>
+      <p><strong>Sujet :</strong> ${escapeHtml(submission.subject)}</p>
+      <p><strong>Message :</strong></p>
+      <p>${escapeHtml(submission.message).replace(/\n/g, '<br>')}</p>
+    `,
+  })
+}
 
 export const dynamic = 'force-dynamic'
 
@@ -61,6 +109,8 @@ export async function POST(request: NextRequest) {
     const submission = await getPrisma().contactSubmission.create({
       data: { name, email, subject, message, source: origine ?? 'contact' },
     })
+
+    await notifyTeam({ name, email, subject, message, origine })
 
     return NextResponse.json({ success: true, id: submission.id })
   } catch (error) {
