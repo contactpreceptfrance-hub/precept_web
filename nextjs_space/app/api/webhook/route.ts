@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getStripe } from '@/lib/stripe'
 import { getPrisma } from '@/lib/prisma'
+import { escapeHtml, sendEmail } from '@/lib/email'
 
 export const dynamic = 'force-dynamic'
 
@@ -52,8 +53,13 @@ export async function POST(req: NextRequest) {
           product && typeof product === 'object' && 'metadata' in product
             ? (product.metadata?.productId ?? null)
             : null
+        // Snapshotted alongside the price for the same reason: a later rename
+        // (or deletion) of the product must not change what a past order shows.
+        const productName =
+          product && typeof product === 'object' && 'name' in product ? product.name : line.description
         return {
           productId,
+          productName,
           quantity: line.quantity ?? 0,
           unitPrice: (line.price?.unit_amount ?? 0) / 100,
         }
@@ -77,22 +83,63 @@ export async function POST(req: NextRequest) {
         )
       }
 
+      const customerEmail = session.customer_details?.email ?? ''
+      const customerName = session.customer_details?.name ?? ''
+
       await prisma.order.create({
         data: {
           stripeSessionId: session.id,
-          customerEmail: session.customer_details?.email ?? '',
-          customerName: session.customer_details?.name ?? '',
+          customerEmail,
+          customerName,
           totalAmount: (session.amount_total ?? 0) / 100,
           status: 'PAID',
           items: {
             create: linkable.map(item => ({
               productId: item.productId!,
+              productName: item.productName,
               quantity: item.quantity,
               unitPrice: item.unitPrice,
             })),
           },
         },
       })
+
+      // Best-effort: the order is already committed above, so a Brevo outage
+      // must not make Stripe re-deliver this webhook (sendEmail never throws).
+      if (customerEmail) {
+        const itemsHtml = charged
+          .map(
+            item =>
+              `<tr>
+                <td style="padding:4px 8px;">${escapeHtml(item.productName ?? 'Article')}</td>
+                <td style="padding:4px 8px;text-align:center;">${item.quantity}</td>
+                <td style="padding:4px 8px;text-align:right;">${item.unitPrice.toFixed(2)} €</td>
+              </tr>`,
+          )
+          .join('')
+
+        await sendEmail({
+          to: [{ email: customerEmail, name: customerName || undefined }],
+          subject: 'Confirmation de votre commande — Precept France',
+          htmlContent: `
+            <p>Bonjour${customerName ? ` ${escapeHtml(customerName)}` : ''},</p>
+            <p>Merci pour votre commande sur Precept France. Voici le récapitulatif :</p>
+            <table style="border-collapse:collapse;width:100%;">
+              <thead>
+                <tr>
+                  <th style="text-align:left;padding:4px 8px;">Article</th>
+                  <th style="padding:4px 8px;">Qté</th>
+                  <th style="text-align:right;padding:4px 8px;">Prix</th>
+                </tr>
+              </thead>
+              <tbody>${itemsHtml}</tbody>
+            </table>
+            <p><strong>Total : ${((session.amount_total ?? 0) / 100).toFixed(2)} €</strong></p>
+            <p>Vous recevrez un nouvel email dès l'expédition de votre commande.</p>
+            <p>L'équipe Precept France</p>
+          `,
+        })
+      }
     } catch (err) {
       // Stripe retries a delivery until it gets a 2xx. Previously this returned
       // 200 on failure, which meant a database error silently lost a paid

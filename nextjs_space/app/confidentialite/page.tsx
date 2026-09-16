@@ -83,6 +83,10 @@ export default function ConfidentialitePage() {
             région de Francfort)
           </li>
           <li>
+            <strong>Brevo</strong> — envoi des emails transactionnels : accusé de réception
+            de votre message et confirmation de commande (France)
+          </li>
+          <li>
             <strong>La Poste</strong> — acheminement des colis (nom et adresse de livraison
             uniquement)
           </li>

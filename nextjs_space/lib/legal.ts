@@ -34,7 +34,7 @@ export const LEGAL = {
   /** Président·e ou représentant·e légal·e — également directeur de la publication. */
   representant: '', // À COMPLÉTER
 
-  email: 'contactpreceptfrance@gmail.com',
+  email: 'contact@preceptfrance.fr',
 
   telephone: '', // À COMPLÉTER
 
@@ -63,7 +63,7 @@ export const LEGAL = {
   },
 
   /** Date de dernière révision affichée en bas des trois pages. */
-  derniereMiseAJour: '10 septembre 2026',
+  derniereMiseAJour: '16 septembre 2026',
 } as const
 
 export const ADRESSE_COMPLETE = [
