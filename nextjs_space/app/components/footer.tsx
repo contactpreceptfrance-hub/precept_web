@@ -118,6 +118,15 @@ export default function Footer() {
                     {link.name}
                   </Link>
                 ))}
+                {/* Team entry point. No prefetch: every public page would
+                    otherwise hit the guarded /admin route on load. */}
+                <Link
+                  href="/admin"
+                  prefetch={false}
+                  className="text-slate-400 hover:text-white text-sm font-light transition-colors"
+                >
+                  Administration
+                </Link>
               </nav>
             </div>
             <div className="flex items-center gap-8">
