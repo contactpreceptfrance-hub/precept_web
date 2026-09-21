@@ -75,7 +75,7 @@ type CartContextValue = {
 
 const CartContext = createContext<CartContextValue | null>(null)
 
-const STORAGE_KEY = 'precept-cart'
+export const STORAGE_KEY = 'precept-cart'
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, { items: [], isOpen: false })
