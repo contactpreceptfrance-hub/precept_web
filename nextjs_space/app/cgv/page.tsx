@@ -115,7 +115,7 @@ export default function CgvPage() {
 
       <Article titre="Article 7 — Livraison">
         <p>
-          Les commandes sont expédiées en <strong>{LEGAL.livraison.zone}</strong> par{' '}
+          Les commandes sont expédiées à destination de <strong>{LEGAL.livraison.zone}</strong> par{' '}
           {LEGAL.livraison.transporteurs}, à l&apos;adresse indiquée par le client lors du
           paiement. Il appartient au client de vérifier l&apos;exactitude de cette adresse.
         </p>

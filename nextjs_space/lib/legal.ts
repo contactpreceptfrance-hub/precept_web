@@ -56,14 +56,15 @@ export const LEGAL = {
   },
 
   livraison: {
-    zone: 'France métropolitaine',
+    zone:
+      'la France (métropolitaine, Guadeloupe, Martinique, Guyane, La Réunion et Mayotte), la Belgique, la Suisse, le Luxembourg et Monaco',
     delai: '3 à 5 jours ouvrés',
     delaiMaximum: '30 jours',
     transporteurs: 'La Poste (lettre suivie ou Colissimo)',
   },
 
   /** Date de dernière révision affichée en bas des trois pages. */
-  derniereMiseAJour: '16 septembre 2026',
+  derniereMiseAJour: '21 septembre 2026',
 } as const
 
 export const ADRESSE_COMPLETE = [
