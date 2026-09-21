@@ -69,6 +69,7 @@ export default async function HomeShopPreview() {
                 price={product.price}
                 imageUrl={product.imageUrl}
                 type={product.type}
+                soldOut={product.soldOut}
               />
             </div>
           ))}

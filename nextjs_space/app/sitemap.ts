@@ -31,6 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let products: { id: string; updatedAt: Date }[] = []
   try {
     products = await getPrisma().product.findMany({
+      where: { published: true },
       select: { id: true, updatedAt: true },
       orderBy: { name: 'asc' },
     })

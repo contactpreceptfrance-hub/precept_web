@@ -80,7 +80,11 @@ export async function POST(req: NextRequest) {
       where: { id: { in: Array.from(quantityByProductId.keys()) } },
     })
 
-    if (products.length !== quantityByProductId.size) {
+    // Hidden and sold-out titles count as gone: a cart filled before someone
+    // hid a book, or a stale product page, must not turn into a sale.
+    const buyable = products.filter((product) => product.published && !product.soldOut)
+
+    if (buyable.length !== quantityByProductId.size) {
       return NextResponse.json(
         { error: "Certains articles ne sont plus disponibles" },
         { status: 400 },
@@ -91,14 +95,18 @@ export async function POST(req: NextRequest) {
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       locale: 'fr',
-      line_items: products.map(product => ({
+      line_items: buyable.map(product => ({
         price_data: {
           currency: 'eur',
           unit_amount: Math.round(product.price * 100), // Stripe expects cents
           product_data: {
             name: product.name,
-            // Stripe only accepts absolute URLs here.
-            images: product.imageUrl ? [`${baseUrl}${product.imageUrl}`] : [],
+            // Stripe only accepts absolute URLs here. Covers uploaded from
+            // the admin are already absolute (Vercel Blob); the original
+            // ones are paths under /public.
+            images: product.imageUrl
+              ? [/^https?:\/\//.test(product.imageUrl) ? product.imageUrl : `${baseUrl}${product.imageUrl}`]
+              : [],
             // Lets the webhook map a line item back to our product without
             // trusting anything the browser sent.
             metadata: { productId: product.id },

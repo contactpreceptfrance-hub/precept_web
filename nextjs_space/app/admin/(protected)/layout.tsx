@@ -27,6 +27,9 @@ export default async function ProtectedAdminLayout({
               Precept France <span className="text-teal">— Administration</span>
             </Link>
             <nav className="hidden sm:flex items-center gap-4 text-sm font-semibold text-darkblue/60">
+              <Link href="/admin/livres" className="hover:text-darkblue transition-colors">
+                Livres
+              </Link>
               <Link href="/admin/commandes" className="hover:text-darkblue transition-colors">
                 Commandes
               </Link>

@@ -21,7 +21,8 @@ export type CatalogueEntry = SeriesGroup['products'][number]
  */
 export const getSeriesGroups = cache(async (): Promise<SeriesGroup[]> => {
   const products = await getPrisma().product.findMany({
-    orderBy: { createdAt: 'asc' },
+    where: { published: true },
+    orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }],
   })
 
   const groups: SeriesGroup[] = SERIES_CONFIG.map(({ key, label }) => ({
@@ -42,7 +43,7 @@ export const getSeriesGroups = cache(async (): Promise<SeriesGroup[]> => {
 
 /**
  * The catalogue as one flat list, in the order the shop displays it: series by
- * series, and by date of addition within each.
+ * series, and by position within each.
  *
  * Derived from getSeriesGroups rather than re-querying, so the reading order of
  * the previous/next links is by construction the order a visitor sees on

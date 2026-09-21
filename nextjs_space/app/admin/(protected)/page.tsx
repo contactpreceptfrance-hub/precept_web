@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Package, MessageSquare, ArrowRight } from 'lucide-react'
+import { Package, MessageSquare, BookOpen, ArrowRight } from 'lucide-react'
 import { getPrisma } from '@/lib/prisma'
 import { requireAdmin } from '@/lib/admin-guard'
 
@@ -21,9 +21,10 @@ export default async function AdminHomePage() {
   await requireAdmin()
 
   const prisma = getPrisma()
-  const [paidOrders, unhandledMessages] = await Promise.all([
+  const [paidOrders, unhandledMessages, publishedBooks] = await Promise.all([
     prisma.order.count({ where: { status: 'PAID' } }),
     prisma.contactSubmission.count({ where: { handledAt: null } }),
+    prisma.product.count({ where: { published: true } }),
   ])
 
   const tiles = [
@@ -41,6 +42,13 @@ export default async function AdminHomePage() {
       href: '/admin/messages?filtre=a-traiter',
       cta: 'Voir les messages',
     },
+    {
+      icon: BookOpen,
+      label: 'Livres en vente',
+      value: publishedBooks,
+      href: '/admin/livres',
+      cta: 'Gérer les livres',
+    },
   ]
 
   return (
@@ -50,7 +58,7 @@ export default async function AdminHomePage() {
         Vous êtes connecté à l’espace d’administration.
       </p>
 
-      <div className="grid sm:grid-cols-2 gap-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {tiles.map(({ icon: Icon, label, value, href, cta }) => (
           <Link
             key={label}

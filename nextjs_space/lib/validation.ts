@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { SERIES_CONFIG } from '@/lib/types'
 
 /**
  * Shared request schemas.
@@ -50,3 +51,39 @@ export type ContactInput = z.infer<typeof contactSchema>
 
 /** An id coming back from a form field, before it reaches the database. */
 export const idSchema = z.string().trim().min(1).max(40)
+
+/**
+ * A book as the admin form submits it.
+ *
+ * The price is typed by hand in a text field, so it accepts a French comma and
+ * is checked as text before it becomes a number: `z.coerce.number()` would
+ * quietly turn "" into 0 and "1,5" into NaN.
+ */
+const priceSchema = z
+  .string()
+  .trim()
+  .regex(/^\d{1,4}([.,]\d{1,2})?$/)
+  .transform((value) => Number(value.replace(',', '.')))
+  .refine((value) => value > 0)
+
+export const bookSchema = z.object({
+  name: z.string().trim().min(1).max(200),
+  description: z.string().trim().min(1).max(5000),
+  price: priceSchema,
+  type: z.enum(['LIVRE', 'FORMATION']),
+  // Empty string means "no series" and is stored as null.
+  series: z
+    .string()
+    .trim()
+    .refine((value) => value === '' || SERIES_CONFIG.some((s) => s.key === value))
+    .transform((value) => (value === '' ? null : value)),
+})
+
+export type BookInput = z.infer<typeof bookSchema>
+
+/**
+ * A product id. Longer than `idSchema` allows: seeded titles use
+ * `seed-<cover file name>` ids, which reach 56 characters, whereas orders and
+ * messages use 25-character cuids.
+ */
+export const productIdSchema = z.string().trim().min(1).max(100)
