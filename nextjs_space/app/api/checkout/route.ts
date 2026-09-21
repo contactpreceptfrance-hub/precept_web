@@ -3,6 +3,7 @@ import { getStripe } from '@/lib/stripe'
 import { getPrisma } from '@/lib/prisma'
 import { RATE_LIMITS, checkRateLimit, clientIp } from '@/lib/rate-limit'
 import { canFulfil } from '@/lib/stock'
+import { SHIPPING_COUNTRIES } from '@/lib/shipping'
 
 export const dynamic = 'force-dynamic'
 
@@ -100,6 +101,9 @@ export async function POST(req: NextRequest) {
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       locale: 'fr',
+      // Books are posted, so the team needs an address. Collected by Stripe and
+      // read back in the webhook; the customer never types it into our site.
+      shipping_address_collection: { allowed_countries: SHIPPING_COUNTRIES },
       line_items: buyable.map(product => ({
         price_data: {
           currency: 'eur',

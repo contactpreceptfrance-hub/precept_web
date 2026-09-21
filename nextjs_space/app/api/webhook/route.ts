@@ -3,6 +3,7 @@ import { getStripe } from '@/lib/stripe'
 import { getPrisma } from '@/lib/prisma'
 import { escapeHtml, sendEmail } from '@/lib/email'
 import { notifyTeamOfOrder } from '@/lib/order-alert'
+import { formatShippingAddress, pickShippingDetails, type StripeShippingDetails } from '@/lib/shipping'
 
 export const dynamic = 'force-dynamic'
 
@@ -34,7 +35,13 @@ export async function POST(req: NextRequest) {
   }
 
   if (event.type === 'checkout.session.completed') {
-    const session = event.data.object as { id: string; customer_details?: { email?: string | null; name?: string | null }; amount_total?: number | null }
+    const session = event.data.object as {
+      id: string
+      customer_details?: { email?: string | null; name?: string | null }
+      amount_total?: number | null
+      collected_information?: { shipping_details?: StripeShippingDetails | null } | null
+      shipping_details?: StripeShippingDetails | null
+    }
 
     try {
       const prisma = getPrisma()
@@ -86,6 +93,12 @@ export async function POST(req: NextRequest) {
 
       const customerEmail = session.customer_details?.email ?? ''
       const customerName = session.customer_details?.name ?? ''
+      const shippingAddress = formatShippingAddress(pickShippingDetails(session))
+      if (!shippingAddress) {
+        // Checkout requires an address, so this should not happen; say so
+        // loudly rather than ship blind. The admin flags the order too.
+        console.error(`Webhook ${session.id}: paid order arrived without a shipping address`)
+      }
 
       // The order and the stock decrement commit together. A duplicate delivery
       // fails on the unique stripeSessionId and rolls the whole thing back, so a
@@ -97,6 +110,7 @@ export async function POST(req: NextRequest) {
             stripeSessionId: session.id,
             customerEmail,
             customerName,
+            shippingAddress,
             totalAmount: (session.amount_total ?? 0) / 100,
             status: 'PAID',
             items: {
@@ -138,6 +152,7 @@ export async function POST(req: NextRequest) {
       await notifyTeamOfOrder({
         customerName,
         customerEmail,
+        shippingAddress,
         totalAmount: (session.amount_total ?? 0) / 100,
         items: charged.map(item => {
           const remaining = item.productId ? (stockAfter.get(item.productId) ?? null) : null
@@ -182,6 +197,11 @@ export async function POST(req: NextRequest) {
               <tbody>${itemsHtml}</tbody>
             </table>
             <p><strong>Total : ${((session.amount_total ?? 0) / 100).toFixed(2)} €</strong></p>
+            ${
+              shippingAddress
+                ? `<p><strong>Adresse de livraison :</strong><br>${escapeHtml(shippingAddress).replace(/\n/g, '<br>')}</p>`
+                : ''
+            }
             <p>Vous recevrez un nouvel email dès l'expédition de votre commande.</p>
             <p>L'équipe Precept France</p>
           `,

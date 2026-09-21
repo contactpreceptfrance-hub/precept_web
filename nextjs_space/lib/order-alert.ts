@@ -23,6 +23,8 @@ const euros = (value: number) => `${value.toFixed(2).replace('.', ',')} €`
 export async function notifyTeamOfOrder(order: {
   customerName: string
   customerEmail: string
+  /** Multi-line delivery address, or null when Stripe did not return one. */
+  shippingAddress: string | null
   totalAmount: number
   items: OrderAlertItem[]
 }): Promise<void> {
@@ -60,6 +62,11 @@ export async function notifyTeamOfOrder(order: {
       <p><strong>Une commande vient d’être payée sur le site.</strong></p>
       <p><strong>Client :</strong> ${escapeHtml(order.customerName || '—')}
         (${escapeHtml(order.customerEmail || 'e-mail non renseigné')})</p>
+      <p><strong>Livraison :</strong><br>${
+        order.shippingAddress
+          ? escapeHtml(order.shippingAddress).replace(/\n/g, '<br>')
+          : '⚠ aucune adresse reçue — à demander au client'
+      }</p>
       <table style="border-collapse:collapse;width:100%;">
         <thead>
           <tr>
