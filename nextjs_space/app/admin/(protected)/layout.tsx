@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ExternalLink, LogOut } from 'lucide-react'
+import { ExternalLink, Globe, LogOut } from 'lucide-react'
 import { requireAdmin } from '@/lib/admin-guard'
 import { logout } from '@/app/admin/actions'
 
@@ -50,17 +50,27 @@ export default async function ProtectedAdminLayout({
             </nav>
           </div>
 
-          {/* A form, not a link: a prefetch on a <Link> would log the team out
-              just by hovering the button. */}
-          <form action={logout}>
-            <button
-              type="submit"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 text-sm font-semibold hover:border-gray-300 transition-colors"
+          <div className="flex items-center gap-3">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-darkblue/60 hover:text-darkblue transition-colors"
             >
-              <LogOut size={15} />
-              Se déconnecter
-            </button>
-          </form>
+              <Globe size={15} />
+              <span className="hidden sm:inline">Retour au site</span>
+            </Link>
+
+            {/* A form, not a link: a prefetch on a <Link> would log the team out
+                just by hovering the button. */}
+            <form action={logout}>
+              <button
+                type="submit"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 text-sm font-semibold hover:border-gray-300 transition-colors"
+              >
+                <LogOut size={15} />
+                Se déconnecter
+              </button>
+            </form>
+          </div>
         </div>
       </header>
 

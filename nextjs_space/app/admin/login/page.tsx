@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import { Lock } from 'lucide-react'
+import Link from 'next/link'
+import { ArrowLeft, Lock } from 'lucide-react'
 import { login } from '@/app/admin/actions'
 
 export const metadata: Metadata = {
@@ -76,6 +77,14 @@ export default function AdminLoginPage({
         <p className="text-center text-xs text-darkblue/40 mt-6">
           Espace réservé à l’équipe Precept France.
         </p>
+
+        <Link
+          href="/"
+          className="mt-4 flex items-center justify-center gap-2 text-sm font-semibold text-darkblue/60 hover:text-darkblue transition-colors"
+        >
+          <ArrowLeft size={15} />
+          Retour au site
+        </Link>
       </div>
     </main>
   )
