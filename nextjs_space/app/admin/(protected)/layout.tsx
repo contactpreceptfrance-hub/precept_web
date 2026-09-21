@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { LogOut } from 'lucide-react'
+import { ExternalLink, LogOut } from 'lucide-react'
 import { requireAdmin } from '@/lib/admin-guard'
 import { logout } from '@/app/admin/actions'
 
@@ -33,6 +33,17 @@ export default async function ProtectedAdminLayout({
               <Link href="/admin/messages" className="hover:text-darkblue transition-colors">
                 Messages
               </Link>
+              {/* Migadu's hosted webmail for contact@preceptfrance.fr. A plain
+                  <a>: it leaves the site, so no Link prefetch or client routing. */}
+              <a
+                href="https://webmail.migadu.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 hover:text-darkblue transition-colors"
+              >
+                Webmail
+                <ExternalLink size={13} />
+              </a>
             </nav>
           </div>
 
