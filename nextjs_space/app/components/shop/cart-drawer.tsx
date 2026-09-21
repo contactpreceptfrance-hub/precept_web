@@ -6,6 +6,9 @@ import Link from 'next/link'
 import { X, Plus, Minus, Trash2, ShoppingBag, Lock } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useCart } from '@/lib/cart-context'
+import { SHIPPING_FEE_CENTS } from '@/lib/shipping'
+
+const SHIPPING_FEE = SHIPPING_FEE_CENTS / 100
 
 export function CartDrawer() {
   const { items, isOpen, closeCart, removeItem, updateQty, totalPrice, clearCart } = useCart()
@@ -126,9 +129,17 @@ export function CartDrawer() {
             {/* Footer */}
             {items.length > 0 && (
               <div className="px-6 py-5 border-t border-gray-200">
+                <div className="flex justify-between text-sm text-darkblue/70 mb-1">
+                  <span>Sous-total</span>
+                  <span>{totalPrice.toFixed(2)} €</span>
+                </div>
+                <div className="flex justify-between text-sm text-darkblue/70 mb-3">
+                  <span>Livraison</span>
+                  <span>{SHIPPING_FEE.toFixed(2)} €</span>
+                </div>
                 <div className="flex justify-between text-darkblue font-bold text-lg mb-4">
                   <span>Total</span>
-                  <span className="text-teal">{totalPrice.toFixed(2)} €</span>
+                  <span className="text-teal">{(totalPrice + SHIPPING_FEE).toFixed(2)} €</span>
                 </div>
                 <label
                   htmlFor="accept-cgv"
@@ -169,7 +180,7 @@ export function CartDrawer() {
                   {isLoading ? (
                     <span className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent" />
                   ) : (
-                    <>Commander et payer — {totalPrice.toFixed(2)} €</>
+                    <>Commander et payer — {(totalPrice + SHIPPING_FEE).toFixed(2)} €</>
                   )}
                 </button>
                 {!cgvAccepted && (

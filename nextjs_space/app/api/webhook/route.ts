@@ -39,6 +39,7 @@ export async function POST(req: NextRequest) {
       id: string
       customer_details?: { email?: string | null; name?: string | null }
       amount_total?: number | null
+      total_details?: { amount_shipping?: number | null } | null
       collected_information?: { shipping_details?: StripeShippingDetails | null } | null
       shipping_details?: StripeShippingDetails | null
     }
@@ -93,6 +94,10 @@ export async function POST(req: NextRequest) {
 
       const customerEmail = session.customer_details?.email ?? ''
       const customerName = session.customer_details?.name ?? ''
+      // What Stripe charged for delivery. Already inside amount_total, so the
+      // order total stays right; it is only broken out for the e-mails, whose
+      // item lines would otherwise not add up to the total shown.
+      const shippingFee = (session.total_details?.amount_shipping ?? 0) / 100
       const shippingAddress = formatShippingAddress(pickShippingDetails(session))
       if (!shippingAddress) {
         // Checkout requires an address, so this should not happen; say so
@@ -153,6 +158,7 @@ export async function POST(req: NextRequest) {
         customerName,
         customerEmail,
         shippingAddress,
+        shippingFee,
         totalAmount: (session.amount_total ?? 0) / 100,
         items: charged.map(item => {
           const remaining = item.productId ? (stockAfter.get(item.productId) ?? null) : null
@@ -196,6 +202,7 @@ export async function POST(req: NextRequest) {
               </thead>
               <tbody>${itemsHtml}</tbody>
             </table>
+            ${shippingFee > 0 ? `<p>Frais de livraison : ${shippingFee.toFixed(2)} €</p>` : ''}
             <p><strong>Total : ${((session.amount_total ?? 0) / 100).toFixed(2)} €</strong></p>
             ${
               shippingAddress

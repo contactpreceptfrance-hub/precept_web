@@ -10,6 +10,13 @@ export const SHIPPING_COUNTRIES: NonNullable<
   NonNullable<Parameters<Stripe['checkout']['sessions']['create']>[0]>['shipping_address_collection']
 >['allowed_countries'] = ['FR', 'GP', 'MQ', 'GF', 'RE', 'YT', 'BE', 'CH', 'LU', 'MC']
 
+/**
+ * Flat delivery fee, in cents, added to every order whatever its size or
+ * destination. Charged by Stripe as a shipping option and shown to the customer
+ * in the basket and on the payment page, before they pay (CGV article 4).
+ */
+export const SHIPPING_FEE_CENTS = 490
+
 type StripeAddress = {
   line1?: string | null
   line2?: string | null

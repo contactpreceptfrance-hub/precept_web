@@ -25,6 +25,8 @@ export async function notifyTeamOfOrder(order: {
   customerEmail: string
   /** Multi-line delivery address, or null when Stripe did not return one. */
   shippingAddress: string | null
+  /** Delivery fee charged, already included in totalAmount. */
+  shippingFee: number
   totalAmount: number
   items: OrderAlertItem[]
 }): Promise<void> {
@@ -78,6 +80,7 @@ export async function notifyTeamOfOrder(order: {
         </thead>
         <tbody>${rows}</tbody>
       </table>
+      ${order.shippingFee > 0 ? `<p>Dont livraison : ${euros(order.shippingFee)}</p>` : ''}
       <p><strong>Total : ${euros(order.totalAmount)}</strong></p>
       <p><a href="${SITE_URL}/admin/commandes?filtre=a-expedier">Voir la commande dans l’administration</a></p>
     `,

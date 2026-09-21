@@ -3,7 +3,7 @@ import { getStripe } from '@/lib/stripe'
 import { getPrisma } from '@/lib/prisma'
 import { RATE_LIMITS, checkRateLimit, clientIp } from '@/lib/rate-limit'
 import { canFulfil } from '@/lib/stock'
-import { SHIPPING_COUNTRIES } from '@/lib/shipping'
+import { SHIPPING_COUNTRIES, SHIPPING_FEE_CENTS } from '@/lib/shipping'
 
 export const dynamic = 'force-dynamic'
 
@@ -104,6 +104,17 @@ export async function POST(req: NextRequest) {
       // Books are posted, so the team needs an address. Collected by Stripe and
       // read back in the webhook; the customer never types it into our site.
       shipping_address_collection: { allowed_countries: SHIPPING_COUNTRIES },
+      // Defined inline: nothing to create or keep in sync in the Stripe
+      // dashboard, and the amount lives next to the code that displays it.
+      shipping_options: [
+        {
+          shipping_rate_data: {
+            type: 'fixed_amount',
+            fixed_amount: { amount: SHIPPING_FEE_CENTS, currency: 'eur' },
+            display_name: 'Livraison',
+          },
+        },
+      ],
       line_items: buyable.map(product => ({
         price_data: {
           currency: 'eur',
