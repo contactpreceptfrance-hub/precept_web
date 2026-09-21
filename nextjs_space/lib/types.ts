@@ -18,6 +18,7 @@ export type SeriesGroup = {
     backImageUrl: string | null
     type: 'LIVRE' | 'FORMATION'
     series: string | null
+    soldOut: boolean
   }[]
 }
 

@@ -6,6 +6,7 @@ import { revalidatePath } from 'next/cache'
 import { getPrisma } from '@/lib/prisma'
 import { requireAdmin } from '@/lib/admin-guard'
 import { idSchema } from '@/lib/validation'
+import { returnPath, withNote } from '@/lib/admin-redirect'
 import {
   ADMIN_COOKIE_NAME,
   ADMIN_COOKIE_OPTIONS,
@@ -64,25 +65,6 @@ export async function login(formData: FormData) {
 export async function logout() {
   cookies().delete(ADMIN_COOKIE_NAME)
   redirect('/admin/login')
-}
-
-/**
- * Where an admin action sends the browser back to.
- *
- * The list pages carry filters and a page number in the query string; without
- * this, marking one order shipped would bounce the team back to page 1 of an
- * unfiltered list every time.
- */
-function returnPath(formData: FormData, fallback: string): string {
-  const value = formData.get('returnTo')
-  if (typeof value !== 'string' || !value.startsWith('/admin')) return fallback
-  if (value.includes('//') || value.includes('\\')) return fallback
-  return value
-}
-
-/** Appends a short outcome note the list page renders once. */
-function withNote(path: string, note: string): string {
-  return `${path}${path.includes('?') ? '&' : '?'}note=${note}`
 }
 
 /**

@@ -13,6 +13,28 @@ export function ActionNote({ note }: { note?: string }) {
       tone: 'warn',
     },
     invalide: { text: 'Requête invalide.', tone: 'warn' },
+
+    // Book manager
+    cree: { text: 'Livre ajouté.', tone: 'ok' },
+    supprime: { text: 'Livre supprimé.', tone: 'ok' },
+    prix: {
+      text: 'Prix invalide : saisissez un montant en euros, par exemple 12,50.',
+      tone: 'warn',
+    },
+    'image-requise': { text: 'Ajoutez une image de couverture.', tone: 'warn' },
+    'image-type': {
+      text: 'Image refusée : utilisez un fichier JPEG, PNG ou WebP.',
+      tone: 'warn',
+    },
+    'image-taille': { text: 'Image trop lourde : 2 Mo maximum par image.', tone: 'warn' },
+    stockage: {
+      text: 'Le stockage des images n’est pas configuré (BLOB_READ_WRITE_TOKEN). Rien n’a été enregistré.',
+      tone: 'warn',
+    },
+    commandes: {
+      text: 'Ce livre figure dans des commandes : il ne peut pas être supprimé. Masquez-le à la place.',
+      tone: 'warn',
+    },
   }
 
   const entry = messages[note]

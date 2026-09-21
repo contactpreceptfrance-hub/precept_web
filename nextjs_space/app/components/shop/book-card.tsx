@@ -14,9 +14,10 @@ type BookCardProps = {
   price: number
   imageUrl: string
   type: 'LIVRE' | 'FORMATION'
+  soldOut?: boolean
 }
 
-export function BookCard({ id, name, description, price, imageUrl, type }: BookCardProps) {
+export function BookCard({ id, name, description, price, imageUrl, type, soldOut = false }: BookCardProps) {
   const { addItem, openCart } = useCart()
   const [showShare, setShowShare] = useState(false)
   const [addedFeedback, setAddedFeedback] = useState(false)
@@ -65,17 +66,23 @@ export function BookCard({ id, name, description, price, imageUrl, type }: BookC
 
       {/* Actions */}
       <div className="flex gap-2">
-        <button
-          onClick={handleAddToCart}
-          className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-bold transition-all duration-200 ${
-            addedFeedback
-              ? 'bg-green-500 text-white'
-              : 'bg-teal text-white hover:bg-teal-600'
-          }`}
-        >
-          <ShoppingBag size={13} />
-          {addedFeedback ? 'Ajouté ✓' : '+ Panier'}
-        </button>
+        {soldOut ? (
+          <span className="flex-1 flex items-center justify-center py-2 rounded-xl text-xs font-bold bg-gray-100 text-gray-400 cursor-not-allowed">
+            Épuisé
+          </span>
+        ) : (
+          <button
+            onClick={handleAddToCart}
+            className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-bold transition-all duration-200 ${
+              addedFeedback
+                ? 'bg-green-500 text-white'
+                : 'bg-teal text-white hover:bg-teal-600'
+            }`}
+          >
+            <ShoppingBag size={13} />
+            {addedFeedback ? 'Ajouté ✓' : '+ Panier'}
+          </button>
+        )}
         <button
           onClick={() => setShowShare(!showShare)}
           className="w-9 flex items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-500 hover:text-darkblue hover:border-gray-300 transition-colors"

@@ -22,6 +22,13 @@ model Product {
   backImageUrl String?
   type         ProductType
   series       String? // "40min" | "seigneur" | "etudes" | "saisir" | "pup" | "enfants"
+  // Hidden from the shop, sitemap and checkout when false. Used instead of
+  // deleting: OrderItem keeps a RESTRICT foreign key to the product.
+  published    Boolean     @default(true)
+  // Still visible, but cannot be added to a cart or bought.
+  soldOut      Boolean     @default(false)
+  // Position within its series, ascending. createdAt breaks ties.
+  sortOrder    Int         @default(0)
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
   orderItems   OrderItem[]

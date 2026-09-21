@@ -12,8 +12,6 @@ const idFor = (imageUrl: string) =>
 async function main() {
   console.log(`Seeding ${books.length} books…`)
 
-  const seeded: string[] = []
-
   for (const book of books) {
     const id = idFor(book.imageUrl)
     const fields = {
@@ -25,38 +23,20 @@ async function main() {
       type: book.type as 'LIVRE' | 'FORMATION',
       series: book.series,
     }
+    // Insert-only. Books are edited from /admin/livres now, so re-running the
+    // seed must not overwrite a price, a description or a cover the team has
+    // changed — it only adds titles that are missing (a seeded title deleted from
+    // the admin would therefore come back on the next run).
     await prisma.product.upsert({
       where: { id },
-      update: fields,
+      update: {},
       create: { id, ...fields },
     })
-    seeded.push(id)
     console.log(`  ✔ ${book.name}`)
   }
 
-  // Drop previously seeded products that are no longer in books.json, so
-  // retired titles stop showing up in the boutique. Anything attached to a
-  // real order is left alone — deleting it would break that order's history.
-  const stale = await prisma.product.findMany({
-    where: {
-      id: { startsWith: 'seed-', notIn: seeded },
-      orderItems: { none: {} },
-    },
-    select: { id: true, name: true },
-  })
-
-  if (stale.length > 0) {
-    await prisma.product.deleteMany({ where: { id: { in: stale.map(p => p.id) } } })
-    console.log(`\nRemoved ${stale.length} retired product(s):`)
-    for (const p of stale) console.log(`  ✘ ${p.name}`)
-  }
-
-  const kept = await prisma.product.count({
-    where: { id: { startsWith: 'seed-', notIn: seeded } },
-  })
-  if (kept > 0) {
-    console.log(`\n⚠ ${kept} retired product(s) kept — they are referenced by existing orders.`)
-  }
+  // Nothing is deleted here any more: removing a retired title is done from
+  // /admin/livres (delete, or hide it if it has orders).
 
   console.log('\nDone.')
   await prisma.$disconnect()

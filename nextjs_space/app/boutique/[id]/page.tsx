@@ -20,7 +20,10 @@ type Props = { params: { id: string } }
 export const revalidate = 3600
 
 export async function generateStaticParams() {
-  const products = await getPrisma().product.findMany({ select: { id: true } })
+  const products = await getPrisma().product.findMany({
+    where: { published: true },
+    select: { id: true },
+  })
   return products.map(({ id }) => ({ id }))
 }
 
@@ -29,7 +32,9 @@ export async function generateStaticParams() {
 // two round trips to the database instead of one.
 const getProduct = cache(async (id: string) => {
   const prisma = getPrisma()
-  return prisma.product.findUnique({ where: { id } })
+  const product = await prisma.product.findUnique({ where: { id } })
+  // A hidden title answers 404 like one that does not exist.
+  return product?.published ? product : null
 })
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -83,6 +88,7 @@ export default async function BookDetailPage({ params }: Props) {
               name={product.name}
               price={product.price}
               imageUrl={product.imageUrl}
+              soldOut={product.soldOut}
             />
 
             {/* Share row */}

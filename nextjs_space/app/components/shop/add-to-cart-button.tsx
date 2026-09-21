@@ -9,9 +9,10 @@ type Props = {
   name: string
   price: number
   imageUrl: string
+  soldOut?: boolean
 }
 
-export function AddToCartButton({ productId, name, price, imageUrl }: Props) {
+export function AddToCartButton({ productId, name, price, imageUrl, soldOut = false }: Props) {
   const { addItem, openCart } = useCart()
   const [added, setAdded] = useState(false)
 
@@ -20,6 +21,18 @@ export function AddToCartButton({ productId, name, price, imageUrl }: Props) {
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)
     openCart()
+  }
+
+  if (soldOut) {
+    return (
+      <button
+        type="button"
+        disabled
+        className="w-full py-4 rounded-xl font-bold text-base bg-gray-100 text-gray-400 cursor-not-allowed"
+      >
+        Épuisé
+      </button>
+    )
   }
 
   return (

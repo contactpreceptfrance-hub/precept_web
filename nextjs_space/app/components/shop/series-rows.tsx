@@ -69,6 +69,7 @@ export function SeriesRows({ groups }: SeriesRowsProps) {
                 price={product.price}
                 imageUrl={product.imageUrl}
                 type={product.type}
+                soldOut={product.soldOut}
               />
             ))}
           </div>
