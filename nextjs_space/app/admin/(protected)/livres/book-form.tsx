@@ -42,7 +42,7 @@ export function BookForm({
         <input id="name" name="name" required maxLength={200} defaultValue={book?.name} className={input} />
       </div>
 
-      <div className="grid sm:grid-cols-3 gap-6">
+      <div className="grid sm:grid-cols-4 gap-6">
         <div>
           <label htmlFor="price" className={label}>Prix (€)</label>
           <input
@@ -53,6 +53,18 @@ export function BookForm({
             pattern="\d{1,4}([.,]\d{1,2})?"
             placeholder="12,50"
             defaultValue={book ? book.price.toFixed(2).replace('.', ',') : undefined}
+            className={input}
+          />
+        </div>
+        <div>
+          <label htmlFor="stock" className={label}>Stock</label>
+          <input
+            id="stock"
+            name="stock"
+            inputMode="numeric"
+            pattern="\d{1,5}"
+            placeholder="Non suivi"
+            defaultValue={book?.stock ?? undefined}
             className={input}
           />
         </div>
@@ -121,6 +133,11 @@ export function BookForm({
           )}
         </div>
       </div>
+
+      <p className={`${hint} -mt-3`}>
+        Stock : nombre d’exemplaires disponibles. Il baisse automatiquement à chaque commande
+        payée, et le livre passe en « Épuisé » à 0. Laissez vide pour ne pas suivre le stock.
+      </p>
 
       <fieldset className="space-y-3 pt-2">
         <legend className={label}>Visibilité</legend>

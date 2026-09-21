@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getStripe } from '@/lib/stripe'
 import { getPrisma } from '@/lib/prisma'
 import { RATE_LIMITS, checkRateLimit, clientIp } from '@/lib/rate-limit'
+import { canFulfil } from '@/lib/stock'
 
 export const dynamic = 'force-dynamic'
 
@@ -80,9 +81,13 @@ export async function POST(req: NextRequest) {
       where: { id: { in: Array.from(quantityByProductId.keys()) } },
     })
 
-    // Hidden and sold-out titles count as gone: a cart filled before someone
-    // hid a book, or a stale product page, must not turn into a sale.
-    const buyable = products.filter((product) => product.published && !product.soldOut)
+    // Hidden and sold-out titles count as gone, and so does a title with fewer
+    // copies left than the cart asks for: a cart filled before someone hid a
+    // book, or a stale product page, must not turn into a sale.
+    const buyable = products.filter(
+      (product) =>
+        product.published && canFulfil(product, quantityByProductId.get(product.id) ?? 0),
+    )
 
     if (buyable.length !== quantityByProductId.size) {
       return NextResponse.json(

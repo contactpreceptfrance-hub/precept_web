@@ -42,6 +42,7 @@ function parseBookForm(formData: FormData) {
     name: formData.get('name'),
     description: formData.get('description'),
     price: formData.get('price'),
+    stock: formData.get('stock') ?? '',
     type: formData.get('type'),
     series: formData.get('series') ?? '',
   })
@@ -49,7 +50,9 @@ function parseBookForm(formData: FormData) {
 
 /** The note to show for a form that did not validate: price gets its own message. */
 function invalidNote(issues: { path: (string | number)[] }[]): string {
-  return issues.some((issue) => issue.path[0] === 'price') ? 'prix' : 'invalide'
+  if (issues.some((issue) => issue.path[0] === 'price')) return 'prix'
+  if (issues.some((issue) => issue.path[0] === 'stock')) return 'stock'
+  return 'invalide'
 }
 
 /** Next free position at the end of a series. */

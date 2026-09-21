@@ -66,11 +66,22 @@ const priceSchema = z
   .transform((value) => Number(value.replace(',', '.')))
   .refine((value) => value > 0)
 
+/**
+ * Copies in hand. Empty means "not tracked" (null), which is different from 0
+ * ("none left") — hence text in, not `z.coerce.number()`, which turns "" into 0.
+ */
+const stockSchema = z
+  .string()
+  .trim()
+  .regex(/^(\d{1,5})?$/)
+  .transform((value) => (value === '' ? null : Number(value)))
+
 export const bookSchema = z.object({
   name: z.string().trim().min(1).max(200),
   description: z.string().trim().min(1).max(5000),
   price: priceSchema,
   type: z.enum(['LIVRE', 'FORMATION']),
+  stock: stockSchema,
   // Empty string means "no series" and is stored as null.
   series: z
     .string()

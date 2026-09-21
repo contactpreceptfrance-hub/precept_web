@@ -5,6 +5,7 @@ import { ArrowDown, ArrowUp, Plus } from 'lucide-react'
 import { getPrisma } from '@/lib/prisma'
 import { requireAdmin } from '@/lib/admin-guard'
 import { SERIES_CONFIG } from '@/lib/types'
+import { isSoldOut } from '@/lib/stock'
 import { ActionNote, Tabs, formatEuros } from '../ui'
 import { moveBook, setPublished, setSoldOut } from './actions'
 
@@ -40,6 +41,7 @@ function BookRow({
     type: string
     published: boolean
     soldOut: boolean
+    stock: number | null
   }
   returnTo: string
   canMove: boolean
@@ -59,6 +61,7 @@ function BookRow({
         <p className="text-sm text-darkblue/50">
           {formatEuros(book.price)}
           {book.type === 'FORMATION' && ' · Formation'}
+          {book.stock !== null && ` · Stock : ${book.stock}`}
         </p>
       </div>
 
@@ -68,7 +71,7 @@ function BookRow({
             Masqué
           </span>
         )}
-        {book.soldOut && (
+        {isSoldOut(book) && (
           <span className="text-xs font-bold px-2.5 py-1 rounded-md uppercase tracking-wide bg-amber-100 text-amber-700">
             Épuisé
           </span>
@@ -146,17 +149,18 @@ export default async function BooksPage({
       series: true,
       published: true,
       soldOut: true,
+      stock: true,
     },
   })
 
   const counts = {
     tous: books.length,
     masques: books.filter((b) => !b.published).length,
-    epuises: books.filter((b) => b.soldOut).length,
+    epuises: books.filter((b) => isSoldOut(b)).length,
   }
 
   const visible = books.filter((b) =>
-    filter === 'masques' ? !b.published : filter === 'epuises' ? b.soldOut : true,
+    filter === 'masques' ? !b.published : filter === 'epuises' ? isSoldOut(b) : true,
   )
 
   // Same grouping as the shop: known series in their display order, then

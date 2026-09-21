@@ -21,6 +21,10 @@ export function ActionNote({ note }: { note?: string }) {
       text: 'Prix invalide : saisissez un montant en euros, par exemple 12,50.',
       tone: 'warn',
     },
+    stock: {
+      text: 'Stock invalide : saisissez un nombre entier, ou laissez vide pour ne pas suivre le stock.',
+      tone: 'warn',
+    },
     'image-requise': { text: 'Ajoutez une image de couverture.', tone: 'warn' },
     'image-type': {
       text: 'Image refusée : utilisez un fichier JPEG, PNG ou WebP.',

@@ -72,6 +72,22 @@ export async function sendEmail(input: SendEmailInput): Promise<void> {
   }
 }
 
+/**
+ * Who hears about things the team must act on (a contact message, a paid
+ * order): TEAM_NOTIFICATION_EMAIL, plus TEAM_NOTIFICATION_EMAIL_CC when set.
+ * `null` when the primary address is missing, so the caller can log and skip.
+ */
+export function getTeamRecipients(): { to: EmailRecipient[]; cc: EmailRecipient[] } | null {
+  const to = process.env.TEAM_NOTIFICATION_EMAIL
+  if (!to) return null
+
+  const cc: EmailRecipient[] = []
+  if (process.env.TEAM_NOTIFICATION_EMAIL_CC) {
+    cc.push({ email: process.env.TEAM_NOTIFICATION_EMAIL_CC })
+  }
+  return { to: [{ email: to }], cc }
+}
+
 /** Escapes text dropped into htmlContent — every field below is user-submitted. */
 export function escapeHtml(value: string): string {
   return value

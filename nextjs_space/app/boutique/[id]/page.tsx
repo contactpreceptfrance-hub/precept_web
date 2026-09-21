@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import { ArrowLeft, Facebook, Mail } from 'lucide-react'
 import { getPrisma } from '@/lib/prisma'
 import { getAdjacentProducts } from '@/lib/products'
+import { isSoldOut } from '@/lib/stock'
 import { SITE_URL } from '@/lib/site'
 import { AddToCartButton } from '@/app/components/shop/add-to-cart-button'
 import { CoverViewer } from '@/app/components/shop/cover-viewer'
@@ -88,7 +89,7 @@ export default async function BookDetailPage({ params }: Props) {
               name={product.name}
               price={product.price}
               imageUrl={product.imageUrl}
-              soldOut={product.soldOut}
+              soldOut={isSoldOut(product)}
             />
 
             {/* Share row */}

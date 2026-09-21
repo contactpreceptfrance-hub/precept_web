@@ -1,6 +1,7 @@
 import { cache } from 'react'
 import { getPrisma } from '@/lib/prisma'
 import { SERIES_CONFIG, SeriesGroup } from '@/lib/types'
+import { isSoldOut } from '@/lib/stock'
 
 /** One entry of the catalogue, as the series grouping exposes it. */
 export type CatalogueEntry = SeriesGroup['products'][number]
@@ -20,10 +21,17 @@ export type CatalogueEntry = SeriesGroup['products'][number]
  * shop until the next revalidation.
  */
 export const getSeriesGroups = cache(async (): Promise<SeriesGroup[]> => {
-  const products = await getPrisma().product.findMany({
+  const rows = await getPrisma().product.findMany({
     where: { published: true },
     orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }],
   })
+
+  // The public catalogue learns whether a book is available, never how many
+  // copies are left: this list is served as JSON by /api/products.
+  const products = rows.map(({ stock, ...product }) => ({
+    ...product,
+    soldOut: isSoldOut({ soldOut: product.soldOut, stock }),
+  }))
 
   const groups: SeriesGroup[] = SERIES_CONFIG.map(({ key, label }) => ({
     series: key,

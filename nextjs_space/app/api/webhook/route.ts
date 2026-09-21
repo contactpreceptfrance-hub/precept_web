@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getStripe } from '@/lib/stripe'
 import { getPrisma } from '@/lib/prisma'
 import { escapeHtml, sendEmail } from '@/lib/email'
+import { notifyTeamOfOrder } from '@/lib/order-alert'
 
 export const dynamic = 'force-dynamic'
 
@@ -86,22 +87,68 @@ export async function POST(req: NextRequest) {
       const customerEmail = session.customer_details?.email ?? ''
       const customerName = session.customer_details?.name ?? ''
 
-      await prisma.order.create({
-        data: {
-          stripeSessionId: session.id,
-          customerEmail,
-          customerName,
-          totalAmount: (session.amount_total ?? 0) / 100,
-          status: 'PAID',
-          items: {
-            create: linkable.map(item => ({
-              productId: item.productId!,
-              productName: item.productName,
-              quantity: item.quantity,
-              unitPrice: item.unitPrice,
-            })),
+      // The order and the stock decrement commit together. A duplicate delivery
+      // fails on the unique stripeSessionId and rolls the whole thing back, so a
+      // retried webhook cannot take the stock down twice.
+      const linkedIds = linkable.map(item => item.productId!)
+      const stockAfter = await prisma.$transaction(async tx => {
+        await tx.order.create({
+          data: {
+            stripeSessionId: session.id,
+            customerEmail,
+            customerName,
+            totalAmount: (session.amount_total ?? 0) / 100,
+            status: 'PAID',
+            items: {
+              create: linkable.map(item => ({
+                productId: item.productId!,
+                productName: item.productName,
+                quantity: item.quantity,
+                unitPrice: item.unitPrice,
+              })),
+            },
           },
-        },
+        })
+
+        // Only books whose stock is tracked (not null) are touched.
+        for (const item of linkable) {
+          await tx.product.updateMany({
+            where: { id: item.productId!, stock: { not: null } },
+            data: { stock: { decrement: item.quantity } },
+          })
+        }
+
+        // Read before clamping: a negative value here means the order took more
+        // copies than were left (two people paying for the last one), which the
+        // team alert reports.
+        const after = await tx.product.findMany({
+          where: { id: { in: linkedIds } },
+          select: { id: true, stock: true },
+        })
+
+        await tx.product.updateMany({
+          where: { id: { in: linkedIds }, stock: { lt: 0 } },
+          data: { stock: 0 },
+        })
+
+        return new Map(after.map(p => [p.id, p.stock]))
+      })
+
+      // Best-effort, and first: this is the message the team acts on.
+      await notifyTeamOfOrder({
+        customerName,
+        customerEmail,
+        totalAmount: (session.amount_total ?? 0) / 100,
+        items: charged.map(item => {
+          const remaining = item.productId ? (stockAfter.get(item.productId) ?? null) : null
+          return {
+            productName: item.productName,
+            quantity: item.quantity,
+            unitPrice: item.unitPrice,
+            stockAfter: remaining === null ? null : Math.max(remaining, 0),
+            oversold: remaining !== null && remaining < 0,
+          }
+        }),
       })
 
       // Best-effort: the order is already committed above, so a Brevo outage

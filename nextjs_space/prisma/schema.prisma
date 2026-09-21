@@ -27,6 +27,10 @@ model Product {
   published    Boolean     @default(true)
   // Still visible, but cannot be added to a cart or bought.
   soldOut      Boolean     @default(false)
+  // Copies in hand. null = not tracked (always available unless soldOut is
+  // set). When set, it is checked at checkout and decremented by the webhook
+  // once an order is paid; at 0 the book counts as sold out.
+  stock        Int?
   // Position within its series, ascending. createdAt breaks ties.
   sortOrder    Int         @default(0)
   createdAt    DateTime    @default(now())
