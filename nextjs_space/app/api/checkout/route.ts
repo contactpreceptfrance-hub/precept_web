@@ -97,7 +97,7 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    const stripe = getStripe()
+    const stripe = await getStripe()
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       locale: 'fr',

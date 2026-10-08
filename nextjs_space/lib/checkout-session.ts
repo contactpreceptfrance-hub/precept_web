@@ -26,8 +26,10 @@ type SessionLike = {
 // before calling Stripe so a garbage query string costs no API request.
 const SESSION_ID = /^cs_(test|live)_[A-Za-z0-9]{10,200}$/
 
-const retrieveFromStripe = (id: string): Promise<SessionLike> =>
-  getStripe().checkout.sessions.retrieve(id)
+const retrieveFromStripe = async (id: string): Promise<SessionLike> => {
+  const stripe = await getStripe()
+  return stripe.checkout.sessions.retrieve(id)
+}
 
 /**
  * Asks Stripe, not the URL: `?session_id=` is something a visitor can type, so

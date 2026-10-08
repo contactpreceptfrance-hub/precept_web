@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Package, MessageSquare, BookOpen, ArrowRight } from 'lucide-react'
+import { Package, MessageSquare, BookOpen, ArrowRight, CreditCard } from 'lucide-react'
 import { getPrisma } from '@/lib/prisma'
 import { requireAdmin } from '@/lib/admin-guard'
+import { getActiveStripeCredentials } from '@/lib/stripe-config'
 
 export const metadata: Metadata = {
   title: 'Administration — Precept France',
@@ -11,20 +12,16 @@ export const metadata: Metadata = {
 
 /**
  * The landing page of the administration area.
- *
- * Counts only, for now: the orders and messages screens land in the next phase.
- * These two numbers are enough to prove end to end that the session works and
- * that the pages can read the database — and they are the two figures the team
- * will want first thing anyway.
  */
 export default async function AdminHomePage() {
   await requireAdmin()
 
   const prisma = getPrisma()
-  const [paidOrders, unhandledMessages, publishedBooks] = await Promise.all([
+  const [paidOrders, unhandledMessages, publishedBooks, stripeCreds] = await Promise.all([
     prisma.order.count({ where: { status: 'PAID' } }),
     prisma.contactSubmission.count({ where: { handledAt: null } }),
     prisma.product.count({ where: { published: true } }),
+    getActiveStripeCredentials(),
   ])
 
   const tiles = [
@@ -49,6 +46,13 @@ export default async function AdminHomePage() {
       href: '/admin/livres',
       cta: 'Gérer les livres',
     },
+    {
+      icon: CreditCard,
+      label: 'Paiements Stripe',
+      value: stripeCreds.mode === 'live' ? 'Live' : 'Test',
+      href: '/admin/parametres',
+      cta: 'Configurer Stripe',
+    },
   ]
 
   return (
@@ -58,7 +62,7 @@ export default async function AdminHomePage() {
         Vous êtes connecté à l’espace d’administration.
       </p>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {tiles.map(({ icon: Icon, label, value, href, cta }) => (
           <Link
             key={label}

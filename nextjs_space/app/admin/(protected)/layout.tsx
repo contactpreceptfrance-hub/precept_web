@@ -36,6 +36,9 @@ export default async function ProtectedAdminLayout({
               <Link href="/admin/messages" className="hover:text-darkblue transition-colors">
                 Messages
               </Link>
+              <Link href="/admin/parametres" className="hover:text-darkblue transition-colors">
+                Paramètres
+              </Link>
               {/* Migadu's hosted webmail for contact@preceptfrance.fr. A plain
                   <a>: it leaves the site, so no Link prefetch or client routing. */}
               <a
@@ -71,6 +74,31 @@ export default async function ProtectedAdminLayout({
               </button>
             </form>
           </div>
+        </div>
+
+        {/* Mobile navigation bar */}
+        <div className="sm:hidden border-t border-gray-100 px-6 py-2.5 flex items-center gap-4 overflow-x-auto text-xs font-semibold text-darkblue/70 bg-gray-50/50">
+          <Link href="/admin/livres" className="hover:text-darkblue transition-colors shrink-0">
+            Livres
+          </Link>
+          <Link href="/admin/commandes" className="hover:text-darkblue transition-colors shrink-0">
+            Commandes
+          </Link>
+          <Link href="/admin/messages" className="hover:text-darkblue transition-colors shrink-0">
+            Messages
+          </Link>
+          <Link href="/admin/parametres" className="hover:text-darkblue transition-colors shrink-0">
+            Paramètres
+          </Link>
+          <a
+            href="https://webmail.migadu.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 hover:text-darkblue transition-colors shrink-0"
+          >
+            Webmail
+            <ExternalLink size={11} />
+          </a>
         </div>
       </header>
 

@@ -5,6 +5,8 @@ import { escapeHtml, sendEmail } from '@/lib/email'
 import { notifyTeamOfOrder } from '@/lib/order-alert'
 import { formatShippingAddress, pickShippingDetails, type StripeShippingDetails } from '@/lib/shipping'
 
+import { getActiveStripeCredentials } from '@/lib/stripe-config'
+
 export const dynamic = 'force-dynamic'
 
 // IMPORTANT: Next.js App Router does not auto-parse body for this route.
@@ -18,13 +20,19 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Missing stripe-signature header' }, { status: 400 })
   }
 
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET
+  const { webhookSecret } = await getActiveStripeCredentials()
   if (!webhookSecret) {
-    console.error('STRIPE_WEBHOOK_SECRET not set')
+    console.error('Stripe webhook secret not configured (neither in DB nor in STRIPE_WEBHOOK_SECRET)')
     return NextResponse.json({ error: 'Webhook secret not configured' }, { status: 500 })
   }
 
-  const stripe = getStripe()
+  let stripe
+  try {
+    stripe = await getStripe()
+  } catch (err) {
+    console.error('Failed to initialize Stripe client in webhook:', err)
+    return NextResponse.json({ error: 'Stripe client initialization failed' }, { status: 500 })
+  }
 
   let event
   try {

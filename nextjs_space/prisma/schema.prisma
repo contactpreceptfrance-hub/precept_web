@@ -131,3 +131,13 @@ model RateLimitHit {
   @@index([bucket, ipHash, createdAt])
   @@index([createdAt])
 }
+
+/// Dynamic application configuration (e.g. Stripe settings).
+/// Secrets are encrypted at rest using AES-256-GCM.
+model AppSetting {
+  key       String   @id
+  value     String
+  isSecret  Boolean  @default(false)
+  updatedAt DateTime @updatedAt
+}
+
