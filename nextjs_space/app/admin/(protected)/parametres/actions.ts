@@ -6,7 +6,9 @@ import { requireAdmin } from '@/lib/admin-guard'
 import {
   STRIPE_SETTING_KEYS,
   StripeMode,
-  getActiveStripeCredentials,
+  StripeAdminSettings,
+  getStripeSecretKeyForMode,
+  getStripeSettingsForAdmin,
   updateStripeConfiguration,
   deleteAppSetting,
 } from '@/lib/stripe-config'
@@ -29,9 +31,9 @@ export async function testStripeConnectionAction(
   let keyToTest = candidateKey?.trim()
 
   if (!keyToTest) {
-    const creds = await getActiveStripeCredentials()
-    if (creds.mode === mode && creds.secretKey) {
-      keyToTest = creds.secretKey
+    const storedKey = await getStripeSecretKeyForMode(mode)
+    if (storedKey) {
+      keyToTest = storedKey
     } else {
       return {
         ok: false,
@@ -77,7 +79,7 @@ export async function testStripeConnectionAction(
  */
 export async function saveStripeSettingsAction(
   formData: FormData,
-): Promise<ActionResult> {
+): Promise<ActionResult<StripeAdminSettings>> {
   await requireAdmin()
 
   const mode = formData.get('mode') as StripeMode | null
@@ -143,9 +145,12 @@ export async function saveStripeSettingsAction(
     invalidateStripeCache()
     revalidatePath('/admin/parametres')
 
+    const updatedSettings = await getStripeSettingsForAdmin()
+
     return {
       ok: true,
       message: 'Paramètres Stripe enregistrés avec succès.',
+      data: updatedSettings,
     }
   } catch (error: unknown) {
     console.error('Erreur lors de la sauvegarde des paramètres Stripe:', error)
@@ -161,7 +166,7 @@ export async function saveStripeSettingsAction(
  */
 export async function clearStripeKeyAction(
   keyName: string,
-): Promise<ActionResult> {
+): Promise<ActionResult<StripeAdminSettings>> {
   await requireAdmin()
 
   const allowedKeys = Object.values(STRIPE_SETTING_KEYS)
@@ -174,9 +179,12 @@ export async function clearStripeKeyAction(
     invalidateStripeCache()
     revalidatePath('/admin/parametres')
 
+    const updatedSettings = await getStripeSettingsForAdmin()
+
     return {
       ok: true,
       message: 'Clé supprimée de la base de données (retour au fallback .env).',
+      data: updatedSettings,
     }
   } catch (error: unknown) {
     console.error('Erreur suppression clé:', error)

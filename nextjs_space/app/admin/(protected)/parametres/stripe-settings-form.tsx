@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useTransition } from 'react'
+import { useState, useEffect, useTransition } from 'react'
+import { useRouter } from 'next/navigation'
 import {
   KeyRound,
   ShieldCheck,
@@ -33,8 +34,15 @@ export function StripeSettingsForm({
   initialSettings: StripeAdminSettings
   webhookUrl: string
 }) {
+  const router = useRouter()
+  const [settings, setSettings] = useState<StripeAdminSettings>(initialSettings)
   const [selectedMode, setSelectedMode] = useState<StripeMode>(initialSettings.mode)
   const [copied, setCopied] = useState(false)
+
+  useEffect(() => {
+    setSettings(initialSettings)
+    setSelectedMode(initialSettings.mode)
+  }, [initialSettings])
 
   // Input states
   const [testSecretKey, setTestSecretKey] = useState('')
@@ -99,6 +107,10 @@ export function StripeSettingsForm({
     try {
       const res = await clearStripeKeyAction(settingKey)
       setSaveStatus(res)
+      if (res.ok && res.data) {
+        setSettings(res.data)
+        router.refresh()
+      }
     } catch {
       setSaveStatus({ ok: false, error: 'Impossible de supprimer la clé.' })
     } finally {
@@ -122,11 +134,16 @@ export function StripeSettingsForm({
         const res = await saveStripeSettingsAction(formData)
         setSaveStatus(res)
         if (res.ok) {
+          if (res.data) {
+            setSettings(res.data)
+            setSelectedMode(res.data.mode)
+          }
           // Reset inputs on success so placeholders take over
           setTestSecretKey('')
           setTestWebhookSecret('')
           setLiveSecretKey('')
           setLiveWebhookSecret('')
+          router.refresh()
         }
       } catch {
         setSaveStatus({ ok: false, error: 'Erreur lors de l’enregistrement.' })
@@ -353,7 +370,7 @@ export function StripeSettingsForm({
               <label htmlFor="testSecretKey" className={labelClass}>
                 Clé secrète de test
               </label>
-              {renderBadge(initialSettings.testSecretKey, 'stripe_test_secret_key')}
+              {renderBadge(settings.testSecretKey, 'stripe_test_secret_key')}
             </div>
             <input
               id="testSecretKey"
@@ -362,7 +379,7 @@ export function StripeSettingsForm({
               autoComplete="off"
               value={testSecretKey}
               onChange={(e) => setTestSecretKey(e.target.value)}
-              placeholder={initialSettings.testSecretKey.masked || 'sk_test_...'}
+              placeholder={settings.testSecretKey.masked || 'sk_test_...'}
               className={inputClass}
             />
             <p className={hintClass}>
@@ -375,7 +392,7 @@ export function StripeSettingsForm({
               <label htmlFor="testWebhookSecret" className={labelClass}>
                 Secret de signature Webhook test
               </label>
-              {renderBadge(initialSettings.testWebhookSecret, 'stripe_test_webhook_secret')}
+              {renderBadge(settings.testWebhookSecret, 'stripe_test_webhook_secret')}
             </div>
             <input
               id="testWebhookSecret"
@@ -384,7 +401,7 @@ export function StripeSettingsForm({
               autoComplete="off"
               value={testWebhookSecret}
               onChange={(e) => setTestWebhookSecret(e.target.value)}
-              placeholder={initialSettings.testWebhookSecret.masked || 'whsec_...'}
+              placeholder={settings.testWebhookSecret.masked || 'whsec_...'}
               className={inputClass}
             />
             <p className={hintClass}>
@@ -441,7 +458,7 @@ export function StripeSettingsForm({
               <label htmlFor="liveSecretKey" className={labelClass}>
                 Clé secrète de production
               </label>
-              {renderBadge(initialSettings.liveSecretKey, 'stripe_live_secret_key')}
+              {renderBadge(settings.liveSecretKey, 'stripe_live_secret_key')}
             </div>
             <input
               id="liveSecretKey"
@@ -450,7 +467,7 @@ export function StripeSettingsForm({
               autoComplete="off"
               value={liveSecretKey}
               onChange={(e) => setLiveSecretKey(e.target.value)}
-              placeholder={initialSettings.liveSecretKey.masked || 'sk_live_...'}
+              placeholder={settings.liveSecretKey.masked || 'sk_live_...'}
               className={inputClass}
             />
             <p className={hintClass}>
@@ -463,7 +480,7 @@ export function StripeSettingsForm({
               <label htmlFor="liveWebhookSecret" className={labelClass}>
                 Secret de signature Webhook production
               </label>
-              {renderBadge(initialSettings.liveWebhookSecret, 'stripe_live_webhook_secret')}
+              {renderBadge(settings.liveWebhookSecret, 'stripe_live_webhook_secret')}
             </div>
             <input
               id="liveWebhookSecret"
@@ -472,7 +489,7 @@ export function StripeSettingsForm({
               autoComplete="off"
               value={liveWebhookSecret}
               onChange={(e) => setLiveWebhookSecret(e.target.value)}
-              placeholder={initialSettings.liveWebhookSecret.masked || 'whsec_...'}
+              placeholder={settings.liveWebhookSecret.masked || 'whsec_...'}
               className={inputClass}
             />
             <p className={hintClass}>

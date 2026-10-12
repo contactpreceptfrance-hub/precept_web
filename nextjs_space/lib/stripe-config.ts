@@ -55,6 +55,37 @@ async function loadStripeSettingsMap(): Promise<Map<string, string>> {
 }
 
 /**
+ * Retrieves the secret key for a specific mode ('test' or 'live') from the database,
+ * falling back to the corresponding environment variable.
+ */
+export async function getStripeSecretKeyForMode(mode: StripeMode): Promise<string | null> {
+  const settings = await loadStripeSettingsMap()
+  const dbCipher = settings.get(
+    mode === 'test' ? STRIPE_SETTING_KEYS.TEST_SECRET_KEY : STRIPE_SETTING_KEYS.LIVE_SECRET_KEY,
+  )
+
+  if (dbCipher) {
+    try {
+      return decryptSecret(dbCipher)
+    } catch (e) {
+      console.error(`Failed to decrypt database Stripe ${mode} secret key:`, e)
+    }
+  }
+
+  const envKey = process.env.STRIPE_SECRET_KEY
+  if (envKey) {
+    if (mode === 'test' && (envKey.startsWith('sk_test_') || envKey.startsWith('rk_test_'))) {
+      return envKey
+    }
+    if (mode === 'live' && (envKey.startsWith('sk_live_') || envKey.startsWith('rk_live_'))) {
+      return envKey
+    }
+  }
+
+  return null
+}
+
+/**
  * Retrieves the currently active Stripe credentials based on active mode,
  * with automatic fallback to environment variables.
  */
