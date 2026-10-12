@@ -32,11 +32,11 @@ export const LEGAL = {
   },
 
   /** Président·e ou représentant·e légal·e — également directeur de la publication. */
-  representant: '', // À COMPLÉTER
+  representant: 'Ammiel KOUADIO',
 
   email: 'contact@preceptfrance.fr',
 
-  telephone: '', // À COMPLÉTER
+  telephone: '+33 7 64 62 71 13',
 
   /** Non assujettie à la TVA : mention obligatoire sur tout document commercial. */
   mentionTva: 'TVA non applicable, article 293 B du Code général des impôts',

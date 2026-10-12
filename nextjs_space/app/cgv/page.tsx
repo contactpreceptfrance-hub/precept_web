@@ -53,7 +53,7 @@ export default function CgvPage() {
           </li>
           <li>
             Téléphone&nbsp;:{' '}
-            <Champ valeur={LEGAL.telephone} label="numéro de téléphone" />
+            <a href={`tel:${LEGAL.telephone.replace(/\s+/g, '')}`}>{LEGAL.telephone}</a>
           </li>
         </ul>
       </Article>
