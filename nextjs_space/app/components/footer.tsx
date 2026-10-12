@@ -7,8 +7,8 @@ import { LEGAL } from '@/lib/legal'
 
 const socialLinks = [
   { name: 'YouTube', icon: Youtube, href: 'https://www.youtube.com/@preceptfrance', color: 'hover:text-red-600' },
-  { name: 'Facebook', icon: Facebook, href: 'https://www.facebook.com/PreceptMinistries', color: 'hover:text-blue-600' },
-  { name: 'Instagram', icon: Instagram, href: 'https://www.instagram.com/preceptministries/', color: 'hover:text-pink-600' },
+  { name: 'Facebook', icon: Facebook, href: 'https://www.facebook.com/profile.php?id=100064661389809', color: 'hover:text-blue-600' },
+  { name: 'Instagram', icon: Instagram, href: 'https://www.instagram.com/precept_france/', color: 'hover:text-pink-600' },
   { name: 'Email', icon: Mail, href: `mailto:${LEGAL.email}`, color: 'hover:text-teal' },
 ]
 
