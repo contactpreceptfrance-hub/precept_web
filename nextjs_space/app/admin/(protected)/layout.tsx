@@ -1,7 +1,6 @@
-import Link from 'next/link'
-import { ExternalLink, Globe, LogOut } from 'lucide-react'
 import { requireAdmin } from '@/lib/admin-guard'
-import { logout } from '@/app/admin/actions'
+import { getPrisma } from '@/lib/prisma'
+import { AdminSidebar } from './admin-sidebar'
 
 /**
  * Everything behind the password.
@@ -18,91 +17,33 @@ export default async function ProtectedAdminLayout({
 }) {
   await requireAdmin()
 
+  let pendingOrdersCount = 0
+  let unhandledMessagesCount = 0
+
+  try {
+    const prisma = getPrisma()
+    const [unhandled, pending] = await Promise.all([
+      prisma.contactSubmission.count({ where: { handledAt: null } }),
+      prisma.order.count({ where: { status: 'PAID' } }),
+    ])
+    unhandledMessagesCount = unhandled
+    pendingOrdersCount = pending
+  } catch (error) {
+    console.error('Failed to load admin sidebar counts:', error)
+  }
+
   return (
-    <>
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-6">
-            <Link href="/admin" className="font-playfair text-lg font-bold">
-              Precept France <span className="text-teal">— Administration</span>
-            </Link>
-            <nav className="hidden sm:flex items-center gap-4 text-sm font-semibold text-darkblue/60">
-              <Link href="/admin/livres" className="hover:text-darkblue transition-colors">
-                Livres
-              </Link>
-              <Link href="/admin/commandes" className="hover:text-darkblue transition-colors">
-                Commandes
-              </Link>
-              <Link href="/admin/messages" className="hover:text-darkblue transition-colors">
-                Messages
-              </Link>
-              <Link href="/admin/parametres" className="hover:text-darkblue transition-colors">
-                Paramètres
-              </Link>
-              {/* Migadu's hosted webmail for contact@preceptfrance.fr. A plain
-                  <a>: it leaves the site, so no Link prefetch or client routing. */}
-              <a
-                href="https://webmail.migadu.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 hover:text-darkblue transition-colors"
-              >
-                Webmail
-                <ExternalLink size={13} />
-              </a>
-            </nav>
-          </div>
+    <div className="min-h-screen flex flex-col lg:flex-row bg-gray-50/70 text-darkblue">
+      <AdminSidebar
+        pendingOrdersCount={pendingOrdersCount}
+        unhandledMessagesCount={unhandledMessagesCount}
+      />
 
-          <div className="flex items-center gap-3">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-darkblue/60 hover:text-darkblue transition-colors"
-            >
-              <Globe size={15} />
-              <span className="hidden sm:inline">Retour au site</span>
-            </Link>
-
-            {/* A form, not a link: a prefetch on a <Link> would log the team out
-                just by hovering the button. */}
-            <form action={logout}>
-              <button
-                type="submit"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 text-sm font-semibold hover:border-gray-300 transition-colors"
-              >
-                <LogOut size={15} />
-                Se déconnecter
-              </button>
-            </form>
-          </div>
-        </div>
-
-        {/* Mobile navigation bar */}
-        <div className="sm:hidden border-t border-gray-100 px-6 py-2.5 flex items-center gap-4 overflow-x-auto text-xs font-semibold text-darkblue/70 bg-gray-50/50">
-          <Link href="/admin/livres" className="hover:text-darkblue transition-colors shrink-0">
-            Livres
-          </Link>
-          <Link href="/admin/commandes" className="hover:text-darkblue transition-colors shrink-0">
-            Commandes
-          </Link>
-          <Link href="/admin/messages" className="hover:text-darkblue transition-colors shrink-0">
-            Messages
-          </Link>
-          <Link href="/admin/parametres" className="hover:text-darkblue transition-colors shrink-0">
-            Paramètres
-          </Link>
-          <a
-            href="https://webmail.migadu.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 hover:text-darkblue transition-colors shrink-0"
-          >
-            Webmail
-            <ExternalLink size={11} />
-          </a>
-        </div>
-      </header>
-
-      <main className="max-w-6xl mx-auto px-6 py-10">{children}</main>
-    </>
+      <div className="flex-1 flex flex-col min-w-0">
+        <main className="flex-1 p-6 sm:p-8 lg:p-10 max-w-7xl w-full mx-auto">
+          {children}
+        </main>
+      </div>
+    </div>
   )
 }
