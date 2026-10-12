@@ -18,16 +18,16 @@ export const LEGAL = {
   formeJuridique: 'Association déclarée régie par la loi du 1er juillet 1901',
 
   /** Numéro RNA (format W suivi de 9 chiffres), figurant sur le récépissé de déclaration. */
-  rna: '', // À COMPLÉTER
+  rna: 'W943 008 438',
 
   /** SIRET, si l'association en possède un (obligatoire dès lors qu'elle vend). */
-  siret: '', // À COMPLÉTER
+  siret: '897 594 990 00011',
 
   /** Siège social. */
   adresse: {
-    rue: '',        // À COMPLÉTER
-    codePostal: '', // À COMPLÉTER
-    ville: '',      // À COMPLÉTER
+    rue: '13 rue Adèle',
+    codePostal: '92220',
+    ville: 'Bagneux',
     pays: 'France',
   },
 
@@ -64,7 +64,7 @@ export const LEGAL = {
   },
 
   /** Date de dernière révision affichée en bas des trois pages. */
-  derniereMiseAJour: '21 septembre 2026',
+  derniereMiseAJour: '12 octobre 2026',
 } as const
 
 export const ADRESSE_COMPLETE = [

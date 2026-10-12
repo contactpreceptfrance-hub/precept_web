@@ -46,6 +46,9 @@ export default function CgvPage() {
             SIRET&nbsp;: <Champ valeur={LEGAL.siret} label="numéro SIRET" />
           </li>
           <li>
+            RNA&nbsp;: <Champ valeur={LEGAL.rna} label="numéro RNA" />
+          </li>
+          <li>
             Courriel&nbsp;: <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a>
           </li>
           <li>
@@ -147,7 +150,8 @@ export default function CgvPage() {
           d&apos;utiliser le formulaire type reproduit en annexe.
         </p>
         <p>
-          Les ouvrages doivent être renvoyés au plus tard quatorze jours après
+          Les ouvrages doivent être renvoyés à l&apos;adresse suivante&nbsp;:{' '}
+          <strong>{ADRESSE_COMPLETE}</strong>, au plus tard quatorze jours après
           communication de la décision, dans un état permettant leur remise en vente.{' '}
           <strong>Les frais de retour restent à la charge du client.</strong> La
           responsabilité du client peut être engagée en cas de dépréciation résultant de
