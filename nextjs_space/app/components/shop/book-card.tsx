@@ -16,13 +16,23 @@ type BookCardProps = {
   imageUrl: string
   type: 'LIVRE' | 'FORMATION'
   soldOut?: boolean
+  samplePdfUrl?: string | null
 }
 
-export function BookCard({ id, name, description, price, imageUrl, type, soldOut = false }: BookCardProps) {
+export function BookCard({
+  id,
+  name,
+  description,
+  price,
+  imageUrl,
+  type,
+  soldOut = false,
+  samplePdfUrl,
+}: BookCardProps) {
   const { addItem, openCart } = useCart()
   const [showShare, setShowShare] = useState(false)
   const [addedFeedback, setAddedFeedback] = useState(false)
-  const hasSample = Boolean(getSamplePdfUrl(name))
+  const hasSample = Boolean(samplePdfUrl || getSamplePdfUrl(name))
 
   function handleAddToCart() {
     addItem({ productId: id, name, price, imageUrl, quantity: 1 })

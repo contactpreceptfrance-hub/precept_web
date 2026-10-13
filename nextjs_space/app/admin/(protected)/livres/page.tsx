@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowDown, ArrowUp, Plus } from 'lucide-react'
+import { ArrowDown, ArrowUp, FileText, Plus } from 'lucide-react'
 import { getPrisma } from '@/lib/prisma'
 import { requireAdmin } from '@/lib/admin-guard'
 import { SERIES_CONFIG } from '@/lib/types'
@@ -38,6 +38,7 @@ function BookRow({
     name: string
     price: number
     imageUrl: string
+    samplePdfUrl: string | null
     type: string
     published: boolean
     soldOut: boolean
@@ -66,6 +67,14 @@ function BookRow({
       </div>
 
       <div className="flex items-center gap-2">
+        {book.samplePdfUrl && (
+          <span
+            title="Extrait PDF associé"
+            className="text-xs font-semibold px-2 py-0.5 rounded-md bg-teal/10 text-teal flex items-center gap-1"
+          >
+            <FileText size={12} /> PDF
+          </span>
+        )}
         {!book.published && (
           <span className="text-xs font-bold px-2.5 py-1 rounded-md uppercase tracking-wide bg-gray-100 text-gray-600">
             Masqué
@@ -145,6 +154,7 @@ export default async function BooksPage({
       name: true,
       price: true,
       imageUrl: true,
+      samplePdfUrl: true,
       type: true,
       series: true,
       published: true,

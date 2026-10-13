@@ -70,6 +70,7 @@ export function SeriesRows({ groups }: SeriesRowsProps) {
                 imageUrl={product.imageUrl}
                 type={product.type}
                 soldOut={product.soldOut}
+                samplePdfUrl={product.samplePdfUrl}
               />
             ))}
           </div>

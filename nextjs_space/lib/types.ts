@@ -16,6 +16,7 @@ export type SeriesGroup = {
     price: number
     imageUrl: string
     backImageUrl: string | null
+    samplePdfUrl: string | null
     type: 'LIVRE' | 'FORMATION'
     series: string | null
     soldOut: boolean

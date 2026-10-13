@@ -39,6 +39,18 @@ export function ActionNote({ note }: { note?: string }) {
       text: 'Ce livre figure dans des commandes : il ne peut pas être supprimé. Masquez-le à la place.',
       tone: 'warn',
     },
+    'pdf-type': {
+      text: 'Document refusé : le fichier téléversé doit être un PDF valide.',
+      tone: 'warn',
+    },
+    'pdf-taille': {
+      text: 'Document trop lourd : 8 Mo maximum pour un fichier PDF.',
+      tone: 'warn',
+    },
+    'pdf-stockage': {
+      text: 'Le document PDF n’a pas pu être enregistré.',
+      tone: 'warn',
+    },
   }
 
   const entry = messages[note]

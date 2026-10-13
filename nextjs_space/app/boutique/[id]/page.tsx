@@ -60,7 +60,7 @@ export default async function BookDetailPage({ params }: Props) {
   if (!product) notFound()
 
   const { prev, next } = await getAdjacentProducts(product.id)
-  const samplePdf = getSamplePdfUrl(product.name)
+  const samplePdf = product.samplePdfUrl || getSamplePdfUrl(product.name)
 
   return (
     <main className="min-h-screen bg-white">
@@ -100,10 +100,10 @@ export default async function BookDetailPage({ params }: Props) {
                   href={samplePdf}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full py-3 px-5 rounded-2xl border-2 border-teal/30 hover:border-teal bg-teal/5 hover:bg-teal/10 text-darkblue font-semibold text-sm transition-all"
+                  className="flex items-center justify-center gap-2 w-full py-3 px-5 rounded-2xl border-2 border-teal/30 hover:border-teal bg-teal/5 hover:bg-teal/10 text-darkblue font-semibold text-sm transition-all shadow-sm"
                 >
                   <FileText size={18} className="text-teal shrink-0" />
-                  <span>Feuilleter un extrait gratuit (Semaine 1)</span>
+                  <span>Feuilleter l’extrait gratuit (PDF)</span>
                 </a>
               </div>
             )}

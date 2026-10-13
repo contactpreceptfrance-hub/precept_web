@@ -1,6 +1,8 @@
 import Image from 'next/image'
+import { ExternalLink, FileText } from 'lucide-react'
 import type { Product } from '@prisma/client'
 import { SERIES_CONFIG } from '@/lib/types'
+import { AVAILABLE_PDF_GROUPS, getPdfDisplayName } from '@/lib/book-pdfs'
 
 const input =
   'w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm focus:border-teal focus:outline-none focus:ring-2 focus:ring-teal/20'
@@ -134,10 +136,124 @@ export function BookForm({
         </div>
       </div>
 
-      <p className={`${hint} -mt-3`}>
-        Stock : nombre d’exemplaires disponibles. Il baisse automatiquement à chaque commande
-        payée, et le livre passe en « Épuisé » à 0. Laissez vide pour ne pas suivre le stock.
-      </p>
+      {/* Extrait PDF / Document d'accompagnement */}
+      <div className="rounded-2xl border border-gray-200 bg-gray-50/60 p-5 space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h3 className="font-semibold text-darkblue text-base flex items-center gap-2">
+              <FileText size={18} className="text-teal" />
+              Extrait PDF / Document d’accompagnement
+            </h3>
+            <p className={hint}>
+              Permet aux visiteurs de feuilleter gratuitement un extrait (Semaine 1, leçon exemple) sur la page du livre.
+            </p>
+          </div>
+          {book?.samplePdfUrl && (
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-teal/10 text-teal">
+              ✓ PDF associé
+            </span>
+          )}
+        </div>
+
+        {book?.samplePdfUrl ? (
+          <div className="bg-white rounded-xl border border-teal/20 p-4 space-y-3">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="min-w-0 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-teal/10 flex items-center justify-center shrink-0">
+                  <FileText size={20} className="text-teal" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-darkblue truncate">
+                    {getPdfDisplayName(book.samplePdfUrl)}
+                  </p>
+                  <p className="text-xs text-darkblue/50 truncate font-mono">
+                    {book.samplePdfUrl}
+                  </p>
+                </div>
+              </div>
+              <a
+                href={book.samplePdfUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg border border-teal/30 bg-teal/5 text-xs font-semibold text-teal hover:bg-teal/10 transition-colors"
+              >
+                <ExternalLink size={14} /> Voir le PDF
+              </a>
+            </div>
+
+            <div className="pt-2 border-t border-gray-100">
+              <label className="flex items-center gap-2 text-sm text-red-600 font-medium cursor-pointer">
+                <input type="checkbox" name="removeSamplePdf" className="rounded text-red-600 focus:ring-red-500" />
+                <span>Supprimer / Retirer ce document PDF de ce livre</span>
+              </label>
+            </div>
+          </div>
+        ) : (
+          <div className="bg-white/80 rounded-xl border border-gray-200 p-3.5 text-xs text-darkblue/60">
+            Aucun document PDF n’est actuellement associé à ce livre. Vous pouvez en sélectionner un ci-dessous ou en téléverser un nouveau.
+          </div>
+        )}
+
+        <div className="grid sm:grid-cols-2 gap-4 pt-1">
+          <div>
+            <label htmlFor="existingPdf" className={label}>
+              {book?.samplePdfUrl ? 'Remplacer par un PDF du catalogue :' : 'Choisir parmi les 45 PDF existants :'}
+            </label>
+            <select
+              id="existingPdf"
+              name="existingPdf"
+              defaultValue=""
+              className={input}
+            >
+              <option value="">-- Ne pas changer / Conserver l’état actuel --</option>
+              {book?.samplePdfUrl && (
+                <option value="__NONE__">-- Aucun document PDF (dissocier) --</option>
+              )}
+              {AVAILABLE_PDF_GROUPS.map((group) => (
+                <optgroup key={group.category} label={group.label}>
+                  {group.files.map((file) => (
+                    <option key={file.url} value={file.url}>
+                      {file.title}
+                    </option>
+                  ))}
+                </optgroup>
+              ))}
+            </select>
+            <p className={hint}>
+              Sélectionnez un extrait ou guide déjà hébergé dans le projet.
+            </p>
+          </div>
+
+          <div>
+            <label htmlFor="samplePdfFile" className={label}>
+              {book?.samplePdfUrl ? 'Ou téléverser un nouveau PDF :' : 'Ou téléverser un fichier PDF :'}
+            </label>
+            <input
+              id="samplePdfFile"
+              type="file"
+              name="samplePdfFile"
+              accept="application/pdf,.pdf"
+              className="block w-full text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-gray-100 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-darkblue hover:file:bg-gray-200"
+            />
+            <p className={hint}>
+              Format PDF, 8 Mo maximum. Remplace le document s’il est fourni.
+            </p>
+          </div>
+        </div>
+
+        <div className="pt-1">
+          <label htmlFor="customPdfUrl" className="block text-xs font-semibold text-darkblue/70 mb-1">
+            Ou indiquer une URL directe / externe (facultatif) :
+          </label>
+          <input
+            id="customPdfUrl"
+            type="url"
+            name="customPdfUrl"
+            placeholder="https://..."
+            className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-xs focus:border-teal focus:outline-none focus:ring-2 focus:ring-teal/20"
+          />
+        </div>
+      </div>
 
       <fieldset className="space-y-3 pt-2">
         <legend className={label}>Visibilité</legend>

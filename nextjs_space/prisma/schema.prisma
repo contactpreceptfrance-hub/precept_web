@@ -20,6 +20,8 @@ model Product {
   // Précepte and Saisir et Agir titles this is a generic series back shared
   // across all of them rather than artwork specific to the title.
   backImageUrl String?
+  // Sample lesson or companion PDF (e.g. /pdfs/... or Vercel Blob URL).
+  samplePdfUrl String?
   type         ProductType
   series       String? // "40min" | "seigneur" | "etudes" | "saisir" | "pup" | "enfants"
   // Hidden from the shop, sitemap and checkout when false. Used instead of

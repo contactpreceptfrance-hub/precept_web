@@ -88,6 +88,14 @@ export const bookSchema = z.object({
     .trim()
     .refine((value) => value === '' || SERIES_CONFIG.some((s) => s.key === value))
     .transform((value) => (value === '' ? null : value)),
+  // Sample lesson or companion PDF (optional).
+  samplePdfUrl: z
+    .string()
+    .trim()
+    .max(500)
+    .optional()
+    .nullable()
+    .transform((value) => (value ? value : null)),
 })
 
 export type BookInput = z.infer<typeof bookSchema>

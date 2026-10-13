@@ -70,6 +70,7 @@ export default async function HomeShopPreview() {
                 imageUrl={product.imageUrl}
                 type={product.type}
                 soldOut={product.soldOut}
+                samplePdfUrl={product.samplePdfUrl}
               />
             </div>
           ))}

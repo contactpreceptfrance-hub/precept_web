@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guide d'Utilisation — Precept France (Administration)</title>
+  <style>
+    :root {
+      --darkblue: #0f172a;
+      --teal: #0d9488;
+      --teal-light: #f0fdfa;
+      --gray-bg: #f8fafc;
+      --border: #e2e8f0;
+      --text: #334155;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--gray-bg);
+      margin: 0;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 48px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--border);
+    }
+    .header {
+      border-bottom: 2px solid var(--teal);
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    h1 {
+      font-size: 28px;
+      color: var(--darkblue);
+      margin: 0 0 8px 0;
+    }
+    .subtitle {
+      color: var(--teal);
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0;
+    }
+    h2 {
+      font-size: 20px;
+      color: var(--darkblue);
+      margin-top: 36px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    h3 {
+      font-size: 16px;
+      color: var(--darkblue);
+      margin-top: 20px;
+    }
+    p, li {
+      font-size: 15px;
+      color: var(--text);
+    }
+    ul, ol {
+      padding-left: 24px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .box {
+      background: var(--teal-light);
+      border-left: 4px solid var(--teal);
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    .box-title {
+      font-weight: bold;
+      color: var(--teal);
+      margin-bottom: 6px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    th {
+      background: #f1f5f9;
+      color: var(--darkblue);
+      font-weight: 600;
+    }
+    tr:nth-child(even) {
+      background: #f8fafc;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .badge-test {
+      background: #fef3c7;
+      color: #b45309;
+    }
+    .badge-live {
+      background: #d1fae5;
+      color: #065f46;
+    }
+    .link-btn {
+      display: inline-block;
+      background: var(--teal);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+    .link-btn:hover {
+      background: #0f766e;
+    }
+    .faq-item {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .faq-q {
+      font-weight: bold;
+      color: var(--darkblue);
+      margin-bottom: 6px;
+    }
+    @media print {
+      body {
+        padding: 0;
+        background: white;
+      }
+      .container {
+        box-shadow: none;
+        border: none;
+        padding: 0;
+      }
+      .no-print {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1>📖 Guide d'Utilisation — Precept France</h1>
+        <p class="subtitle">Espace Administration pour l'équipe (Simple & Pratique)</p>
+      </div>
+      <button class="no-print" onclick="window.print()" style="cursor:pointer; background:#f1f5f9; border:1px solid #cbd5e1; padding:8px 14px; border-radius:8px; font-weight:bold; color:#334155;">
+        🖨️ Imprimer / Enregistrer en PDF
+      </button>
+    </div>
+
+    <div class="box">
+      <div class="box-title">Lien d'accès à l'espace d'administration</div>
+      Pour vous connecter, rendez-vous sur : <strong><a href="https://www.preceptfrance.fr/admin" target="_blank" style="color:var(--teal);">https://www.preceptfrance.fr/admin</a></strong><br>
+      Entrez votre mot de passe administrateur pour accéder à l'interface.
+    </div>
+
+    <h2>1. Le menu de navigation (Barre de gauche)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Onglet</th>
+          <th>À quoi ça sert ?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>📊 <strong>Tableau de bord</strong></td>
+          <td>Vue d'ensemble : ventes totales, commandes en attente, messages reçus.</td>
+        </tr>
+        <tr>
+          <td>📦 <strong>Commandes</strong></td>
+          <td>Toutes les commandes passées par les clients avec adresses de livraison.</td>
+        </tr>
+        <tr>
+          <td>📚 <strong>Livres & Catalogue</strong></td>
+          <td>Gérer vos 42 livres : modifier un prix, marquer un livre comme épuisé.</td>
+        </tr>
+        <tr>
+          <td>💬 <strong>Messages</strong></td>
+          <td>Messages et demandes reçus via le formulaire de contact du site.</td>
+        </tr>
+        <tr>
+          <td>⚙️ <strong>Paramètres</strong></td>
+          <td>Activer les paiements en mode Test ou en mode Réel (Production).</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>2. Comment traiter une commande reçue ?</h2>
+    <ol>
+      <li>Dès qu'un client paye sur le site, sa commande apparaît dans <strong>Commandes</strong> (<code>/admin/commandes</code>).</li>
+      <li>Le client reçoit automatiquement un email de confirmation, et l'équipe reçoit une alerte par email.</li>
+      <li>Cliquez sur la commande pour voir :
+        <ul>
+          <li>Le <strong>nom</strong> et l'<strong>email</strong> du client</li>
+          <li>L'<strong>adresse de livraison complète</strong></li>
+          <li>La liste des <strong>livres commandés</strong> et quantités</li>
+        </ul>
+      </li>
+      <li>Préparez le colis depuis le local (<em>13 Rue Adèle, 92220 Bagneux</em>) et déposez-le au transporteur (La Poste Colissimo, etc.).</li>
+    </ol>
+
+    <h2>3. Comment modifier le prix ou le stock d'un livre ?</h2>
+    <ol>
+      <li>Allez dans <strong>Livres</strong> (<code>/admin/livres</code>).</li>
+      <li>Cliquez sur le livre souhaité.</li>
+      <li><strong>Pour changer le prix :</strong> tapez le nouveau montant dans la case <em>Prix (€)</em> (ex. <code>11.99</code>).</li>
+      <li><strong>Si le livre est en rupture de stock :</strong> cochez simplement la case <em>« Épuisé (Sold out) »</em>. Sur le site, le bouton passera en « Épuisé » pour empêcher les commandes. Décochez dès que vous recevez du stock.</li>
+      <li>Cliquez sur <strong>Enregistrer</strong>. La mise à jour est immédiate sur le site !</li>
+    </ol>
+
+    <h2>4. Les extraits gratuits (Semaine 1)</h2>
+    <p>Sur chaque fiche livre de la boutique, un bouton <strong>« Feuilleter un extrait gratuit (Semaine 1) »</strong> permet aux visiteurs de lire les premières leçons en PDF avant d'acheter. Tout est automatique.</p>
+
+    <h2>5. Gérer les paiements Stripe</h2>
+    <p>Dans <strong>Paramètres</strong> (<code>/admin/parametres</code>), vous pouvez basculer l'état de la boutique :</p>
+    <ul>
+      <li><span class="badge badge-test">🟡 Mode Test</span> : Idéal pour tester sans argent réel avec la carte fictive <code>4242 4242 4242 4242</code>.</li>
+      <li><span class="badge badge-live">🟢 Mode Production</span> : Le mode officiel pour recevoir les vrais paiements des clients sur le compte bancaire de l'association.</li>
+    </ul>
+
+    <h2>6. Les ressources gratuites du site</h2>
+    <p>Le site propose désormais une page dédiée : <strong><a href="https://www.preceptfrance.fr/ressources" target="_blank" style="color:var(--teal);">https://www.preceptfrance.fr/ressources</a></strong></p>
+    <ul>
+      <li><strong>7 études complètes gratuites</strong> (Psaume 19, Psaume 23, Jean 1, Hébreux 10, Philippiens 4...).</li>
+      <li><strong>Les outils et signets</strong> : la brochure officielle de la méthode inductive, le signet de symboles et mots-clés, le marque-page O-I-A.</li>
+      <li>N'hésitez pas à partager ce lien lors de conférences, cultes ou ateliers pour équiper les participants !</li>
+    </ul>
+
+    <h2>7. Questions fréquentes (FAQ)</h2>
+    <div class="faq-item">
+      <div class="faq-q">❓ Un client n'a pas reçu son email de confirmation ?</div>
+      <div>Vérifiez dans <em>Commandes</em> que le statut est bien « Payée ». Demandez-lui de regarder ses Spams. Si besoin, renvoyez-lui un email manuel avec le récapitulatif affiché dans votre panneau admin.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">❓ Où répondre aux personnes souhaitant rejoindre un groupe d'étude ?</div>
+      <div>Allez dans <em>Messages</em> (<code>/admin/messages</code>). Vous pouvez copier l'email du contact ou lui répondre directement depuis votre messagerie <code>contact@preceptfrance.fr</code>.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">❓ Les coordonnées légales de l'association :</div>
+      <div>RNA : <strong>W943 008 438</strong> | SIRET : <strong>89759499000011</strong> | Tél : <strong>+33 7 64 62 71 13</strong> | Président : <strong>Ammiel KOUADIO</strong> | Adresse : <strong>13 Rue Adèle, 92220 Bagneux</strong>.</div>
+    </div>
+
+  </div>
+
+</body>
+</html>

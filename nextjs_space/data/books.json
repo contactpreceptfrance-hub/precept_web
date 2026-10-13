@@ -6,7 +6,8 @@
     "imageUrl": "/images/books/batir-un-mariage-qui-fructifie-vraiment.webp",
     "backImageUrl": "/images/books/batir-un-mariage-qui-fructifie-vraiment-verso.webp",
     "type": "LIVRE",
-    "series": "40min"
+    "series": "40min",
+    "samplePdfUrl": "/pdfs/40_minutes/Mariage-Semaine-1.pdf"
   },
   {
     "name": "Comment faire des choix que vous ne regretterez pas",
@@ -15,7 +16,8 @@
     "imageUrl": "/images/books/comment-faire-des-choix-que-vous-ne-regretterez-pas.webp",
     "backImageUrl": "/images/books/comment-faire-des-choix-que-vous-ne-regretterez-pas-verso.webp",
     "type": "LIVRE",
-    "series": "40min"
+    "series": "40min",
+    "samplePdfUrl": "/pdfs/40_minutes/Choix-Semaine-1.pdf"
   },
   {
     "name": "Comment savoir que Dieu est votre Père ?",
@@ -24,7 +26,8 @@
     "imageUrl": "/images/books/comment-savoir-que-dieu-est-votre-pere.webp",
     "backImageUrl": "/images/books/comment-savoir-que-dieu-est-votre-pere-verso.webp",
     "type": "LIVRE",
-    "series": "40min"
+    "series": "40min",
+    "samplePdfUrl": "/pdfs/40_minutes/Pere-Semaine-1.pdf"
   },
   {
     "name": "Enflammez votre passion pour Dieu",
@@ -33,7 +36,8 @@
     "imageUrl": "/images/books/enflammez-votre-passion-pour-dieu.webp",
     "backImageUrl": "/images/books/enflammez-votre-passion-pour-dieu-verso.webp",
     "type": "LIVRE",
-    "series": "40min"
+    "series": "40min",
+    "samplePdfUrl": "/pdfs/40_minutes/Enflammez-Semaine-1.pdf"
   },
   {
     "name": "Entretenir une relation réelle avec Dieu",
@@ -42,7 +46,8 @@
     "imageUrl": "/images/books/entretenir-une-relation-reelle-avec-dieu.webp",
     "backImageUrl": "/images/books/entretenir-une-relation-reelle-avec-dieu-verso.webp",
     "type": "LIVRE",
-    "series": "40min"
+    "series": "40min",
+    "samplePdfUrl": null
   },
   {
     "name": "Jésus : comprendre sa mort et sa résurrection",
@@ -51,7 +56,8 @@
     "imageUrl": "/images/books/jesus-comprendre-sa-mort-et-sa-resurrection.webp",
     "backImageUrl": "/images/books/jesus-comprendre-sa-mort-et-sa-resurrection-verso.webp",
     "type": "LIVRE",
-    "series": "40min"
+    "series": "40min",
+    "samplePdfUrl": "/pdfs/40_minutes/Resurrection-Semaine-1.pdf"
   },
   {
     "name": "Jésus : faire l'expérience de son toucher",
@@ -60,7 +66,8 @@
     "imageUrl": "/images/books/jesus-faire-l-experience-de-son-toucher.webp",
     "backImageUrl": "/images/books/jesus-faire-l-experience-de-son-toucher-verso.webp",
     "type": "LIVRE",
-    "series": "40min"
+    "series": "40min",
+    "samplePdfUrl": "/pdfs/40_minutes/Toucher-Semaine-1.pdf"
   },
   {
     "name": "Jésus : à l'écoute de sa voix",
@@ -69,7 +76,8 @@
     "imageUrl": "/images/books/jesus-a-l-ecoute-de-sa-voix.webp",
     "backImageUrl": "/images/books/jesus-a-l-ecoute-de-sa-voix-verso.webp",
     "type": "LIVRE",
-    "series": "40min"
+    "series": "40min",
+    "samplePdfUrl": "/pdfs/40_minutes/Voix-Semaine-1.pdf"
   },
   {
     "name": "Le ciel, l'enfer et la vie après la mort",
@@ -78,7 +86,8 @@
     "imageUrl": "/images/books/le-ciel-l-enfer-et-la-vie-apres-la-mort.webp",
     "backImageUrl": "/images/books/le-ciel-l-enfer-et-la-vie-apres-la-mort-verso.webp",
     "type": "LIVRE",
-    "series": "40min"
+    "series": "40min",
+    "samplePdfUrl": "/pdfs/40_minutes/Ciel-Semaine-1.pdf"
   },
   {
     "name": "Libéré de l'emprise de la peur",
@@ -87,7 +96,8 @@
     "imageUrl": "/images/books/libere-de-l-emprise-de-la-peur.webp",
     "backImageUrl": "/images/books/libere-de-l-emprise-de-la-peur-verso.webp",
     "type": "LIVRE",
-    "series": "40min"
+    "series": "40min",
+    "samplePdfUrl": null
   },
   {
     "name": "Mener une vie d'adoration authentique",
@@ -96,7 +106,8 @@
     "imageUrl": "/images/books/mener-une-vie-d-adoration-authentique.webp",
     "backImageUrl": "/images/books/mener-une-vie-d-adoration-authentique-verso.webp",
     "type": "LIVRE",
-    "series": "40min"
+    "series": "40min",
+    "samplePdfUrl": null
   },
   {
     "name": "Pardonner : briser l'emprise du passé",
@@ -105,7 +116,8 @@
     "imageUrl": "/images/books/pardonner-briser-l-emprise-du-passe.webp",
     "backImageUrl": "/images/books/pardonner-briser-l-emprise-du-passe-verso.webp",
     "type": "LIVRE",
-    "series": "40min"
+    "series": "40min",
+    "samplePdfUrl": "/pdfs/40_minutes/Pardonner-Semaine-1.pdf"
   },
   {
     "name": "Être un disciple : ce qu'il en coûte vraiment",
@@ -114,7 +126,8 @@
     "imageUrl": "/images/books/etre-un-disciple-ce-qu-il-en-coute-vraiment.webp",
     "backImageUrl": "/images/books/etre-un-disciple-ce-qu-il-en-coute-vraiment-verso.webp",
     "type": "LIVRE",
-    "series": "40min"
+    "series": "40min",
+    "samplePdfUrl": null
   },
   {
     "name": "Dieu, es-tu là ?",
@@ -123,7 +136,8 @@
     "imageUrl": "/images/books/dieu-es-tu-la.webp",
     "backImageUrl": "/images/books/dieu-es-tu-la-verso.webp",
     "type": "LIVRE",
-    "series": "seigneur"
+    "series": "seigneur",
+    "samplePdfUrl": "/pdfs/seigneur/Dieu-Es-tu-la-Semaine-1.pdf"
   },
   {
     "name": "Seigneur, enseigne-moi à prier",
@@ -132,7 +146,8 @@
     "imageUrl": "/images/books/seigneur-enseigne-moi-a-prier.webp",
     "backImageUrl": "/images/books/seigneur-enseigne-moi-a-prier-verso.webp",
     "type": "LIVRE",
-    "series": "seigneur"
+    "series": "seigneur",
+    "samplePdfUrl": "/pdfs/seigneur/Seigneur-enseigne-moi-prier-jour-1-et-2.pdf"
   },
   {
     "name": "Seigneur, enseigne-moi à étudier la Bible",
@@ -141,7 +156,8 @@
     "imageUrl": "/images/books/seigneur-enseigne-moi-a-etudier-la-bible.webp",
     "backImageUrl": "/images/books/seigneur-enseigne-moi-a-etudier-la-bible-verso.webp",
     "type": "LIVRE",
-    "series": "seigneur"
+    "series": "seigneur",
+    "samplePdfUrl": "/pdfs/seigneur/Seigneur-Enseigne-Jour-1-4.pdf"
   },
   {
     "name": "Seigneur, j'ai besoin de réponses",
@@ -150,7 +166,8 @@
     "imageUrl": "/images/books/seigneur-j-ai-besoin-de-reponses.webp",
     "backImageUrl": "/images/books/seigneur-j-ai-besoin-de-reponses-verso.webp",
     "type": "LIVRE",
-    "series": "seigneur"
+    "series": "seigneur",
+    "samplePdfUrl": "/pdfs/seigneur/Reponses-Jour-1-4.pdf"
   },
   {
     "name": "Seigneur, je veux te connaître",
@@ -159,7 +176,8 @@
     "imageUrl": "/images/books/seigneur-je-veux-te-connaitre.webp",
     "backImageUrl": "/images/books/seigneur-je-veux-te-connaitre-verso.webp",
     "type": "LIVRE",
-    "series": "seigneur"
+    "series": "seigneur",
+    "samplePdfUrl": "/pdfs/seigneur/Seigneur-je-veux-te-connaiitre-chapitre-1.pdf"
   },
   {
     "name": "Choisir la Victoire",
@@ -168,7 +186,8 @@
     "imageUrl": "/images/books/choisir-la-victoire.webp",
     "backImageUrl": "/images/books/choisir-la-victoire-verso.webp",
     "type": "LIVRE",
-    "series": "etudes"
+    "series": "etudes",
+    "samplePdfUrl": "/pdfs/etudes_inductives_pup/Josue-Semaine-1.pdf"
   },
   {
     "name": "Enfin Libéré",
@@ -177,7 +196,8 @@
     "imageUrl": "/images/books/enfin-libere.webp",
     "backImageUrl": "/images/books/enfin-libere-verso.webp",
     "type": "LIVRE",
-    "series": "etudes"
+    "series": "etudes",
+    "samplePdfUrl": "/pdfs/etudes_inductives_pup/Enfin-libere-Gal-Semaine-1.pdf"
   },
   {
     "name": "Enseigne-moi tes voies",
@@ -186,7 +206,8 @@
     "imageUrl": "/images/books/enseigne-moi-tes-voies.webp",
     "backImageUrl": "/images/books/enseigne-moi-tes-voies-verso.webp",
     "type": "LIVRE",
-    "series": "etudes"
+    "series": "etudes",
+    "samplePdfUrl": null
   },
   {
     "name": "L'appel à suivre Jésus",
@@ -195,7 +216,8 @@
     "imageUrl": "/images/books/l-appel-a-suivre-jesus.webp",
     "backImageUrl": "/images/books/l-appel-a-suivre-jesus-verso.webp",
     "type": "LIVRE",
-    "series": "etudes"
+    "series": "etudes",
+    "samplePdfUrl": "/pdfs/etudes_inductives_pup/Lappel-a-suivre-Jesus-Luc-semaine-1.pdf"
   },
   {
     "name": "La clé pour vivre par la Foi",
@@ -204,7 +226,8 @@
     "imageUrl": "/images/books/la-cle-pour-vivre-par-la-foi.webp",
     "backImageUrl": "/images/books/la-cle-pour-vivre-par-la-foi-verso.webp",
     "type": "LIVRE",
-    "series": "etudes"
+    "series": "etudes",
+    "samplePdfUrl": "/pdfs/etudes_inductives_pup/Semaine-1-Hebreux.pdf"
   },
   {
     "name": "Philippiens",
@@ -213,7 +236,8 @@
     "imageUrl": "/images/books/philippiens.webp",
     "backImageUrl": "/images/books/philippiens-verso.webp",
     "type": "LIVRE",
-    "series": "saisir"
+    "series": "saisir",
+    "samplePdfUrl": null
   },
   {
     "name": "1 Thessaloniciens",
@@ -222,7 +246,8 @@
     "imageUrl": "/images/books/1-thessaloniciens.webp",
     "backImageUrl": "/images/books/1-thessaloniciens-verso.webp",
     "type": "LIVRE",
-    "series": "pup"
+    "series": "pup",
+    "samplePdfUrl": "/pdfs/etudes_inductives_pup/1-Thessaloniciens-Lecon-1.pdf"
   },
   {
     "name": "2 Timothée",
@@ -231,7 +256,8 @@
     "imageUrl": "/images/books/2-timothee.webp",
     "backImageUrl": "/images/books/2-timothee-verso.webp",
     "type": "LIVRE",
-    "series": "pup"
+    "series": "pup",
+    "samplePdfUrl": "/pdfs/etudes_inductives_pup/2-Timothee-Lecon-1.pdf"
   },
   {
     "name": "Esdras et Aggée",
@@ -240,7 +266,8 @@
     "imageUrl": "/images/books/esdras-et-aggee.webp",
     "backImageUrl": "/images/books/esdras-et-aggee-verso.webp",
     "type": "LIVRE",
-    "series": "pup"
+    "series": "pup",
+    "samplePdfUrl": "/pdfs/etudes_inductives_pup/Esra-Aggee-Lecon-1.pdf"
   },
   {
     "name": "Genèse, partie 1",
@@ -249,7 +276,8 @@
     "imageUrl": "/images/books/genese-partie-1.webp",
     "backImageUrl": "/images/books/genese-partie-1-verso.webp",
     "type": "LIVRE",
-    "series": "pup"
+    "series": "pup",
+    "samplePdfUrl": null
   },
   {
     "name": "Genèse, partie 2",
@@ -258,7 +286,8 @@
     "imageUrl": "/images/books/genese-partie-2.webp",
     "backImageUrl": "/images/books/genese-partie-2-verso.webp",
     "type": "LIVRE",
-    "series": "pup"
+    "series": "pup",
+    "samplePdfUrl": null
   },
   {
     "name": "Genèse, partie 3",
@@ -267,7 +296,8 @@
     "imageUrl": "/images/books/genese-partie-3.webp",
     "backImageUrl": "/images/books/genese-partie-3-verso.webp",
     "type": "LIVRE",
-    "series": "pup"
+    "series": "pup",
+    "samplePdfUrl": null
   },
   {
     "name": "L'Alliance",
@@ -276,7 +306,8 @@
     "imageUrl": "/images/books/l-alliance.webp",
     "backImageUrl": "/images/books/l-alliance-verso.webp",
     "type": "LIVRE",
-    "series": "pup"
+    "series": "pup",
+    "samplePdfUrl": null
   },
   {
     "name": "Romains, partie 1",
@@ -285,7 +316,8 @@
     "imageUrl": "/images/books/romains-partie-1.webp",
     "backImageUrl": "/images/books/romains-partie-1-verso.webp",
     "type": "LIVRE",
-    "series": "pup"
+    "series": "pup",
+    "samplePdfUrl": "/pdfs/etudes_inductives_pup/Romains-partie1-Lecon-1-1.pdf"
   },
   {
     "name": "Romains, partie 2",
@@ -294,7 +326,8 @@
     "imageUrl": "/images/books/romains-partie-2.webp",
     "backImageUrl": "/images/books/romains-partie-2-verso.webp",
     "type": "LIVRE",
-    "series": "pup"
+    "series": "pup",
+    "samplePdfUrl": null
   },
   {
     "name": "Romains, partie 3",
@@ -303,7 +336,8 @@
     "imageUrl": "/images/books/romains-partie-3.webp",
     "backImageUrl": "/images/books/romains-partie-3-verso.webp",
     "type": "LIVRE",
-    "series": "pup"
+    "series": "pup",
+    "samplePdfUrl": "/pdfs/etudes_inductives_pup/Romans-Pt3-Lecon-1.pdf"
   },
   {
     "name": "Romains, partie 4",
@@ -312,7 +346,8 @@
     "imageUrl": "/images/books/romains-partie-4.webp",
     "backImageUrl": "/images/books/romains-partie-4-verso.webp",
     "type": "LIVRE",
-    "series": "pup"
+    "series": "pup",
+    "samplePdfUrl": "/pdfs/etudes_inductives_pup/Romains-Pt4-Lecon-1.pdf"
   },
   {
     "name": "Tite",
@@ -321,7 +356,8 @@
     "imageUrl": "/images/books/tite.webp",
     "backImageUrl": "/images/books/tite-verso.webp",
     "type": "LIVRE",
-    "series": "pup"
+    "series": "pup",
+    "samplePdfUrl": null
   },
   {
     "name": "Abraham, le vaillant explorateur de Dieu",
@@ -330,7 +366,8 @@
     "imageUrl": "/images/books/abraham-le-vaillant-explorateur-de-dieu.webp",
     "backImageUrl": "/images/books/abraham-le-vaillant-explorateur-de-dieu-verso.webp",
     "type": "LIVRE",
-    "series": "enfants"
+    "series": "enfants",
+    "samplePdfUrl": null
   },
   {
     "name": "Déterrons le passé",
@@ -339,7 +376,8 @@
     "imageUrl": "/images/books/deterrons-le-passe.webp",
     "backImageUrl": "/images/books/deterrons-le-passe-verso.webp",
     "type": "LIVRE",
-    "series": "enfants"
+    "series": "enfants",
+    "samplePdfUrl": "/pdfs/enfants_dd/Deterrons-semaine-1.pdf"
   },
   {
     "name": "Jésus sous les réflecteurs",
@@ -348,7 +386,8 @@
     "imageUrl": "/images/books/jesus-sous-les-reflecteurs.webp",
     "backImageUrl": "/images/books/jesus-sous-les-reflecteurs-verso.webp",
     "type": "LIVRE",
-    "series": "enfants"
+    "series": "enfants",
+    "samplePdfUrl": "/pdfs/enfants_dd/Jesus-sous-les-refleteurs-semaine-1.pdf"
   },
   {
     "name": "Jésus, puissance incroyable",
@@ -357,7 +396,8 @@
     "imageUrl": "/images/books/jesus-puissance-incroyable.webp",
     "backImageUrl": "/images/books/jesus-puissance-incroyable-verso.webp",
     "type": "LIVRE",
-    "series": "enfants"
+    "series": "enfants",
+    "samplePdfUrl": null
   },
   {
     "name": "Jésus, vers l'Éternité",
@@ -366,7 +406,8 @@
     "imageUrl": "/images/books/jesus-vers-l-eternite.webp",
     "backImageUrl": "/images/books/jesus-vers-l-eternite-verso.webp",
     "type": "LIVRE",
-    "series": "enfants"
+    "series": "enfants",
+    "samplePdfUrl": "/pdfs/enfants_dd/Jesus-vers-lEternite-Jean-17-21-semaine-1.pdf"
   },
   {
     "name": "L'extraordinaire création de Dieu",
@@ -375,6 +416,7 @@
     "imageUrl": "/images/books/l-extraordinaire-creation-de-dieu.webp",
     "backImageUrl": "/images/books/l-extraordinaire-creation-de-dieu-verso.webp",
     "type": "LIVRE",
-    "series": "enfants"
+    "series": "enfants",
+    "samplePdfUrl": "/pdfs/enfants_dd/Creation-semaine-1-et-plus-3.pdf"
   }
 ]

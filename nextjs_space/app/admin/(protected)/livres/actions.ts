@@ -7,6 +7,7 @@ import { requireAdmin } from '@/lib/admin-guard'
 import { bookSchema, productIdSchema } from '@/lib/validation'
 import { returnPath, withNote } from '@/lib/admin-redirect'
 import { removeCover, uploadCover } from '@/lib/book-images'
+import { removePdf, uploadPdf } from '@/lib/book-pdfs'
 
 const LIST = '/admin/livres'
 
@@ -45,6 +46,7 @@ function parseBookForm(formData: FormData) {
     stock: formData.get('stock') ?? '',
     type: formData.get('type'),
     series: formData.get('series') ?? '',
+    samplePdfUrl: formData.get('samplePdfUrl') ?? '',
   })
 }
 
@@ -84,11 +86,26 @@ export async function createBook(formData: FormData) {
     redirect(withNote(back, verso.problem))
   }
 
+  const pdfUpload = await uploadPdf(formData.get('samplePdfFile'), `${slug}-extrait`)
+  if (pdfUpload && 'problem' in pdfUpload) {
+    await removeCover(front.url)
+    if (verso && !('problem' in verso)) await removeCover(verso.url)
+    redirect(withNote(back, pdfUpload.problem))
+  }
+
+  const existingPdf = (formData.get('existingPdf') as string)?.trim()
+  const customPdfUrl = (formData.get('customPdfUrl') as string)?.trim()
+  const samplePdfUrl =
+    pdfUpload?.url ||
+    customPdfUrl ||
+    (existingPdf && existingPdf !== '__NONE__' ? existingPdf : null)
+
   await getPrisma().product.create({
     data: {
       ...parsed.data,
       imageUrl: front.url,
       backImageUrl: verso?.url ?? null,
+      samplePdfUrl,
       published: formData.get('published') === 'on',
       soldOut: formData.get('soldOut') === 'on',
       sortOrder: await nextSortOrder(parsed.data.series),
@@ -124,7 +141,29 @@ export async function updateBook(formData: FormData) {
     redirect(withNote(back, verso.problem))
   }
 
+  const pdfUpload = await uploadPdf(formData.get('samplePdfFile'), `${slug}-extrait`)
+  if (pdfUpload && 'problem' in pdfUpload) {
+    if (front) await removeCover(front.url)
+    if (verso && !('problem' in verso)) await removeCover(verso.url)
+    redirect(withNote(back, pdfUpload.problem))
+  }
+
   const dropBack = !verso && formData.get('removeBack') === 'on'
+  const dropPdf = formData.get('removeSamplePdf') === 'on'
+  const existingPdf = (formData.get('existingPdf') as string)?.trim()
+  const customPdfUrl = (formData.get('customPdfUrl') as string)?.trim()
+
+  let finalPdfUrl: string | null = existing.samplePdfUrl
+  if (dropPdf || existingPdf === '__NONE__') {
+    finalPdfUrl = null
+  } else if (pdfUpload) {
+    finalPdfUrl = pdfUpload.url
+  } else if (customPdfUrl) {
+    finalPdfUrl = customPdfUrl
+  } else if (existingPdf) {
+    finalPdfUrl = existingPdf
+  }
+
   const seriesChanged = parsed.data.series !== existing.series
 
   await prisma.product.update({
@@ -133,6 +172,7 @@ export async function updateBook(formData: FormData) {
       ...parsed.data,
       imageUrl: front?.url ?? existing.imageUrl,
       backImageUrl: verso?.url ?? (dropBack ? null : existing.backImageUrl),
+      samplePdfUrl: finalPdfUrl,
       published: formData.get('published') === 'on',
       soldOut: formData.get('soldOut') === 'on',
       // A book moved to another series goes to the end of it.
@@ -143,6 +183,9 @@ export async function updateBook(formData: FormData) {
   // Only once the row points at the new files is it safe to drop the old ones.
   if (front) await removeCover(existing.imageUrl)
   if (verso || dropBack) await removeCover(existing.backImageUrl)
+  if (finalPdfUrl !== existing.samplePdfUrl) {
+    await removePdf(existing.samplePdfUrl)
+  }
 
   revalidateCatalogue()
   redirect(withNote(LIST, 'ok'))
@@ -248,6 +291,7 @@ export async function deleteBook(formData: FormData) {
 
   await removeCover(existing.imageUrl)
   await removeCover(existing.backImageUrl)
+  await removePdf(existing.samplePdfUrl)
 
   revalidateCatalogue()
   redirect(withNote(LIST, 'supprime'))

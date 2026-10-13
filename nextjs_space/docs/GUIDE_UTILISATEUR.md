@@ -89,11 +89,15 @@ Si vous n'avez plus d'exemplaires physiques d'un livre :
 3. Enregistrez.
 > **Résultat sur le site :** Les visiteurs verront toujours la couverture et la description du livre, mais le bouton "Ajouter au panier" sera remplacé par la mention grisée **« Épuisé »**, empêchant toute commande impossible à honorer. Dès réception de nouveaux exemplaires, décochez simplement la case !
 
-#### C. Les extraits gratuits (Semaine 1)
-Pour la majorité des livres, les visiteurs peuvent cliquer sur **« Feuilleter un extrait gratuit (Semaine 1) »**.
-- Le document PDF s'ouvre directement dans une nouvelle fenêtre.
-- Le visiteur peut lire les premières leçons avant d'acheter le livre complet.
-- Vous n'avez rien à manipuler : tout est déjà automatisé !
+#### C. Gérer les extraits PDF et documents d’accompagnement
+Chaque livre peut avoir un extrait PDF gratuit (Semaine 1, leçon d'exemple, guide) associé :
+- **Sur le site public :** Les visiteurs voient un bouton **« Feuilleter l’extrait gratuit (PDF) »** et un badge discret sur la couverture.
+- **Dans l'administration (`/admin/livres/[id]`) :** Une section dédiée **« Extrait PDF / Document d’accompagnement »** vous permet de tout gérer simplement :
+  1. **Lier un PDF existant :** Choisissez parmi les **45 PDF déjà intégrés** au site via le menu déroulant (classés par série : 40 Minutes, Seigneur, Enfants D&D, PUP, Études Éclair, Outils).
+  2. **Téléverser un nouveau PDF :** Cliquez sur *« Choisir un fichier »* pour envoyer un PDF depuis votre ordinateur (jusqu'à 8 Mo). Il remplacera automatiquement l'extrait actuel.
+  3. **Visualiser le PDF actuel :** Cliquez sur le bouton bleu *« Voir le PDF »* pour l'ouvrir dans un nouvel onglet et vérifier son contenu.
+  4. **Supprimer / Dissocier le PDF :** Cochez la case rouge *« Supprimer / Retirer ce document PDF de ce livre »* et enregistrez. Le bouton d'extrait disparaîtra immédiatement de la fiche du livre.
+  5. **Lien direct / externe (facultatif) :** Si un document est hébergé sur un serveur externe ou un drive partagé, vous pouvez coller son adresse web directe.
 
 ---
 
