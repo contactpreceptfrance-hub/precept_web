@@ -14,9 +14,10 @@ export function SharePopover({ bookId, bookTitle, bookDescription, onClose }: Sh
   const ref = useRef<HTMLDivElement>(null)
   const [copied, setCopied] = useState(false)
 
-  const bookUrl = typeof window !== 'undefined'
-    ? `${window.location.origin}/boutique/${bookId}`
-    : `/boutique/${bookId}`
+  const origin = typeof window !== 'undefined' && window.location.origin
+    ? window.location.origin
+    : 'https://www.preceptfrance.fr'
+  const bookUrl = `${origin}/boutique/${bookId}`
 
   const inviteMessage = `Je participe à un groupe d'étude biblique Precept et je t'invite à nous rejoindre ! Découvre les ressources sur ${bookUrl} 📖`
 
@@ -64,7 +65,7 @@ export function SharePopover({ bookId, bookTitle, bookDescription, onClose }: Sh
       icon: <span className="text-xs font-bold">WA</span>,
       bg: 'bg-[#25d366]',
       action: () => window.open(
-        `https://wa.me/?text=${encodeURIComponent(`${bookTitle} — ${bookUrl}`)}`,
+        `https://wa.me/?text=${encodeURIComponent(`Découvrez « ${bookTitle} » sur Precept France : ${bookUrl}`)}`,
         '_blank'
       ),
     },

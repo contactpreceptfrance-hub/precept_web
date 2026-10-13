@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { cache } from 'react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, Facebook, FileText, Mail } from 'lucide-react'
+import { ArrowLeft, Facebook, FileText, Mail, MessageCircle } from 'lucide-react'
 import { getPrisma } from '@/lib/prisma'
 import { getAdjacentProducts } from '@/lib/products'
 import { isSoldOut } from '@/lib/stock'
@@ -110,29 +110,29 @@ export default async function BookDetailPage({ params }: Props) {
 
             {/* Share row */}
             <div className="mt-8 pt-6 border-t border-gray-200">
-              <p className="text-darkblue/40 text-xs uppercase tracking-widest mb-3">Partager</p>
-              <div className="flex gap-2">
+              <p className="text-darkblue/40 text-xs uppercase tracking-widest mb-3">Partager ce livre</p>
+              <div className="flex flex-wrap gap-2">
+                <a
+                  href={`https://wa.me/?text=${encodeURIComponent(`Découvrez « ${product.name} » sur Precept France : ${SITE_URL}/boutique/${product.id}`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#25d366] text-white text-sm font-semibold hover:opacity-90 transition-opacity shadow-sm"
+                >
+                  <MessageCircle size={15} /> WhatsApp
+                </a>
                 <a
                   href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`${SITE_URL}/boutique/${product.id}`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#1877f2] text-white text-sm font-semibold hover:opacity-90 transition-opacity"
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#1877f2] text-white text-sm font-semibold hover:opacity-90 transition-opacity shadow-sm"
                 >
                   <Facebook size={15} /> Facebook
                 </a>
                 <a
-                  href={`https://wa.me/?text=${encodeURIComponent(`${product.name} — ${product.description.slice(0, 80)}…`)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#25d366] text-white text-sm font-semibold hover:opacity-90 transition-opacity"
+                  href={`mailto:?subject=${encodeURIComponent(`Livre Precept : ${product.name}`)}&body=${encodeURIComponent(`${product.name}\n\n${product.description}\n\nDécouvrez ce livre sur Precept France : ${SITE_URL}/boutique/${product.id}`)}`}
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#4b5563] text-white text-sm font-semibold hover:opacity-90 transition-opacity shadow-sm"
                 >
-                  WA
-                </a>
-                <a
-                  href={`mailto:?subject=${encodeURIComponent(product.name)}&body=${encodeURIComponent(product.description)}`}
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#4b5563] text-white text-sm font-semibold hover:opacity-90 transition-opacity"
-                >
-                  <Mail size={15} />
+                  <Mail size={15} /> Email
                 </a>
               </div>
             </div>
