@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { ShoppingBag, Share2 } from 'lucide-react'
 import { useCart } from '@/lib/cart-context'
 import { SharePopover } from '@/app/components/shop/share-popover'
+import { getSamplePdfUrl } from '@/lib/sample-pdfs'
 
 type BookCardProps = {
   id: string
@@ -21,6 +22,7 @@ export function BookCard({ id, name, description, price, imageUrl, type, soldOut
   const { addItem, openCart } = useCart()
   const [showShare, setShowShare] = useState(false)
   const [addedFeedback, setAddedFeedback] = useState(false)
+  const hasSample = Boolean(getSamplePdfUrl(name))
 
   function handleAddToCart() {
     addItem({ productId: id, name, price, imageUrl, quantity: 1 })
@@ -57,12 +59,27 @@ export function BookCard({ id, name, description, price, imageUrl, type, soldOut
           }`}>
             {type === 'LIVRE' ? 'Livre' : 'Formation'}
           </span>
+          {hasSample && (
+            <span
+              title="Extrait gratuit (Semaine 1) disponible"
+              className="absolute top-2 right-2 text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-[#020617]/80 text-white backdrop-blur-sm shadow-sm"
+            >
+              Extrait
+            </span>
+          )}
         </div>
       </Link>
 
       {/* Info */}
       <p className="text-darkblue text-sm font-semibold truncate mb-1">{name}</p>
-      <p className="text-teal text-sm font-bold mb-3">{price.toFixed(2)} €</p>
+      <div className="flex items-center justify-between mb-3">
+        <p className="text-teal text-sm font-bold">{price.toFixed(2)} €</p>
+        {hasSample && (
+          <span className="text-[10px] font-semibold text-teal bg-teal/10 px-1.5 py-0.5 rounded-md">
+            Semaine 1
+          </span>
+        )}
+      </div>
 
       {/* Actions */}
       <div className="flex gap-2">

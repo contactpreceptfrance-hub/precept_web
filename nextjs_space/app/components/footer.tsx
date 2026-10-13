@@ -63,6 +63,8 @@ export default function Footer() {
                 { name: 'Notre Mission', href: '/#mission' },
                 { name: 'Ressources Vidéo', href: '/#videos' },
                 { name: 'Nos études', href: '/etude' },
+                { name: 'Ressources gratuites', href: '/ressources' },
+                { name: 'Boutique', href: '/boutique' },
                 { name: 'Contactez-nous', href: '/#contact' },
               ]?.map((link) => (
                 <li key={link?.name ?? ''}>
