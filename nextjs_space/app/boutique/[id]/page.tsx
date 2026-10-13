@@ -2,11 +2,12 @@ import type { Metadata } from 'next'
 import { cache } from 'react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, Facebook, Mail } from 'lucide-react'
+import { ArrowLeft, Facebook, FileText, Mail } from 'lucide-react'
 import { getPrisma } from '@/lib/prisma'
 import { getAdjacentProducts } from '@/lib/products'
 import { isSoldOut } from '@/lib/stock'
 import { SITE_URL } from '@/lib/site'
+import { getSamplePdfUrl } from '@/lib/sample-pdfs'
 import { AddToCartButton } from '@/app/components/shop/add-to-cart-button'
 import { CoverViewer } from '@/app/components/shop/cover-viewer'
 import { BookNav } from '@/app/components/shop/book-nav'
@@ -59,6 +60,7 @@ export default async function BookDetailPage({ params }: Props) {
   if (!product) notFound()
 
   const { prev, next } = await getAdjacentProducts(product.id)
+  const samplePdf = getSamplePdfUrl(product.name)
 
   return (
     <main className="min-h-screen bg-white">
@@ -91,6 +93,20 @@ export default async function BookDetailPage({ params }: Props) {
               imageUrl={product.imageUrl}
               soldOut={isSoldOut(product)}
             />
+
+            {samplePdf && (
+              <div className="mt-4">
+                <a
+                  href={samplePdf}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 w-full py-3 px-5 rounded-2xl border-2 border-teal/30 hover:border-teal bg-teal/5 hover:bg-teal/10 text-darkblue font-semibold text-sm transition-all"
+                >
+                  <FileText size={18} className="text-teal shrink-0" />
+                  <span>Feuilleter un extrait gratuit (Semaine 1)</span>
+                </a>
+              </div>
+            )}
 
             {/* Share row */}
             <div className="mt-8 pt-6 border-t border-gray-200">

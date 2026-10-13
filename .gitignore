@@ -38,6 +38,7 @@ yarn-error.log*
 # Local reference material kept at the repo root (Precept brochures, the
 # scraped Canadian catalogue) — never meant to ship with the site.
 /*.pdf
+/scraped_pdfs/
 /Precept Produkt Katalog.html
 /Precept Produkt Katalog_files/
 # Ad-hoc design screenshots dropped at the root during the 2026-03 redesign.
