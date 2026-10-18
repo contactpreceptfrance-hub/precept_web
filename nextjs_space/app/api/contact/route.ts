@@ -7,6 +7,7 @@ import { escapeHtml, sendEmail, type EmailRecipient } from '@/lib/email'
 const ORIGIN_LABELS: Record<string, string> = {
   contact: 'Formulaire de contact',
   groupe: "Demande d'étude en groupe",
+  atelier: 'Demande Atelier Zoom',
 }
 
 /**

@@ -1,11 +1,12 @@
 import { del, put } from '@vercel/blob'
+import fs from 'fs'
+import path from 'path'
 
 /**
  * Cover uploads for the admin book manager.
  *
- * Server-only. Covers go to Vercel Blob because /public is read-only on Vercel;
- * the covers that shipped with the site stay as paths under /public and keep
- * working untouched.
+ * Server-only. Covers go to Vercel Blob when BLOB_READ_WRITE_TOKEN is set,
+ * with a fallback to /public/images/books/uploads/ for local development.
  */
 
 /**
@@ -52,28 +53,60 @@ export async function uploadCover(
   const extension = sniffExtension(buffer)
   if (!extension) return { problem: 'image-type' }
 
-  if (!isStorageConfigured()) return { problem: 'stockage' }
+  if (isStorageConfigured()) {
+    const { url } = await put(`books/${slug}.${extension}`, buffer, {
+      access: 'public',
+      // Two covers with the same name must not overwrite each other, and a fresh
+      // URL sidesteps the CDN serving the previous cover after a replacement.
+      addRandomSuffix: true,
+      contentType: `image/${extension === 'jpg' ? 'jpeg' : extension}`,
+    })
+    return { url }
+  }
 
-  const { url } = await put(`books/${slug}.${extension}`, buffer, {
-    access: 'public',
-    // Two covers with the same name must not overwrite each other, and a fresh
-    // URL sidesteps the CDN serving the previous cover after a replacement.
-    addRandomSuffix: true,
-    contentType: `image/${extension === 'jpg' ? 'jpeg' : extension}`,
-  })
-  return { url }
+  // Fallback to local /public/images/books/uploads/ directory for local dev
+  try {
+    const uploadsDir = path.join(process.cwd(), 'public', 'images', 'books', 'uploads')
+    if (!fs.existsSync(uploadsDir)) {
+      fs.mkdirSync(uploadsDir, { recursive: true })
+    }
+    const safeName = `${slug}-${Date.now()}.${extension}`
+    const filePath = path.join(uploadsDir, safeName)
+    fs.writeFileSync(filePath, Buffer.from(buffer))
+    return { url: `/images/books/uploads/${safeName}` }
+  } catch (error) {
+    console.error('book-images: could not save local cover file', error)
+    return { problem: 'stockage' }
+  }
 }
 
 /**
- * Deletes a cover that was uploaded from the admin. Files under /public are left
- * alone, and a failure is only logged: an orphaned blob costs nothing, whereas
- * failing the save over it would lose the team's edit.
+ * Deletes a cover that was uploaded from the admin. Files under /public outside
+ * /images/books/uploads/ are left alone, and a failure is only logged.
  */
 export async function removeCover(url: string | null | undefined): Promise<void> {
-  if (!url || !/^https:\/\/[^/]+\.public\.blob\.vercel-storage\.com\//.test(url)) return
-  try {
-    await del(url)
-  } catch (error) {
-    console.error('book-images: could not delete old cover', url, error)
+  if (!url) return
+
+  // 1. Vercel Blob
+  if (/^https:\/\/[^/]+\.public\.blob\.vercel-storage\.com\//.test(url)) {
+    try {
+      await del(url)
+    } catch (error) {
+      console.error('book-images: could not delete old cover', url, error)
+    }
+    return
+  }
+
+  // 2. Local uploaded file
+  if (url.startsWith('/images/books/uploads/')) {
+    try {
+      const localPath = path.join(process.cwd(), 'public', url)
+      if (fs.existsSync(localPath)) {
+        fs.unlinkSync(localPath)
+      }
+    } catch (error) {
+      console.error('book-images: could not delete old local cover', url, error)
+    }
   }
 }
+

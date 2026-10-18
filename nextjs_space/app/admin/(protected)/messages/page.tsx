@@ -101,6 +101,11 @@ export default async function AdminMessagesPage({ searchParams }: Props) {
                         Groupe
                       </span>
                     )}
+                    {message.source === 'atelier' && (
+                      <span className="inline-flex items-center gap-1 text-xs font-bold px-2 py-0.5 rounded-md bg-teal/10 text-teal uppercase tracking-wide">
+                        Atelier Zoom
+                      </span>
+                    )}
                   </p>
                   <a
                     href={`mailto:${message.email}?subject=${encodeURIComponent(`Re: ${message.subject}`)}`}

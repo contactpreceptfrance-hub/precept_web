@@ -38,6 +38,7 @@ model Product {
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
   orderItems   OrderItem[]
+  ateliers     Atelier[]
 }
 
 enum ProductType {
@@ -142,4 +143,38 @@ model AppSetting {
   isSecret  Boolean  @default(false)
   updatedAt DateTime @updatedAt
 }
+
+/// Weekly or recurring virtual Zoom study workshop (Atelier).
+model Atelier {
+  id             String    @id @default(cuid())
+  title          String
+  description    String
+  // Human-readable recurring schedule, e.g. "Tous les mardis de 20h00 à 21h30 (Heure de Paris)"
+  scheduleText   String
+  // Optional date/time of the next upcoming session (powers calendar export & spotlight)
+  nextDate       DateTime?
+  durationMin    Int       @default(90)
+  leaderName     String?
+  zoomUrl        String
+  // Optional Meeting ID / Passcode or short connection note
+  zoomInfo       String?
+
+  // Optional link to a Book in the shop (Acheter le livre is optional for participants)
+  productId      String?
+  product        Product?  @relation(fields: [productId], references: [id], onDelete: SetNull)
+
+  // Optional custom cover or PDF override (if no book is linked or a custom handout is used)
+  customImageUrl String?
+  customPdfUrl   String?
+
+  featured       Boolean   @default(false)
+  published      Boolean   @default(true)
+  sortOrder      Int       @default(0)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([published, sortOrder])
+  @@index([productId])
+}
+
 

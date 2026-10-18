@@ -20,7 +20,7 @@ import { SERIES_CONFIG } from '@/lib/types'
  * which the admin filters on, so it has to come from a fixed allowlist rather
  * than from whatever the client posts.
  */
-export const contactOrigins = ['contact', 'groupe'] as const
+export const contactOrigins = ['contact', 'groupe', 'atelier'] as const
 export type ContactOrigin = (typeof contactOrigins)[number]
 
 /** Below this, nobody typed it. Bots submit instantly; humans do not. */
@@ -106,3 +106,55 @@ export type BookInput = z.infer<typeof bookSchema>
  * messages use 25-character cuids.
  */
 export const productIdSchema = z.string().trim().min(1).max(100)
+
+const durationMinSchema = z
+  .string()
+  .trim()
+  .regex(/^(\d{1,3})?$/)
+  .transform((value) => (value === '' ? 90 : Number(value)))
+  .refine((value) => value >= 15 && value <= 480)
+
+const optionalNextDateSchema = z
+  .string()
+  .trim()
+  .transform((value) => {
+    if (!value) return null
+    const parsed = new Date(value)
+    return Number.isNaN(parsed.getTime()) ? undefined : parsed
+  })
+  .refine((value) => value !== undefined)
+
+export const atelierSchema = z.object({
+  title: z.string().trim().min(1).max(200),
+  description: z.string().trim().min(1).max(5000),
+  scheduleText: z.string().trim().min(1).max(300),
+  nextDate: optionalNextDateSchema,
+  durationMin: durationMinSchema,
+  leaderName: z
+    .string()
+    .trim()
+    .max(150)
+    .optional()
+    .transform((value) => (value ? value : null)),
+  zoomUrl: z
+    .string()
+    .trim()
+    .url()
+    .max(500)
+    .refine((url) => /^https?:\/\//i.test(url)),
+  zoomInfo: z
+    .string()
+    .trim()
+    .max(250)
+    .optional()
+    .transform((value) => (value ? value : null)),
+  productId: z
+    .string()
+    .trim()
+    .max(100)
+    .optional()
+    .transform((value) => (value ? value : null)),
+})
+
+export type AtelierInput = z.infer<typeof atelierSchema>
+

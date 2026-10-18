@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Package, MessageSquare, BookOpen, ArrowRight, CreditCard } from 'lucide-react'
+import { Package, MessageSquare, BookOpen, ArrowRight, CreditCard, Video } from 'lucide-react'
 import { getPrisma } from '@/lib/prisma'
 import { requireAdmin } from '@/lib/admin-guard'
 import { getActiveStripeCredentials } from '@/lib/stripe-config'
@@ -17,12 +17,14 @@ export default async function AdminHomePage() {
   await requireAdmin()
 
   const prisma = getPrisma()
-  const [paidOrders, unhandledMessages, publishedBooks, stripeCreds] = await Promise.all([
-    prisma.order.count({ where: { status: 'PAID' } }),
-    prisma.contactSubmission.count({ where: { handledAt: null } }),
-    prisma.product.count({ where: { published: true } }),
-    getActiveStripeCredentials(),
-  ])
+  const [paidOrders, unhandledMessages, publishedBooks, publishedAteliers, stripeCreds] =
+    await Promise.all([
+      prisma.order.count({ where: { status: 'PAID' } }),
+      prisma.contactSubmission.count({ where: { handledAt: null } }),
+      prisma.product.count({ where: { published: true } }),
+      prisma.atelier.count({ where: { published: true } }),
+      getActiveStripeCredentials(),
+    ])
 
   const tiles = [
     {
@@ -47,6 +49,13 @@ export default async function AdminHomePage() {
       cta: 'Gérer les livres',
     },
     {
+      icon: Video,
+      label: 'Ateliers Zoom actifs',
+      value: publishedAteliers,
+      href: '/admin/ateliers',
+      cta: 'Gérer les ateliers',
+    },
+    {
       icon: CreditCard,
       label: 'Paiements Stripe',
       value: stripeCreds.mode === 'live' ? 'Live' : 'Test',
@@ -62,7 +71,7 @@ export default async function AdminHomePage() {
         Vous êtes connecté à l’espace d’administration.
       </p>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
         {tiles.map(({ icon: Icon, label, value, href, cta }) => (
           <Link
             key={label}

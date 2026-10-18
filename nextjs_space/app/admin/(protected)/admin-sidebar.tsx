@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 import {
   LayoutDashboard,
   BookOpen,
+  Video,
   Package,
   MessageSquare,
   Settings,
@@ -80,6 +81,11 @@ export function AdminSidebar({
       name: 'Livres',
       href: '/admin/livres',
       icon: BookOpen,
+    },
+    {
+      name: 'Ateliers',
+      href: '/admin/ateliers',
+      icon: Video,
     },
     {
       name: 'Commandes',

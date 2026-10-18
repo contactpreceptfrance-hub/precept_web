@@ -2,24 +2,58 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { Facebook, Mail, Users, X } from 'lucide-react'
+import { SITE_URL } from '@/lib/site'
 
 type SharePopoverProps = {
-  bookId: string
-  bookTitle: string
-  bookDescription: string
+  /** Legacy book props (kept for backward compatibility with BookCard) */
+  bookId?: string
+  bookTitle?: string
+  bookDescription?: string
+  /** Generic share props (used by Ateliers or custom cards) */
+  urlPath?: string
+  title?: string
+  description?: string
+  whatsappText?: string
+  inviteMessage?: string
+  emailSubject?: string
   onClose: () => void
 }
 
-export function SharePopover({ bookId, bookTitle, bookDescription, onClose }: SharePopoverProps) {
+export function SharePopover({
+  bookId,
+  bookTitle,
+  bookDescription,
+  urlPath,
+  title,
+  description,
+  whatsappText,
+  inviteMessage: customInviteMessage,
+  emailSubject: customEmailSubject,
+  onClose,
+}: SharePopoverProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [copied, setCopied] = useState(false)
 
-  const origin = typeof window !== 'undefined' && window.location.origin
-    ? window.location.origin
-    : 'https://www.preceptfrance.fr'
-  const bookUrl = `${origin}/boutique/${bookId}`
+  const origin =
+    typeof window !== 'undefined' && window.location.origin
+      ? window.location.origin
+      : SITE_URL
 
-  const inviteMessage = `Je participe à un groupe d'étude biblique Precept et je t'invite à nous rejoindre ! Découvre les ressources sur ${bookUrl} 📖`
+  const resolvedTitle = title ?? bookTitle ?? 'Precept France'
+  const resolvedDescription = description ?? bookDescription ?? ''
+  const resolvedPath = urlPath ?? (bookId ? `/boutique/${bookId}` : '')
+  const shareUrl = resolvedPath.startsWith('http')
+    ? resolvedPath
+    : `${origin}${resolvedPath.startsWith('/') ? '' : '/'}${resolvedPath}`
+
+  const inviteMessage =
+    customInviteMessage ??
+    `Je participe à un groupe d'étude biblique Precept et je t'invite à nous rejoindre ! Découvre les ressources sur ${shareUrl} 📖`
+
+  const resolvedWhatsappText =
+    whatsappText ?? `Découvrez « ${resolvedTitle} » sur Precept France : ${shareUrl}`
+
+  const resolvedEmailSubject = customEmailSubject ?? `Livre Precept : ${resolvedTitle}`
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -41,7 +75,7 @@ export function SharePopover({ bookId, bookTitle, bookDescription, onClose }: Sh
   async function handleGroupInvite() {
     if (navigator.share) {
       try {
-        await navigator.share({ text: inviteMessage, url: bookUrl })
+        await navigator.share({ text: inviteMessage, url: shareUrl })
       } catch {
         copyToClipboard(inviteMessage)
       }
@@ -55,33 +89,36 @@ export function SharePopover({ bookId, bookTitle, bookDescription, onClose }: Sh
       name: 'Facebook',
       icon: <Facebook size={14} />,
       bg: 'bg-[#1877f2]',
-      action: () => window.open(
-        `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(bookUrl)}`,
-        '_blank', 'width=600,height=400'
-      ),
+      action: () =>
+        window.open(
+          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
+          '_blank',
+          'width=600,height=400',
+        ),
     },
     {
       name: 'WhatsApp',
       icon: <span className="text-xs font-bold">WA</span>,
       bg: 'bg-[#25d366]',
-      action: () => window.open(
-        `https://wa.me/?text=${encodeURIComponent(`Découvrez « ${bookTitle} » sur Precept France : ${bookUrl}`)}`,
-        '_blank'
-      ),
+      action: () =>
+        window.open(
+          `https://wa.me/?text=${encodeURIComponent(resolvedWhatsappText)}`,
+          '_blank',
+        ),
     },
     {
       name: copied ? 'Lien copié ✓' : 'Instagram',
       icon: <span className="text-xs font-bold">IG</span>,
       bg: 'bg-gradient-to-br from-[#f09433] via-[#dc2743] to-[#bc1888]',
-      action: () => copyToClipboard(bookUrl),
+      action: () => copyToClipboard(shareUrl),
     },
     {
       name: 'Email',
       icon: <Mail size={14} />,
       bg: 'bg-[#4b5563]',
       action: () => {
-        const subject = encodeURIComponent(`Livre Precept : ${bookTitle}`)
-        const body = encodeURIComponent(`${bookDescription}\n\nDécouvrez ce livre : ${bookUrl}`)
+        const subject = encodeURIComponent(resolvedEmailSubject)
+        const body = encodeURIComponent(`${resolvedDescription}\n\nDécouvrez sur Precept France : ${shareUrl}`)
         window.open(`mailto:?subject=${subject}&body=${body}`)
       },
     },
@@ -127,3 +164,4 @@ export function SharePopover({ bookId, bookTitle, bookDescription, onClose }: Sh
     </div>
   )
 }
+

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     'La méthode inductive, nos six collections de la plus légère à la plus approfondie, et comment rejoindre ou démarrer un groupe d’étude.',
 }
 
-const GUIDE_PDF = '/images/Choisir-letude-ideale-7-26.pdf'
+const GUIDE_PDF = '/pdfs/brochures_outils/Choisir-letude-ideale-7-26.pdf'
 
 const METHOD = [
   {

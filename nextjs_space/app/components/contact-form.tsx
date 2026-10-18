@@ -9,7 +9,7 @@ type ContactFormProps = {
   /** Pre-fills the subject, for a form that already knows what it is about. */
   defaultSubject?: string
   /** Recorded as ContactSubmission.source so the admin can filter on it. */
-  origine?: 'contact' | 'groupe'
+  origine?: 'contact' | 'groupe' | 'atelier'
   submitLabel?: string
 }
 

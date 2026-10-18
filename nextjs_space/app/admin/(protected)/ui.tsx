@@ -51,6 +51,22 @@ export function ActionNote({ note }: { note?: string }) {
       text: 'Le document PDF n’a pas pu être enregistré.',
       tone: 'warn',
     },
+
+    // Atelier manager
+    'atelier-cree': { text: 'Atelier ajouté.', tone: 'ok' },
+    'atelier-supprime': { text: 'Atelier supprimé.', tone: 'ok' },
+    'zoom-invalide': {
+      text: 'Lien Zoom invalide : saisissez une adresse complète commençant par https://.',
+      tone: 'warn',
+    },
+    'duree-invalide': {
+      text: 'Durée invalide : saisissez une durée entre 15 et 480 minutes.',
+      tone: 'warn',
+    },
+    'date-invalide': {
+      text: 'Date de prochaine rencontre invalide.',
+      tone: 'warn',
+    },
   }
 
   const entry = messages[note]
