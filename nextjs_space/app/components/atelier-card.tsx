@@ -15,6 +15,8 @@ import {
   Sparkles,
   MessageCircle,
   Download,
+  Copy,
+  Check,
 } from 'lucide-react'
 import type { PublicAtelier } from '@/lib/ateliers'
 import { SharePopover } from '@/app/components/shop/share-popover'
@@ -33,9 +35,9 @@ function buildGoogleCalendarUrl(atelier: PublicAtelier): string | null {
   const details = [
     atelier.description,
     '',
-    `Rejoindre sur Zoom : ${atelier.zoomUrl}`,
-    atelier.zoomInfo ? `Infos Zoom : ${atelier.zoomInfo}` : '',
-    `Plus d'infos : ${SITE_URL}/ateliers#atelier-${atelier.id}`,
+    `Lien de connexion : ${atelier.zoomUrl}`,
+    atelier.zoomInfo ? `Infos : ${atelier.zoomInfo}` : '',
+    `Page des ateliers : ${SITE_URL}/ateliers`,
   ]
     .filter(Boolean)
     .join('\n')
@@ -62,7 +64,7 @@ function downloadIcsFile(atelier: PublicAtelier) {
 
   const description = [
     atelier.description,
-    `Lien Zoom : ${atelier.zoomUrl}`,
+    `Lien de connexion : ${atelier.zoomUrl}`,
     atelier.zoomInfo ? `Infos : ${atelier.zoomInfo}` : '',
   ]
     .filter(Boolean)
@@ -121,25 +123,36 @@ export function AtelierCard({
   spotlight?: boolean
 }) {
   const [showShare, setShowShare] = useState(false)
+  const [copiedInvite, setCopiedInvite] = useState(false)
 
   const origin =
     typeof window !== 'undefined' && window.location.origin ? window.location.origin : SITE_URL
-  const atelierUrl = `${origin}/ateliers#atelier-${atelier.id}`
+  const ateliersPageUrl = `${origin}/ateliers`
   const fullPdfUrl =
     atelier.pdfUrl && !atelier.pdfUrl.startsWith('http')
       ? `${origin}${atelier.pdfUrl}`
       : atelier.pdfUrl
 
-  const whatsappLines = [
-    `📖 *Atelier d'étude biblique Precept : ${atelier.title}*`,
-    `🗓️ ${atelier.scheduleText}`,
-    `🎥 *Lien Zoom :* ${atelier.zoomUrl}`,
-    atelier.zoomInfo ? `🔑 ${atelier.zoomInfo}` : null,
-    fullPdfUrl ? `📄 *Extrait gratuit (PDF) :* ${fullPdfUrl}` : null,
-    `👉 Toutes les infos : ${atelierUrl}`,
+  // Plain UTF-8 text without 4-byte surrogate-pair emojis (which wa.me's redirect
+  // corrupts into U+FFFD replacement characters) and without hash fragments so
+  // WhatsApp never blocks or mangles the message.
+  const whatsappText = [
+    `*Atelier d'étude biblique Precept : ${atelier.title}*`,
+    `Horaire : ${atelier.scheduleText}`,
+    `Lien de connexion : ${atelier.zoomUrl}`,
+    atelier.zoomInfo ? `Infos : ${atelier.zoomInfo}` : null,
+    fullPdfUrl ? `Extrait gratuit (PDF) : ${fullPdfUrl}` : null,
+    `Toutes les infos : ${ateliersPageUrl}`,
   ]
     .filter(Boolean)
     .join('\n')
+
+  function handleCopyInvite() {
+    navigator.clipboard.writeText(whatsappText).then(() => {
+      setCopiedInvite(true)
+      setTimeout(() => setCopiedInvite(false), 2500)
+    })
+  }
 
   const googleCalUrl = buildGoogleCalendarUrl(atelier)
   const formattedNextDate = formatNextSessionDate(atelier.nextDate)
@@ -178,7 +191,7 @@ export function AtelierCard({
               </div>
             )}
             <span className="absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wide bg-teal text-white shadow-sm">
-              Zoom Live
+              En direct
             </span>
           </div>
         </div>
@@ -249,7 +262,7 @@ export function AtelierCard({
 
           {/* Primary & Secondary Action Buttons */}
           <div className="flex flex-wrap items-center gap-3">
-            {/* 1. Zoom Link */}
+            {/* 1. Direct Meeting Link */}
             <a
               href={atelier.zoomUrl}
               target="_blank"
@@ -257,23 +270,11 @@ export function AtelierCard({
               className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-teal hover:bg-teal-600 text-white font-bold text-sm transition-all shadow-md hover:shadow-lg"
             >
               <Video size={17} />
-              <span>Rejoindre sur Zoom</span>
+              <span>Rejoindre la rencontre</span>
               <ExternalLink size={14} className="opacity-80" />
             </a>
 
-            {/* 2. Quick WhatsApp Share (matches team workflow) */}
-            <a
-              href={`https://wa.me/?text=${encodeURIComponent(whatsappLines)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#25d366] hover:opacity-95 text-white font-bold text-sm transition-all shadow-sm"
-              title="Partager le lien Zoom et les infos sur WhatsApp"
-            >
-              <MessageCircle size={16} />
-              <span>Partager sur WhatsApp</span>
-            </a>
-
-            {/* 3. Free Sample PDF if available */}
+            {/* 2. Free Sample PDF if available */}
             {atelier.pdfUrl && (
               <a
                 href={atelier.pdfUrl}
@@ -290,7 +291,7 @@ export function AtelierCard({
               </a>
             )}
 
-            {/* 4. Optional Book Link */}
+            {/* 3. Optional Book Link */}
             {atelier.book && (
               <Link
                 href={`/boutique/${atelier.book.id}`}
@@ -310,7 +311,36 @@ export function AtelierCard({
               </Link>
             )}
 
-            {/* 5. Share Popover Trigger */}
+            {/* 4. WhatsApp Share */}
+            <a
+              href={`https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappText)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#25d366] hover:opacity-95 text-white font-bold text-sm transition-all shadow-sm"
+              title="Partager l'invitation sur WhatsApp"
+            >
+              <MessageCircle size={16} />
+              <span>WhatsApp</span>
+            </a>
+
+            {/* 5. Copy Invitation (1-click fallback for desktop / WhatsApp groups) */}
+            <button
+              type="button"
+              onClick={handleCopyInvite}
+              className={`inline-flex items-center justify-center gap-1.5 px-3.5 py-3 rounded-xl border text-sm font-semibold transition-colors ${
+                copiedInvite
+                  ? 'border-emerald-500 bg-emerald-50 text-emerald-700'
+                  : spotlight
+                    ? 'border-white/25 bg-white/5 hover:bg-white/15 text-white'
+                    : 'border-gray-200 bg-white hover:border-gray-300 text-darkblue/70 hover:text-darkblue'
+              }`}
+              title="Copier le message complet (lien + horaire + PDF) pour le coller dans WhatsApp"
+            >
+              {copiedInvite ? <Check size={15} /> : <Copy size={15} />}
+              <span>{copiedInvite ? 'Invitation copiée ✓' : 'Copier l’invitation'}</span>
+            </button>
+
+            {/* 6. Share Popover Trigger */}
             <div className="relative">
               <button
                 type="button"
@@ -324,16 +354,15 @@ export function AtelierCard({
                 title="Autres options de partage"
               >
                 <Share2 size={16} />
-                <span className=" sm:inline">Partager</span>
               </button>
 
               {showShare && (
                 <SharePopover
-                  urlPath={`/ateliers#atelier-${atelier.id}`}
+                  urlPath="/ateliers"
                   title={atelier.title}
-                  description={`${atelier.scheduleText}\n\n${atelier.description}\n\nLien Zoom : ${atelier.zoomUrl}`}
-                  whatsappText={whatsappLines}
-                  inviteMessage={whatsappLines}
+                  description={whatsappText}
+                  whatsappText={whatsappText}
+                  inviteMessage={whatsappText}
                   emailSubject={`Atelier d'étude biblique Precept : ${atelier.title}`}
                   onClose={() => setShowShare(false)}
                 />

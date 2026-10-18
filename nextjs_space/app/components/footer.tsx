@@ -62,8 +62,7 @@ export default function Footer() {
                 // /boutique, /etude or any legal page.
                 { name: 'Notre Mission', href: '/#mission' },
                 { name: 'Ressources Vidéo', href: '/#videos' },
-                { name: 'Nos études', href: '/etude' },
-                { name: 'Ateliers Zoom', href: '/ateliers' },
+                { name: 'Ateliers', href: '/ateliers' },
                 { name: 'Ressources gratuites', href: '/ressources' },
                 { name: 'Boutique', href: '/boutique' },
                 { name: 'Contactez-nous', href: '/#contact' },

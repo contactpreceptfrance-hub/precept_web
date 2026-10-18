@@ -24,6 +24,15 @@ const nextConfig = {
     // Covers uploaded from the admin live in Vercel Blob.
     remotePatterns: [{ protocol: 'https', hostname: '*.public.blob.vercel-storage.com' }],
   },
+  async redirects() {
+    return [
+      {
+        source: '/etude',
+        destination: '/ateliers',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

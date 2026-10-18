@@ -48,7 +48,7 @@ export function SharePopover({
 
   const inviteMessage =
     customInviteMessage ??
-    `Je participe à un groupe d'étude biblique Precept et je t'invite à nous rejoindre ! Découvre les ressources sur ${shareUrl} 📖`
+    `Je participe à un groupe d'étude biblique Precept et je t'invite à nous rejoindre ! Découvre les ressources sur : ${shareUrl}`
 
   const resolvedWhatsappText =
     whatsappText ?? `Découvrez « ${resolvedTitle} » sur Precept France : ${shareUrl}`
@@ -102,8 +102,9 @@ export function SharePopover({
       bg: 'bg-[#25d366]',
       action: () =>
         window.open(
-          `https://wa.me/?text=${encodeURIComponent(resolvedWhatsappText)}`,
+          `https://api.whatsapp.com/send?text=${encodeURIComponent(resolvedWhatsappText)}`,
           '_blank',
+          'noopener,noreferrer',
         ),
     },
     {

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Menu, X, BookOpen, Video, Mail, ShoppingBag, Compass, FileText, Users } from 'lucide-react'
+import { Menu, X, BookOpen, Video, Mail, ShoppingBag, Compass, FileText } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useCart } from '@/lib/cart-context'
 import { CartDrawer } from '@/app/components/shop/cart-drawer'
@@ -16,8 +16,7 @@ export default function Header() {
     // Absolute paths so the anchors also work from /boutique pages.
     { name: 'Mission',    href: '/#mission',   icon: BookOpen },
     { name: 'Vidéos',     href: '/#videos',    icon: Video },
-    { name: 'Nos études', href: '/etude',      icon: Compass },
-    { name: 'Ateliers',   href: '/ateliers',   icon: Users },
+    { name: 'Ateliers',   href: '/ateliers',   icon: Compass },
     { name: 'Ressources', href: '/ressources', icon: FileText },
     { name: 'Boutique',   href: '/boutique',   icon: ShoppingBag },
     { name: 'Contact',    href: '/#contact',   icon: Mail },

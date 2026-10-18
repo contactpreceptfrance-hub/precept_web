@@ -291,11 +291,11 @@ export default function RessourcesPage() {
               <ArrowRight size={18} />
             </Link>
             <Link
-              href="/etude"
+              href="/ateliers#methode"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-white/20 text-white font-bold hover:bg-white/10 transition-colors"
             >
               <Compass size={18} />
-              <span>Comment fonctionne la méthode ?</span>
+              <span>Découvrir nos ateliers & la méthode</span>
             </Link>
           </div>
         </div>

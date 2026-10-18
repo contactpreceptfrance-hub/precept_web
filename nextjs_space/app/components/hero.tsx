@@ -48,7 +48,7 @@ export default function Hero() {
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-5">
               <Link
-                href="/etude"
+                href="/ateliers"
                 className="px-8 py-4 bg-gradient-to-r from-[#125f67] to-[#093a5d] hover:from-[#1a7078] hover:to-[#0d4b72] text-[#edf3fa] rounded-lg font-semibold transition-all duration-300 shadow-lg shadow-[#021126]/55 active:scale-95 flex items-center gap-3 border border-[#8fc8c3]/14"
               >
                 <BookOpen size={20} />
