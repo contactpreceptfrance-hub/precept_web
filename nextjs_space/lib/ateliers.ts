@@ -77,3 +77,9 @@ export const getPublishedAteliers = cache(async (): Promise<PublicAtelier[]> => 
     return []
   }
 })
+
+export const getAtelierById = cache(async (id: string): Promise<PublicAtelier | null> => {
+  const ateliers = await getPublishedAteliers()
+  return ateliers.find((a) => a.id === id) ?? null
+})
+

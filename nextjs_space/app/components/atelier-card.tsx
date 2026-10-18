@@ -127,22 +127,23 @@ export function AtelierCard({
 
   const origin =
     typeof window !== 'undefined' && window.location.origin ? window.location.origin : SITE_URL
-  const ateliersPageUrl = `${origin}/ateliers`
+  const atelierSharePath = `/ateliers/${atelier.id}`
+  const atelierShareUrl = `${origin}${atelierSharePath}`
   const fullPdfUrl =
     atelier.pdfUrl && !atelier.pdfUrl.startsWith('http')
       ? `${origin}${atelier.pdfUrl}`
       : atelier.pdfUrl
 
-  // Plain UTF-8 text without 4-byte surrogate-pair emojis (which wa.me's redirect
-  // corrupts into U+FFFD replacement characters) and without hash fragments so
-  // WhatsApp never blocks or mangles the message.
+  // Note: WhatsApp always generates its link preview card from the VERY FIRST URL
+  // in a message. Placing `atelierShareUrl` first ensures WhatsApp displays the
+  // book cover (`og:image` from `/ateliers/[id]`) instead of the Zoom/Google Meet screen.
   const whatsappText = [
     `*Atelier d'étude biblique Precept : ${atelier.title}*`,
     `Horaire : ${atelier.scheduleText}`,
+    `Infos et livre : ${atelierShareUrl}`,
     `Lien de connexion : ${atelier.zoomUrl}`,
     atelier.zoomInfo ? `Infos : ${atelier.zoomInfo}` : null,
     fullPdfUrl ? `Extrait gratuit (PDF) : ${fullPdfUrl}` : null,
-    `Toutes les infos : ${ateliersPageUrl}`,
   ]
     .filter(Boolean)
     .join('\n')
@@ -358,8 +359,8 @@ export function AtelierCard({
 
               {showShare && (
                 <SharePopover
-                  urlPath="/ateliers"
-                  title={atelier.title}
+                  urlPath={atelierSharePath}
+                  title={`Atelier Precept : ${atelier.title}`}
                   description={whatsappText}
                   whatsappText={whatsappText}
                   inviteMessage={whatsappText}
