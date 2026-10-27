@@ -158,3 +158,20 @@ export const atelierSchema = z.object({
 
 export type AtelierInput = z.infer<typeof atelierSchema>
 
+
+/**
+ * A donation as the /don page submits it.
+ *
+ * The amount is typed by hand, so like `priceSchema` it is text with an
+ * optional French comma, checked before it becomes a number. Bounds keep a
+ * typo ("2500000") from reaching Stripe.
+ */
+export const donationSchema = z.object({
+  amount: z
+    .string()
+    .trim()
+    .regex(/^\d{1,5}([.,]\d{1,2})?$/)
+    .transform((value) => Number(value.replace(',', '.')))
+    .refine((value) => value >= 1 && value <= 10000),
+  recurring: z.boolean(),
+})

@@ -3,6 +3,7 @@ import Hero from './components/hero'
 import MissionSection from './components/mission-section'
 import YoutubeSection from './components/youtube-section'
 import HomeShopPreview from './components/home-shop-preview'
+import DonSection from './components/don-section'
 import ContactSection from './components/contact-section'
 import Footer from './components/footer'
 
@@ -26,6 +27,7 @@ export default function Home() {
       <MissionSection />
       <YoutubeSection />
       <HomeShopPreview />
+      <DonSection />
       <ContactSection />
       <Footer />
     </main>

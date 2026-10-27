@@ -31,6 +31,12 @@ export default function CgvPage() {
           réserve. Le vendeur se réserve le droit de les modifier&nbsp;; la version
           applicable est celle en vigueur à la date de la commande.
         </p>
+        <p>
+          Les dons effectués sur la page «&nbsp;Faire un don&nbsp;» ne sont pas des
+          ventes&nbsp;: ils sont volontaires, libres de toute contrepartie et ne relèvent
+          pas des présentes conditions. Un don mensuel peut être arrêté à tout moment sur
+          simple demande par e-mail.
+        </p>
       </Article>
 
       <Article titre="Article 2 — Identité du vendeur">

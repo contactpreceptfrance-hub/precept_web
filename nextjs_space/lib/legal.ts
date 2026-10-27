@@ -55,6 +55,16 @@ export const LEGAL = {
     site: '',    // À COMPLÉTER
   },
 
+  /**
+   * Coordonnées bancaires pour les dons par virement. À COMPLÉTER : tant que
+   * l'IBAN est vide, la page /don masque le bloc « Par virement ».
+   */
+  banque: {
+    titulaire: 'Precept France',
+    iban: '', // À COMPLÉTER
+    bic: '',  // À COMPLÉTER
+  },
+
   livraison: {
     zone:
       'la France (métropolitaine, Guadeloupe, Martinique, Guyane, La Réunion et Mayotte), la Belgique, la Suisse, le Luxembourg et Monaco',

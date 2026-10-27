@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Menu, X, BookOpen, Video, Mail, ShoppingBag, Compass, FileText } from 'lucide-react'
+import { Menu, X, BookOpen, Video, Mail, ShoppingBag, Compass, FileText, Heart } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useCart } from '@/lib/cart-context'
 import { CartDrawer } from '@/app/components/shop/cart-drawer'
@@ -62,6 +62,16 @@ export default function Header() {
             </nav>
 
             <div className="flex items-center gap-3">
+              {/* Donation CTA */}
+              <Link
+                href="/don"
+                className="flex items-center gap-2 px-3 py-2 rounded-lg border-2 border-[#14b8a6] text-[#0d9488] font-semibold hover:bg-[#14b8a6] hover:text-white transition-all duration-300"
+                aria-label="Faire un don"
+              >
+                <Heart size={18} />
+                <span className="hidden md:inline text-sm">Faire un don</span>
+              </Link>
+
               {/* Cart button */}
               <button
                 onClick={openCart}

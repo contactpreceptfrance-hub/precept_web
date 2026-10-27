@@ -56,6 +56,13 @@ export default async function SuccesPage({
             <p className="text-darkblue/70 mb-8 leading-relaxed">
               Que Dieu bénisse votre étude de Sa Parole.
             </p>
+            <p className="text-darkblue/70 mb-8 leading-relaxed">
+              Vous aimez notre mission ?{' '}
+              <Link href="/don" className="text-teal font-semibold hover:underline">
+                Soutenez-la par un don
+              </Link>
+              .
+            </p>
             {shopLink}
           </>
         )}

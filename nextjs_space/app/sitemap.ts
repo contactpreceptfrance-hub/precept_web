@@ -11,6 +11,7 @@ const STATIC_ROUTES: { path: string; priority: number; changeFrequency: Metadata
   { path: '',                  priority: 1.0, changeFrequency: 'monthly' },
   { path: '/boutique',         priority: 0.9, changeFrequency: 'weekly' },
   { path: '/ateliers',         priority: 0.9, changeFrequency: 'weekly' },
+  { path: '/don',              priority: 0.7, changeFrequency: 'monthly' },
   { path: '/ressources',       priority: 0.8, changeFrequency: 'monthly' },
   { path: '/cgv',              priority: 0.3, changeFrequency: 'yearly' },
   { path: '/confidentialite',  priority: 0.3, changeFrequency: 'yearly' },

@@ -16,7 +16,7 @@ import { getPrisma } from '@/lib/prisma'
  * it avoids a transaction or an advisory lock on every request.
  */
 
-export type RateLimitBucket = 'contact' | 'checkout' | 'admin_login'
+export type RateLimitBucket = 'contact' | 'checkout' | 'don' | 'admin_login'
 
 /** Rows older than this are useless: the widest window in use is 24 h. */
 const RETENTION_MS = 25 * 60 * 60 * 1000
@@ -133,5 +133,6 @@ export const RATE_LIMITS = {
   contactHourly: { limit: 5, windowMs: 60 * 60 * 1000 },
   contactDaily: { limit: 20, windowMs: 24 * 60 * 60 * 1000 },
   checkout: { limit: 20, windowMs: 60 * 60 * 1000 },
+  don: { limit: 20, windowMs: 60 * 60 * 1000 },
   adminLogin: { limit: 10, windowMs: 15 * 60 * 1000 },
 } as const

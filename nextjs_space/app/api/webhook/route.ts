@@ -5,6 +5,7 @@ import { escapeHtml, sendEmail } from '@/lib/email'
 import { notifyTeamOfOrder } from '@/lib/order-alert'
 import { formatShippingAddress, pickShippingDetails, type StripeShippingDetails } from '@/lib/shipping'
 
+import { recordCheckoutDonation, recordInvoiceDonation, type DonationInvoice, type DonationSession } from '@/lib/donations'
 import { getActiveStripeCredentials } from '@/lib/stripe-config'
 
 export const dynamic = 'force-dynamic'
@@ -40,6 +41,33 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     console.error('Webhook signature verification failed:', err)
     return NextResponse.json({ error: 'Invalid signature' }, { status: 400 })
+  }
+
+  // Gifts share this endpoint with book orders; the marker set in
+  // /api/don is what tells them apart. They must never reach the order path
+  // below, which would try to link line items to products.
+  if (event.type === 'checkout.session.completed') {
+    const donation = event.data.object as DonationSession & { metadata?: { kind?: string } | null }
+    if (donation.metadata?.kind === 'don') {
+      try {
+        await recordCheckoutDonation(donation)
+      } catch (err) {
+        console.error('Failed to record donation:', err)
+        return NextResponse.json({ error: 'Donation persistence failed' }, { status: 500 })
+      }
+      return NextResponse.json({ received: true })
+    }
+  }
+
+  // Monthly renewals.
+  if (event.type === 'invoice.paid') {
+    try {
+      await recordInvoiceDonation(event.data.object as unknown as DonationInvoice)
+    } catch (err) {
+      console.error('Failed to record donation renewal:', err)
+      return NextResponse.json({ error: 'Donation persistence failed' }, { status: 500 })
+    }
+    return NextResponse.json({ received: true })
   }
 
   if (event.type === 'checkout.session.completed') {

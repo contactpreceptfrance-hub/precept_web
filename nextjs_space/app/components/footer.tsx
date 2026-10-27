@@ -65,6 +65,7 @@ export default function Footer() {
                 { name: 'Ateliers', href: '/ateliers' },
                 { name: 'Ressources gratuites', href: '/ressources' },
                 { name: 'Boutique', href: '/boutique' },
+                { name: 'Faire un don', href: '/don' },
                 { name: 'Contactez-nous', href: '/#contact' },
               ]?.map((link) => (
                 <li key={link?.name ?? ''}>

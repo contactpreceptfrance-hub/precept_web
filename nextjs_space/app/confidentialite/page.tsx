@@ -118,6 +118,11 @@ export default function ConfidentialitePage() {
             au-delà de vingt-cinq heures.
           </li>
           <li>
+            <strong>Dons&nbsp;:</strong> nom, adresse e-mail et montant du don, dix ans,
+            au titre des pièces comptables. Un don mensuel est conservé tant qu&apos;il
+            est actif, puis dix ans.
+          </li>
+          <li>
             <strong>Données de paiement&nbsp;:</strong> conservées par Stripe selon sa
             propre politique&nbsp;; nous n&apos;en détenons aucune.
           </li>

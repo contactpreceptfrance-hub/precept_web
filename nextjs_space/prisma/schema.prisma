@@ -87,6 +87,27 @@ model OrderItem {
   @@index([productId])
 }
 
+// A gift received through Stripe Checkout. Rows exist only once the money is
+// in: a monthly gift produces one row per paid invoice. Kept apart from Order
+// because an Order needs line items that point at a Product.
+model Donation {
+  id                   String   @id @default(cuid())
+  // Null for renewals: they come from invoice.paid, not from a Checkout session.
+  stripeSessionId      String?  @unique
+  stripeSubscriptionId String?
+  // Set for monthly gifts. Shared by the first checkout and its invoice.paid
+  // event, so whichever arrives second finds the row instead of duplicating it.
+  stripeInvoiceId      String?  @unique
+  amount               Float
+  recurring            Boolean  @default(false)
+  donorEmail           String?
+  donorName            String?
+  createdAt            DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([recurring, createdAt])
+}
+
 enum OrderStatus {
   PENDING
   PAID
@@ -125,7 +146,7 @@ model ContactSubmission {
 /// the only thing that actually limits anything.
 model RateLimitHit {
   id        String   @id @default(cuid())
-  bucket    String // "contact" | "checkout" | "admin_login"
+  bucket    String // "contact" | "checkout" | "don" | "admin_login"
   // sha256(ip + RATE_LIMIT_SALT). The raw address is never stored, which keeps
   // this out of the "personal data" bucket the privacy policy has to describe.
   ipHash    String

@@ -9,6 +9,7 @@ import {
   BookOpen,
   Video,
   Package,
+  Heart,
   MessageSquare,
   Settings,
   Mail,
@@ -93,6 +94,11 @@ export function AdminSidebar({
       icon: Package,
       badge: pendingOrdersCount > 0 ? pendingOrdersCount : undefined,
       badgeTone: 'amber',
+    },
+    {
+      name: 'Dons',
+      href: '/admin/dons',
+      icon: Heart,
     },
     {
       name: 'Messages',
