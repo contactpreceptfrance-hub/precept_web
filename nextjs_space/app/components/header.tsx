@@ -66,10 +66,10 @@ export default function Header() {
               <Link
                 href="/don"
                 className="flex items-center gap-2 px-3 py-2 rounded-lg border-2 border-[#14b8a6] text-[#0d9488] font-semibold hover:bg-[#14b8a6] hover:text-white transition-all duration-300"
-                aria-label="Faire un don"
+                aria-label="Dons"
               >
                 <Heart size={18} />
-                <span className="hidden md:inline text-sm">Faire un don</span>
+                <span className="hidden md:inline text-sm">Dons</span>
               </Link>
 
               {/* Cart button */}
