@@ -8,6 +8,7 @@ const euros = (value: number) => `${value.toFixed(2).replace('.', ',')} €`
 export type DonationSession = {
   id: string
   mode?: string | null
+  payment_status?: string | null
   amount_total?: number | null
   customer_details?: { email?: string | null; name?: string | null } | null
   subscription?: string | { id: string } | null
@@ -89,6 +90,14 @@ async function notifyAndThank(donation: {
  * Both write through the invoice id, so the second to arrive finds the row.
  */
 export async function recordCheckoutDonation(session: DonationSession): Promise<void> {
+  // `checkout.session.completed` also fires for delayed methods (e.g. SEPA
+  // debit) before the money has arrived. Those are recorded later, from
+  // `checkout.session.async_payment_succeeded`, which carries 'paid'.
+  if (session.payment_status !== 'paid' && session.payment_status !== 'no_payment_required') {
+    console.log(`Webhook ${session.id}: donation not paid yet (${session.payment_status}), skipping`)
+    return
+  }
+
   const prisma = getPrisma()
   const invoiceId = idOf(session.invoice)
   const recurring = session.mode === 'subscription'

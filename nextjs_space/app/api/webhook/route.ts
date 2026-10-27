@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
   // Gifts share this endpoint with book orders; the marker set in
   // /api/don is what tells them apart. They must never reach the order path
   // below, which would try to link line items to products.
-  if (event.type === 'checkout.session.completed') {
+  if (event.type === 'checkout.session.completed' || event.type === 'checkout.session.async_payment_succeeded') {
     const donation = event.data.object as DonationSession & { metadata?: { kind?: string } | null }
     if (donation.metadata?.kind === 'don') {
       try {
