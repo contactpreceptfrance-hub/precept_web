@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Header from '@/app/components/header'
 import Footer from '@/app/components/footer'
 import { DonView } from './don-view'
-import { LEGAL } from '@/lib/legal'
+import { getBankDetails } from '@/lib/bank-config'
 
 export const revalidate = 3600
 
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
   },
 }
 
-export default function DonPage() {
-  const { titulaire, iban, bic } = LEGAL.banque
+export default async function DonPage() {
+  const { titulaire, iban, bic } = await getBankDetails()
   return (
     <main className="min-h-screen bg-gray-50">
       <Header />
